@@ -40,7 +40,6 @@ function put_json ($info)
 
 	$str = json_encode ($info);
 	$str = "rich_info = $str";
-	var_dump ($str);
 
 	file_put_contents ($filename, $str);
 }
