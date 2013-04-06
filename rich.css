@@ -1,0 +1,75 @@
+html, body, #canvas {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#canvas {
+	width: 70%;
+	border-right: 2px solid black;
+	float: left;
+}
+
+div#user {
+	padding: 0 0 0 0;
+	float: left;
+	width: 28%;
+}
+
+body {
+	background: white;
+	color: black;
+}
+
+h1 {
+	font-size: 120%;
+}
+
+h2 {
+	font-size: 100%;
+	margin-bottom: 0px;
+	margin: 0;
+	padding: 0;
+}
+
+h3, h4 {
+	margin: 0px;
+	padding: 0px;
+}
+
+label {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+optgroup.hidden {
+	display: none;
+}
+
+div.left {
+	float: left;
+	width: 50%;
+	vertical-align: top;
+}
+
+div.right {
+	margin-left: 50%;
+}
+
+label {
+	font-size: 90%;
+	width: 90%;
+	padding-left: 1em;
+}
+
+div#options {
+	position: fixed;
+	bottom: 1em;
+	width: 30%;
+	margin: 0px;
+	padding: 0 0.5em 0 0.5em;
+}
+
