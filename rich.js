@@ -157,7 +157,7 @@ function show_rich()
 		if (rich_info.route) {
 			// XXX activate current route
 			if (opt_one) {
-				hide_other_routes (option);
+				hide_other_routes (rich_info.route);
 			}
 			load_kml (rich_info.route, "route", 1);
 
