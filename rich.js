@@ -351,7 +351,7 @@ function init_options()
 	t = document.getElementById ("show_hill");   t.checked = show_hill;
 }
 
-function on_change_option (id)
+function on_change_kml (id)
 {
 	var route_key = document.getElementById("dropdown").value;
 	var check = document.getElementById(id);
