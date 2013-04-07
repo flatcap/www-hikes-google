@@ -34,6 +34,7 @@ function initialise()
 	init_routes();
 	init_hills();
 	init_dropdown();
+	init_options();
 
 	map = map_init();
 
@@ -48,7 +49,6 @@ function initialise()
 	dd.focus();
 
 	show_rich();
-	init_options();
 
 	document.onkeyup = function(e) {
 		e = window.event || e;
@@ -145,7 +145,7 @@ function init_hills()
 			"days_other"	: 1,
 			"dist_walked"	: 104.0,
 			"complete"	: 11,
-			"custom"	: "area_done,area_todo,hills_done,hills_todo",
+			"custom"	: "",
 			"latitude"	: 54.484200,
 			"longitude"	: -3.079490,
 			"zoom"		: 10
@@ -210,7 +210,7 @@ function init_routes()
 			"days_other"	: 3,
 			"dist_walked"	: 194.0,
 			"complete"	: 100,
-			"custom"		: "",
+			"custom"	: "",
 			"latitude"	: 54.425322,
 			"longitude"	: -2.032471,
 			"zoom"		: 8
@@ -1713,16 +1713,26 @@ function route_sort(a,b)
 	return (a.fullname > b.fullname);
 }
 
+function select_dropdown (id)
+{
+	var dd = document.getElementById ("dropdown");
+	for (var i = 0; i < dd.options.length; i++) {
+		if (dd.options[i].value == id) {
+			dd.options[i].selected = true;
+			return;
+		}
+	}
+}
+
 function show_rich()
 {
 	if (opt_rich) {
-		var ll = new google.maps.LatLng(rich_info.latitude, rich_info.longitude);
 		if (marker_rich) {
 			marker_rich.setMap (map);
 		} else {
 			var image = 'rich.png';
 			marker_rich = new google.maps.Marker({
-				position: ll,
+				position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
 				map: map,
 				icon: image,
 				title: "Where's Rich?"
@@ -1744,6 +1754,7 @@ function show_rich()
 			// If on a route, zoom to display it
 			// XXX enable correct options and select it in the dropdown
 			map_zoom_route (rich_info.route);
+			select_dropdown (rich_info.route);
 		} else {
 			// else zoom to current location
 			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
@@ -1895,10 +1906,20 @@ function on_change_kml (id)
 	kml[name] = check.checked;
 
 	if (route_key in routes) {
-		load_kml (route_key, name, routes[route_key][key]);
+		load_kml (route_key, name, check.checked);
 	}
 	if (route_key in hills) {
-		load_kml (route_key, name, hills[route_key][key]);
+		var attr = hills[route_key].attr;
+		if ((key == 'h') && (attr.indexOf ('h')) >= 0) {
+			load_kml (route_key, 'hills_done', check.checked);
+			load_kml (route_key, 'area_done',  check.checked);
+		}
+
+		if ((key == 't') && (attr.indexOf ('t')) >= 0) {
+			load_kml (route_key, 'hills_todo', check.checked);
+			load_kml (route_key, 'area_todo',  check.checked);
+		}
+
 	}
 }
 
