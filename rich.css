@@ -17,8 +17,12 @@ div#user {
 }
 
 body {
+	/*
 	background: white;
 	color: black;
+	*/
+	color: white;
+	background: black;
 }
 
 h1 {
