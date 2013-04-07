@@ -45,10 +45,6 @@ label {
 	user-select: none;
 }
 
-optgroup.hidden {
-	display: none;
-}
-
 div.left {
 	float: left;
 	width: 50%;
@@ -69,7 +65,5 @@ div#options {
 	position: fixed;
 	bottom: 1em;
 	width: 30%;
-	margin: 0px;
-	padding: 0 0.5em 0 0.5em;
 }
 
