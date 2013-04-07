@@ -48,7 +48,7 @@ function get_waypoint ($route, $wp, &$lat, &$lon)
 	$map = exec ("grep -w $wp $route");
 
 	$parts = explode ('"', $map);
-	if (count ($parts < 7))
+	if (count ($parts) < 7)
 		return false;
 
 	$conv_lat = $parts[1] / 23860929;
