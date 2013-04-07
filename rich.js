@@ -1605,10 +1605,7 @@ function hide_route (id)
 
 function load_kml (id, key, visible)
 {
-	var base = "web/";
-	var url = "";
-
-	url = base + id + "/" + key + ".kml";
+	var url = url_base + id + "/" + key + ".kml";
 
 	var i = find_geoxml (url);
 	if (i >= 0) {
@@ -1843,6 +1840,23 @@ function on_change_kml (id)
 
 	kml[name] = check.checked;
 
+	var url = url_base + route_key + "/" + name + ".kml";
+	var i = find_geoxml (url);
+	if (i >= 0) {
+		if (kml[name]) {
+			geo.showDocument (geo.docs[i]);
+		} else {
+			geo.hideDocument (geo.docs[i]);
+		}
+	} else {
+		if (kml[name]) {
+			geo.parse (url);
+		}
+	}
+
+	show_route_new (route_key);
+	return;
+
 	if (route_key in routes) {
 		load_kml (route_key, name, check.checked);
 	}
@@ -2018,6 +2032,7 @@ function kml_load_new (name, type)
 		geo.showDocument (geo.docs[i]);
 	} else {
 		geo.parse (url);
+		console.log ("read: " + url);
 	}
 }
 
@@ -2032,29 +2047,60 @@ function show_route_new (name)
 
 	var attr = routes[name].attr;
 	var hill = !("dist_route" in routes[name]);
+	var hike = false;
+	var todo = false;
 
 	if (kml["ferry"]) {
-		// What?
+		if (attr.indexOf ('f') >= 0)
+			kml_load_new (name, "ferry");
 	}
 
 	if (kml["hike"]) {
 		if ((!hill) || ((extra == true) && (hill == true))) {
-			if (attr.indexOf ('h') >= 0) kml_load_new (name, "hike");
+			if (attr.indexOf ('h') >= 0) {
+				kml_load_new (name, "hike");
+				hike = true;
+			}
 		}
-		if (attr.indexOf ('P') >= 0) kml_load_new (name, "hills_done");
+		if (attr.indexOf ('P') >= 0)
+			kml_load_new (name, "hills_done");
+	}
+
+	if (kml["todo"]) {
+		if (kml["area"]) {
+			if (attr.indexOf ('a') >= 0)
+				kml_load_new (name, "area_todo");
+		}
+		if (attr.indexOf ('t') >= 0) {
+			kml_load_new (name, "todo");
+			todo = true;
+		}
+		if (attr.indexOf ('p') >= 0) {
+			kml_load_new (name, "hills_todo");
+		}
 	}
 
 	if (kml["route"]) {
-		if (attr.indexOf ('r') >= 0) kml_load_new (name, "route");
+		if ((attr.indexOf ('r') >= 0) && (!hike) && (!todo)) {
+			kml_load_new (name, "route");
+		} else {
+			var url = url_base + name + "/route.kml";
+			var i = find_geoxml (url);
+			if (i >= 0) {
+				geo.hideDocument (geo.docs[i]);
+			}
+		}
 	}
 
 	if (kml["area"]) {
-		if (attr.indexOf ('A') >= 0) kml_load_new (name, "area_done");
+		if (attr.indexOf ('A') >= 0)
+			kml_load_new (name, "area_done");
 	}
 
 	if (kml["camp"]) {
 		if ((!hill) || ((extra == true) && (hill == true))) {
-			if (attr.indexOf ('c') >= 0) kml_load_new (name, "camp");
+			if (attr.indexOf ('c') >= 0)
+				kml_load_new (name, "camp");
 		}
 	}
 
@@ -2065,23 +2111,18 @@ function show_route_new (name)
 	}
 
 	if (kml["finish"]) {
-		if (attr.indexOf ('f') >= 0) kml_load_new (name, "finish");
+		if (attr.indexOf ('f') >= 0)
+			kml_load_new (name, "finish");
 	}
 
 	if (kml["start"]) {
-		if (attr.indexOf ('s') >= 0) kml_load_new (name, "start");
-	}
-
-	if (kml["todo"]) {
-		if (kml["area"]) {
-			if (attr.indexOf ('a') >= 0) kml_load_new (name, "area_todo");
-		}
-		if (attr.indexOf ('t') >= 0) kml_load_new (name, "todo");
-		if (attr.indexOf ('p') >= 0) kml_load_new (name, "hills_todo");
+		if (attr.indexOf ('s') >= 0)
+			kml_load_new (name, "start");
 	}
 
 	if (kml["variant"]) {
-		if (attr.indexOf ('v') >= 0) kml_load_new (name, "variant");
+		if (attr.indexOf ('v') >= 0)
+			kml_load_new (name, "variant");
 	}
 
 	if (opt_zoom) {
