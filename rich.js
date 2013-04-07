@@ -137,7 +137,7 @@ function init_hills()
 		"wainwrights" : {
 			"fullname"	: "Wainwrights &mdash; Lake District",
 			"name"		: "Wainwrights",
-			"attr"		: "cht",
+			"attr"		: "AawchPps",
 			"date_start"	: "2012-10-22",
 			"date_end"	: "0000-00-00",
 			"days_walked"	: 7,
@@ -161,7 +161,7 @@ function init_hills()
 		"munros" : {
 			"fullname"	: "Munros &mdash; Scotland",
 			"name"		: "Munros",
-			"attr"		: "t",
+			"attr"		: "ap",
 			"complete"	: 0,
 			"custom"	: "",
 			"latitude"	: 56.670616,
@@ -201,7 +201,7 @@ function init_routes()
 		"coast.to.coast" : {
 			"fullname"	: "Coast to Coast",
 			"name"		: "Coast to Coast",
-			"attr"		: "chs",
+			"attr"		: "cfhs",
 			"dist_route"	: 184.2,
 			"date_start"	: "2012-09-28",
 			"date_end"	: "2012-10-10",
@@ -218,7 +218,7 @@ function init_routes()
 		"e2" : {
 			"fullname"	: "E2 Dover to Kirk Yetholm",
 			"name"		: "E2",
-			"attr"		: "chstv",
+			"attr"		: "cfhstv",
 			"dist_route"	: 684.0,
 			"date_start"	: "2010-09-22",
 			"date_end"	: "2013-02-23",
@@ -235,7 +235,7 @@ function init_routes()
 		"e9" : {
 			"fullname"	: "E9 Dover to Plymouth",
 			"name"		: "E9",
-			"attr"		: "chsv",
+			"attr"		: "cfhsv",
 			"dist_route"	: 440.0,
 			"date_start"	: "2012-06-13",
 			"date_end"	: "2013-01-12",
@@ -252,7 +252,7 @@ function init_routes()
 		"isle.of.wight.coast" : {
 			"fullname"	: "Isle of Wight Coastal Path",
 			"name"		: "Isle of Wight Coast",
-			"attr"		: "chs",
+			"attr"		: "cfhs",
 			"dist_route"	: 68.7,
 			"date_start"	: "2012-12-30",
 			"date_end"	: "2013-01-02",
@@ -269,7 +269,7 @@ function init_routes()
 		"kent.coast" : {
 			"fullname"	: "Kent Coast Path",
 			"name"		: "Kent Coast",
-			"attr"		: "chsv",
+			"attr"		: "cfhsv",
 			"dist_route"	: 207.0,
 			"date_start"	: "2013-01-11",
 			"date_end"	: "2013-01-21",
@@ -286,7 +286,7 @@ function init_routes()
 		"north.downs" : {
 			"fullname"	: "North Downs Way &mdash; National Trail",
 			"name"		: "North Downs",
-			"attr"		: "chsv",
+			"attr"		: "cfhsv",
 			"dist_route"	: 125.1,
 			"date_start"	: "2013-01-12",
 			"date_end"	: "2013-02-08",
@@ -303,7 +303,7 @@ function init_routes()
 		"oxford.green.belt" : {
 			"fullname"	: "Oxford Green Belt Way",
 			"name"		: "Oxford Green Belt",
-			"attr"		: "chs",
+			"attr"		: "cfhs",
 			"dist_route"	: 52.1,
 			"date_start"	: "2013-02-24",
 			"date_end"	: "2013-03-07",
@@ -320,7 +320,7 @@ function init_routes()
 		"pennine.way" : {
 			"fullname"	: "Pennine Way &mdash; National Trail",
 			"name"		: "Pennine Way",
-			"attr"		: "chs",
+			"attr"		: "cfhs",
 			"dist_route"	: 255.0,
 			"date_start"	: "2010-09-20",
 			"date_end"	: "2012-10-18",
@@ -337,7 +337,7 @@ function init_routes()
 		"snowdon.horseshoe" : {
 			"fullname"	: "Snowdon Horseshoe",
 			"name"		: "Snowdon Horseshoe",
-			"attr"		: "hs",
+			"attr"		: "fhs",
 			"dist_route"	: 7.4,
 			"date_start"	: "2005-08-20",
 			"date_end"	: "2005-08-20",
@@ -371,7 +371,7 @@ function init_routes()
 		"thanet.coast" : {
 			"fullname"	: "Thanet Coastal Path",
 			"name"		: "Thanet Coast",
-			"attr"		: "chs",
+			"attr"		: "cfhs",
 			"dist_route"	: 19.6,
 			"date_start"	: "2013-01-14",
 			"date_end"	: "2013-01-15",
@@ -388,7 +388,7 @@ function init_routes()
 		"three.towers" : {
 			"fullname"	: "Three Towers",
 			"name"		: "Three Towers",
-			"attr"		: "hs",
+			"attr"		: "fhs",
 			"dist_route"	: 45.0,
 			"date_start"	: "2010-04-10",
 			"date_end"	: "2010-04-10",
@@ -405,7 +405,7 @@ function init_routes()
 		"white.cliffs" : {
 			"fullname"	: "White Cliffs Country Trails",
 			"name"		: "White Cliffs",
-			"attr"		: "hs",
+			"attr"		: "fhs",
 			"dist_route"	: 9.2,
 			"date_start"	: "2013-01-14",
 			"date_end"	: "2013-01-14",
@@ -422,7 +422,7 @@ function init_routes()
 		"yorkshire.three.peaks" : {
 			"fullname"	: "Yorkshire Three Peaks",
 			"name"		: "Yorkshire Three Peaks",
-			"attr"		: "hs",
+			"attr"		: "fhs",
 			"dist_route"	: 24.5,
 			"date_start"	: "2011-08-03",
 			"date_end"	: "2011-08-03",
@@ -441,7 +441,7 @@ function init_routes()
 		"1066.country.walk" : {
 			"fullname"	: "1066 Country Walk",
 			"name"		: "1066 Country Walk",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 31.6,
 			"date_start"	: "2013-01-09",
 			"date_end"	: "0000-00-00",
@@ -458,7 +458,7 @@ function init_routes()
 		"arden.way" : {
 			"fullname"	: "Arden Way",
 			"name"		: "Arden Way",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 26.5,
 			"date_start"	: "2012-12-18",
 			"date_end"	: "0000-00-00",
@@ -475,7 +475,7 @@ function init_routes()
 		"cleveland.way" : {
 			"fullname"	: "Cleveland Way &mdash; National Trail",
 			"name"		: "Cleveland Way",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 106.4,
 			"date_start"	: "2012-10-08",
 			"date_end"	: "0000-00-00",
@@ -492,7 +492,7 @@ function init_routes()
 		"cotswold.canals" : {
 			"fullname"	: "Cotswold Canals Walk",
 			"name"		: "Cotswold Canals",
-			"attr"		: "hst",
+			"attr"		: "fhst",
 			"dist_route"	: 41.3,
 			"date_start"	: "2013-02-28",
 			"date_end"	: "0000-00-00",
@@ -509,7 +509,7 @@ function init_routes()
 		"coventry.way" : {
 			"fullname"	: "Coventry Way",
 			"name"		: "Coventry Way",
-			"attr"		: "hst",
+			"attr"		: "fhst",
 			"dist_route"	: 40.1,
 			"date_start"	: "2012-12-18",
 			"date_end"	: "0000-00-00",
@@ -526,7 +526,7 @@ function init_routes()
 		"dales.centurion" : {
 			"fullname"	: "Yorkshire Dales Centurion Walk",
 			"name"		: "Dales Centurion Walk",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 100.1,
 			"date_start"	: "2011-08-03",
 			"date_end"	: "0000-00-00",
@@ -543,7 +543,7 @@ function init_routes()
 		"dales.top.ten" : {
 			"fullname"	: "Yorkshire Dales Top Ten",
 			"name"		: "Dales Top Ten",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 77.1,
 			"date_start"	: "2010-09-25",
 			"date_end"	: "0000-00-00",
@@ -560,7 +560,7 @@ function init_routes()
 		"dales.walk" : {
 			"fullname"	: "Dales Walk",
 			"name"		: "Dales Walk",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 71.7,
 			"date_start"	: "2012-10-04",
 			"date_end"	: "0000-00-00",
@@ -577,7 +577,7 @@ function init_routes()
 		"gritstone.trail" : {
 			"fullname"	: "Gritstone Trail",
 			"name"		: "Gritstone Trail",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 34.7,
 			"date_start"	: "2012-12-12",
 			"date_end"	: "0000-00-00",
@@ -594,7 +594,7 @@ function init_routes()
 		"hadrians.wall" : {
 			"fullname"	: "Hadrians Wall Path &mdash; National Trail",
 			"name"		: "Hadrians Wall",
-			"attr"		: "hst",
+			"attr"		: "fhst",
 			"dist_route"	: 86.1,
 			"date_start"	: "2012-10-14",
 			"date_end"	: "0000-00-00",
@@ -611,7 +611,7 @@ function init_routes()
 		"heart.of.england" : {
 			"fullname"	: "Heart of England Way",
 			"name"		: "Heart of England",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 101.0,
 			"date_start"	: "2012-12-16",
 			"date_end"	: "2012-12-21",
@@ -628,7 +628,7 @@ function init_routes()
 		"lyke.wake.walk" : {
 			"fullname"	: "Lyke Wake Walk",
 			"name"		: "Lyke Wake Walk",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 39.2,
 			"date_start"	: "2012-10-08",
 			"date_end"	: "0000-00-00",
@@ -645,7 +645,7 @@ function init_routes()
 		"oldham.way" : {
 			"fullname"	: "Oldham Way",
 			"name"		: "Oldham Way",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 38.5,
 			"date_start"	: "2010-09-22",
 			"date_end"	: "0000-00-00",
@@ -662,7 +662,7 @@ function init_routes()
 		"oxford.canal" : {
 			"fullname"	: "Oxford Canal Walk",
 			"name"		: "Oxford Canal",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 81.8,
 			"date_start"	: "2013-02-23",
 			"date_end"	: "0000-00-00",
@@ -679,7 +679,7 @@ function init_routes()
 		"oxfordshire.way" : {
 			"fullname"	: "Oxfordshire Way",
 			"name"		: "Oxfordshire Way",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 67.1,
 			"date_start"	: "2012-12-21",
 			"date_end"	: "0000-00-00",
@@ -696,7 +696,7 @@ function init_routes()
 		"pilgrims.way" : {
 			"fullname"	: "Pilgrims Way",
 			"name"		: "Pilgrims Way",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 132.4,
 			"date_start"	: "2013-02-04",
 			"date_end"	: "0000-00-00",
@@ -713,7 +713,7 @@ function init_routes()
 		"saxon.shore" : {
 			"fullname"	: "Saxon Shore Way",
 			"name"		: "Saxon Shore",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 163.2,
 			"date_start"	: "2013-01-12",
 			"date_end"	: "0000-00-00",
@@ -730,7 +730,7 @@ function init_routes()
 		"solent.way" : {
 			"fullname"	: "Solent Way",
 			"name"		: "Solent Way",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 62.6,
 			"date_start"	: "2012-12-30",
 			"date_end"	: "0000-00-00",
@@ -747,7 +747,7 @@ function init_routes()
 		"south.downs" : {
 			"fullname"	: "South Downs Way &mdash; National Trail",
 			"name"		: "South Downs",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 94.7,
 			"date_start"	: "2013-01-06",
 			"date_end"	: "0000-00-00",
@@ -764,7 +764,7 @@ function init_routes()
 		"staffordshire.moorlands" : {
 			"fullname"	: "Staffordshire Moorlands Challenge Walk",
 			"name"		: "Staffordshire Moorlands",
-			"attr"		: "hst",
+			"attr"		: "fhst",
 			"dist_route"	: 21.8,
 			"date_start"	: "2012-12-14",
 			"date_end"	: "0000-00-00",
@@ -781,7 +781,7 @@ function init_routes()
 		"staffordshire.way" : {
 			"fullname"	: "Staffordshire Way",
 			"name"		: "Staffordshire Way",
-			"attr"		: "chst",
+			"attr"		: "cfhst",
 			"dist_route"	: 94.5,
 			"date_start"	: "2012-12-13",
 			"date_end"	: "0000-00-00",
@@ -798,7 +798,7 @@ function init_routes()
 		"tameside.trail" : {
 			"fullname"	: "Tameside Trail",
 			"name"		: "Tameside Trail",
-			"attr"		: "hst",
+			"attr"		: "fhst",
 			"dist_route"	: 34.2,
 			"date_start"	: "2012-12-11",
 			"date_end"	: "0000-00-00",
@@ -815,7 +815,7 @@ function init_routes()
 		"thames.path" : {
 			"fullname"	: "Thames Path &mdash; National Trail",
 			"name"		: "Thames Path",
-			"attr"		: "chstv",
+			"attr"		: "cfhstv",
 			"dist_route"	: 181.8,
 			"date_start"	: "2013-02-19",
 			"date_end"	: "0000-00-00",
@@ -832,7 +832,7 @@ function init_routes()
 		"wey.navigation" : {
 			"fullname"	: "Wey Navigation",
 			"name"		: "Wey Navigation",
-			"attr"		: "hst",
+			"attr"		: "fhst",
 			"dist_route"	: 19.3,
 			"date_start"	: "2013-02-08",
 			"date_end"	: "0000-00-00",
@@ -849,7 +849,7 @@ function init_routes()
 		"wysis.way" : {
 			"fullname"	: "Wysis Way",
 			"name"		: "Wysis Way",
-			"attr"		: "hst",
+			"attr"		: "fhst",
 			"dist_route"	: 51.8,
 			"date_start"	: "2013-02-28",
 			"date_end"	: "0000-00-00",
@@ -868,7 +868,7 @@ function init_routes()
 		"ayrshire.coast" : {
 			"fullname"	: "Ayrshire Coastal Path",
 			"name"		: "Ayrshire Coastal Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 78.3,
 			"latitude"	: 55.463285,
 			"longitude"	: -4.812012,
@@ -877,7 +877,7 @@ function init_routes()
 		"berwick.boundary" : {
 			"fullname"	: "Berwick Borough Boundary Walk",
 			"name"		: "Berwick Borough Boundary Walk",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 109.3,
 			"latitude"	: 55.583002,
 			"longitude"	: -2.024231,
@@ -886,7 +886,7 @@ function init_routes()
 		"calderdale.way" : {
 			"fullname"	: "Calderdale Way",
 			"name"		: "Calderdale Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 49.6,
 			"latitude"	: 53.723936,
 			"longitude"	: -1.925354,
@@ -895,7 +895,7 @@ function init_routes()
 		"central.scottish.way" : {
 			"fullname"	: "Central Scottish Way",
 			"name"		: "Central Scottish Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 146.6,
 			"latitude"	: 55.856817,
 			"longitude"	: -3.142090,
@@ -904,7 +904,7 @@ function init_routes()
 		"coast.to.coast.alternative" : {
 			"fullname"	: "Alternative Coast to Coast",
 			"name"		: "Alternative Coast to Coast",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 200.1,
 			"latitude"	: 54.829172,
 			"longitude"	: -2.433472,
@@ -913,7 +913,7 @@ function init_routes()
 		"coast.to.coast.scotland" : {
 			"fullname"	: "Coast to Coast Scotland",
 			"name"		: "Coast to Coast Scotland",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 134.4,
 			"latitude"	: 56.398705,
 			"longitude"	: -4.213257,
@@ -922,7 +922,7 @@ function init_routes()
 		"coast.to.coast.south" : {
 			"fullname"	: "Southern Coast to Coast",
 			"name"		: "Southern Coast to Coast",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 277.8,
 			"latitude"	: 51.141448,
 			"longitude"	: -1.142578,
@@ -931,7 +931,7 @@ function init_routes()
 		"cotswold.diamond" : {
 			"fullname"	: "Diamond Way North Cotswold",
 			"name"		: "Diamond Way North Cotswold",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 65.4,
 			"latitude"	: 51.940879,
 			"longitude"	: -1.754379,
@@ -940,7 +940,7 @@ function init_routes()
 		"cotswold.way" : {
 			"fullname"	: "Cotswold Way - National Trail",
 			"name"		: "Cotswold Way - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 101.1,
 			"latitude"	: 51.795027,
 			"longitude"	: -2.153320,
@@ -949,7 +949,7 @@ function init_routes()
 		"cross.cotswold" : {
 			"fullname"	: "Cross Cotswold Pathway",
 			"name"		: "Cross Cotswold Pathway",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 90.3,
 			"latitude"	: 51.801822,
 			"longitude"	: -1.881409,
@@ -958,7 +958,7 @@ function init_routes()
 		"cumbria.coast" : {
 			"fullname"	: "Cumbria Coastal Way",
 			"name"		: "Cumbria Coastal Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 192.4,
 			"latitude"	: 54.535426,
 			"longitude"	: -3.098145,
@@ -967,7 +967,7 @@ function init_routes()
 		"cumbrian.trident" : {
 			"fullname"	: "Cumbrian Classic Trident Walk",
 			"name"		: "Cumbrian Classic Trident Walk",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 97.0,
 			"latitude"	: 54.509124,
 			"longitude"	: -3.081665,
@@ -976,7 +976,7 @@ function init_routes()
 		"cumbria.way" : {
 			"fullname"	: "Cumbria Way",
 			"name"		: "Cumbria Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 73.6,
 			"latitude"	: 54.557730,
 			"longitude"	: -3.081665,
@@ -985,7 +985,7 @@ function init_routes()
 		"dales.challenge" : {
 			"fullname"	: "Yorkshire Dales Challenge Walk",
 			"name"		: "Yorkshire Dales Challenge Walk",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 22.0,
 			"latitude"	: 54.178713,
 			"longitude"	: -2.117271,
@@ -994,7 +994,7 @@ function init_routes()
 		"dales.way" : {
 			"fullname"	: "Dales Way",
 			"name"		: "Dales Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 78.1,
 			"latitude"	: 54.191370,
 			"longitude"	: -2.296143,
@@ -1003,7 +1003,7 @@ function init_routes()
 		"dane.valley" : {
 			"fullname"	: "Dane Valley Way",
 			"name"		: "Dane Valley Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 40.5,
 			"latitude"	: 53.206033,
 			"longitude"	: -2.142334,
@@ -1012,7 +1012,7 @@ function init_routes()
 		"e8" : {
 			"fullname"	: "E8 Hull to Liverpool",
 			"name"		: "E8 Hull to Liverpool",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 178.8,
 			"latitude"	: 53.497850,
 			"longitude"	: -1.642456,
@@ -1021,7 +1021,7 @@ function init_routes()
 		"elham.valley" : {
 			"fullname"	: "Elham Valley Way",
 			"name"		: "Elham Valley Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 21.7,
 			"latitude"	: 51.184938,
 			"longitude"	: 1.119232 ,
@@ -1030,7 +1030,7 @@ function init_routes()
 		"eskdale.way" : {
 			"fullname"	: "Eskdale Way",
 			"name"		: "Eskdale Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 88.2,
 			"latitude"	: 54.434908,
 			"longitude"	: -0.843201,
@@ -1039,7 +1039,7 @@ function init_routes()
 		"esk.valley" : {
 			"fullname"	: "Esk Valley Walk",
 			"name"		: "Esk Valley Walk",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 36.9,
 			"latitude"	: 54.428518,
 			"longitude"	: -0.790329,
@@ -1048,7 +1048,7 @@ function init_routes()
 		"etherow.goyt.valley" : {
 			"fullname"	: "Etherow - Goyt Valley Way",
 			"name"		: "Etherow - Goyt Valley Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 14.1,
 			"latitude"	: 53.428560,
 			"longitude"	: -2.040367,
@@ -1057,7 +1057,7 @@ function init_routes()
 		"fife.coast" : {
 			"fullname"	: "Fife Coastal Path",
 			"name"		: "Fife Coastal Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 115.1,
 			"latitude"	: 56.238008,
 			"longitude"	: -3.228607,
@@ -1066,7 +1066,7 @@ function init_routes()
 		"five.degrees.west" : {
 			"fullname"	: "Five Degrees West",
 			"name"		: "Five Degrees West",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 290,
 			"latitude"	: 57.106419,
 			"longitude"	: -4.943848,
@@ -1076,7 +1076,7 @@ function init_routes()
 		"gloucestershire.way" : {
 			"fullname"	: "Gloucestershire Way",
 			"name"		: "Gloucestershire Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 94.2,
 			"latitude"	: 51.808615,
 			"longitude"	: -2.230225,
@@ -1085,7 +1085,7 @@ function init_routes()
 		"glyndwrs.way" : {
 			"fullname"	: "Glyndwrs Way - National Trail",
 			"name"		: "Glyndwrs Way - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 136.6,
 			"latitude"	: 52.538779,
 			"longitude"	: -3.361816,
@@ -1094,7 +1094,7 @@ function init_routes()
 		"goyt.way" : {
 			"fullname"	: "Goyt Way",
 			"name"		: "Goyt Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 9.7,
 			"latitude"	: 53.371654,
 			"longitude"	: -2.028351,
@@ -1103,7 +1103,7 @@ function init_routes()
 		"great.english.walk" : {
 			"fullname"	: "Great English Walk",
 			"name"		: "Great English Walk",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 586.0,
 			"latitude"	: 53.638125,
 			"longitude"	: -2.065430,
@@ -1112,7 +1112,7 @@ function init_routes()
 		"great.glen.way" : {
 			"fullname"	: "Great Glen Way - National Trail",
 			"name"		: "Great Glen Way - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 72.6,
 			"latitude"	: 57.166036,
 			"longitude"	: -4.600525,
@@ -1121,7 +1121,7 @@ function init_routes()
 		"hadrians.coast" : {
 			"fullname"	: "Hadrians Coastal Route",
 			"name"		: "Hadrians Coastal Route",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 77.7,
 			"latitude"	: 54.678595,
 			"longitude"	: -3.370056,
@@ -1130,7 +1130,7 @@ function init_routes()
 		"heart.of.snowdonia" : {
 			"fullname"	: "Heart of Snowdonia",
 			"name"		: "Heart of Snowdonia",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 48.9,
 			"latitude"	: 53.081240,
 			"longitude"	: -4.011383,
@@ -1139,7 +1139,7 @@ function init_routes()
 		"hobblers.way" : {
 			"fullname"	: "Hobblers Way",
 			"name"		: "Hobblers Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 192.3,
 			"latitude"	: 52.221070,
 			"longitude"	: -1.071167,
@@ -1148,7 +1148,7 @@ function init_routes()
 		"isaacs.tea.trail" : {
 			"fullname"	: "Isaacs Tea Trail",
 			"name"		: "Isaacs Tea Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 37.3,
 			"latitude"	: 54.849932,
 			"longitude"	: -2.347641,
@@ -1157,7 +1157,7 @@ function init_routes()
 		"itchen.way" : {
 			"fullname"	: "Itchen Way",
 			"name"		: "Itchen Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 30.4,
 			"latitude"	: 50.984370,
 			"longitude"	: -1.290207,
@@ -1166,7 +1166,7 @@ function init_routes()
 		"lancashire.coast" : {
 			"fullname"	: "Lancashire Coastal Way",
 			"name"		: "Lancashire Coastal Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 68.1,
 			"latitude"	: 53.956086,
 			"longitude"	: -2.860565,
@@ -1175,7 +1175,7 @@ function init_routes()
 		"macmillan.abbotsbury.langport" : {
 			"fullname"	: "Macmillan Abbotsbury Langport Link",
 			"name"		: "Macmillan Abbotsbury Langport Link",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 40.4,
 			"latitude"	: 50.875311,
 			"longitude"	: -2.712250,
@@ -1184,7 +1184,7 @@ function init_routes()
 		"macmillan.way" : {
 			"fullname"	: "Macmillan Way",
 			"name"		: "Macmillan Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 286.5,
 			"latitude"	: 52.099757,
 			"longitude"	: -1.065674,
@@ -1193,7 +1193,7 @@ function init_routes()
 		"macmillan.way.west" : {
 			"fullname"	: "Macmillan Way West",
 			"name"		: "Macmillan Way West",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 101.5,
 			"latitude"	: 51.110420,
 			"longitude"	: -3.342590,
@@ -1202,7 +1202,7 @@ function init_routes()
 		"midshires.way" : {
 			"fullname"	: "Midshires Way",
 			"name"		: "Midshires Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 223.7,
 			"latitude"	: 52.636397,
 			"longitude"	: -1.334839,
@@ -1211,7 +1211,7 @@ function init_routes()
 		"millennium.way" : {
 			"fullname"	: "Way For The Millennium",
 			"name"		: "Way For The Millennium",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 37.7,
 			"latitude"	: 52.762892,
 			"longitude"	: -1.972046,
@@ -1220,7 +1220,7 @@ function init_routes()
 		"monarchs.way" : {
 			"fullname"	: "Monarchs Way",
 			"name"		: "Monarchs Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 564.7,
 			"latitude"	: 51.655519,
 			"longitude"	: -2.147827,
@@ -1229,7 +1229,7 @@ function init_routes()
 		"mull.of.galloway.trail" : {
 			"fullname"	: "Mull Of Galloway Trail",
 			"name"		: "Mull Of Galloway Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 35.5,
 			"latitude"	: 54.846571,
 			"longitude"	: -4.980927,
@@ -1238,7 +1238,7 @@ function init_routes()
 		"nelson.way" : {
 			"fullname"	: "Nelson Way",
 			"name"		: "Nelson Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 406.3,
 			"latitude"	: 51.730431,
 			"longitude"	: 0.318604 ,
@@ -1247,7 +1247,7 @@ function init_routes()
 		"north.to.the.cape" : {
 			"fullname"	: "North to the Cape",
 			"name"		: "North to the Cape",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 218.3,
 			"latitude"	: 57.671848,
 			"longitude"	: -5.026245,
@@ -1256,7 +1256,7 @@ function init_routes()
 		"northumberland.coast" : {
 			"fullname"	: "Northumberland Coast Path",
 			"name"		: "Northumberland Coast Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 63.9,
 			"latitude"	: 55.522412,
 			"longitude"	: -1.782532,
@@ -1265,7 +1265,7 @@ function init_routes()
 		"offas.dyke" : {
 			"fullname"	: "Offas Dyke Path - National Trail",
 			"name"		: "Offas Dyke Path - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 178.1,
 			"latitude"	: 52.479435,
 			"longitude"	: -3.246460,
@@ -1274,7 +1274,7 @@ function init_routes()
 		"peddars.way.and.norfolk.coast" : {
 			"fullname"	: "Peddars Way and Norfolk Coast Path - National Trail",
 			"name"		: "Peddars Way and Norfolk Coast Path - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 96.7,
 			"latitude"	: 52.757905,
 			"longitude"	: 0.892639 ,
@@ -1283,7 +1283,7 @@ function init_routes()
 		"pembrokshire.coast" : {
 			"fullname"	: "Pembrokshire Coast Path - National Trail",
 			"name"		: "Pembrokshire Coast Path - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 182.1,
 			"latitude"	: 51.849353,
 			"longitude"	: -4.879303,
@@ -1292,7 +1292,7 @@ function init_routes()
 		"pennine.bridleway" : {
 			"fullname"	: "Pennine Bridleway - National Trail",
 			"name"		: "Pennine Bridleway - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 163.4,
 			"latitude"	: 53.690201,
 			"longitude"	: -2.164307,
@@ -1301,7 +1301,7 @@ function init_routes()
 		"ribble.way" : {
 			"fullname"	: "Ribble Way",
 			"name"		: "Ribble Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 68.9,
 			"latitude"	: 53.964165,
 			"longitude"	: -2.419739,
@@ -1310,7 +1310,7 @@ function init_routes()
 		"ridgeway" : {
 			"fullname"	: "Ridgeway - National Trail",
 			"name"		: "Ridgeway - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 85.7,
 			"latitude"	: 51.614606,
 			"longitude"	: -1.186523,
@@ -1319,7 +1319,7 @@ function init_routes()
 		"river.parrett" : {
 			"fullname"	: "River Parrett Trail",
 			"name"		: "River Parrett Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 44.2,
 			"latitude"	: 51.024121,
 			"longitude"	: -2.855072,
@@ -1328,7 +1328,7 @@ function init_routes()
 		"rob.roy.way" : {
 			"fullname"	: "Rob Roy Way",
 			"name"		: "Rob Roy Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 79.4,
 			"latitude"	: 56.409343,
 			"longitude"	: -4.095154,
@@ -1337,7 +1337,7 @@ function init_routes()
 		"rochdale.way" : {
 			"fullname"	: "Rochdale Way",
 			"name"		: "Rochdale Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 48.1,
 			"latitude"	: 53.613081,
 			"longitude"	: -2.146454,
@@ -1346,7 +1346,7 @@ function init_routes()
 		"sefton.coast" : {
 			"fullname"	: "Sefton Coastal Path",
 			"name"		: "Sefton Coastal Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 21.9,
 			"latitude"	: 53.581500,
 			"longitude"	: -3.019867,
@@ -1355,7 +1355,7 @@ function init_routes()
 		"severn.way" : {
 			"fullname"	: "Severn Way",
 			"name"		: "Severn Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 223.8,
 			"latitude"	: 52.146973,
 			"longitude"	: -2.982788,
@@ -1364,7 +1364,7 @@ function init_routes()
 		"shakespeare.way" : {
 			"fullname"	: "Shakespeare Way",
 			"name"		: "Shakespeare Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 128.9,
 			"latitude"	: 51.779736,
 			"longitude"	: -1.197510,
@@ -1373,7 +1373,7 @@ function init_routes()
 		"snowdonia.to.the.gower" : {
 			"fullname"	: "Snowdonia to the Gower",
 			"name"		: "Snowdonia to the Gower",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 208.7,
 			"latitude"	: 52.425873,
 			"longitude"	: -3.850708,
@@ -1382,7 +1382,7 @@ function init_routes()
 		"southern.upland.way" : {
 			"fullname"	: "Southern Upland Way - National Trail",
 			"name"		: "Southern Upland Way - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 211.2,
 			"latitude"	: 55.394712,
 			"longitude"	: -3.543091,
@@ -1391,7 +1391,7 @@ function init_routes()
 		"south.tyne.trail" : {
 			"fullname"	: "South Tyne Trail",
 			"name"		: "South Tyne Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 22.0,
 			"latitude"	: 54.844199,
 			"longitude"	: -2.462311,
@@ -1400,7 +1400,7 @@ function init_routes()
 		"speyside.way" : {
 			"fullname"	: "Speyside Way - National Trail",
 			"name"		: "Speyside Way - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 66.1,
 			"latitude"	: 57.405023,
 			"longitude"	: -3.337097,
@@ -1409,7 +1409,7 @@ function init_routes()
 		"staffordshire.gritstone" : {
 			"fullname"	: "Staffordshire Gritstone Walk",
 			"name"		: "Staffordshire Gritstone Walk",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 34.7,
 			"latitude"	: 53.158300,
 			"longitude"	: -1.947670,
@@ -1418,7 +1418,7 @@ function init_routes()
 		"standedge.trail" : {
 			"fullname"	: "Standedge Trail",
 			"name"		: "Standedge Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 11.3,
 			"latitude"	: 53.585882,
 			"longitude"	: -1.959686,
@@ -1427,7 +1427,7 @@ function init_routes()
 		"staunton.way" : {
 			"fullname"	: "Staunton Way",
 			"name"		: "Staunton Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 21.1,
 			"latitude"	: 50.927925,
 			"longitude"	: -0.952377,
@@ -1436,7 +1436,7 @@ function init_routes()
 		"st.cuthberts" : {
 			"fullname"	: "St Cuthberts Way",
 			"name"		: "St Cuthberts Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 64.3,
 			"latitude"	: 55.550388,
 			"longitude"	: -2.254944,
@@ -1445,7 +1445,7 @@ function init_routes()
 		"suffolk.coast.and.heath" : {
 			"fullname"	: "Suffolk Coast and Heath Path",
 			"name"		: "Suffolk Coast and Heath Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 57.6,
 			"latitude"	: 52.209290,
 			"longitude"	: 1.610870 ,
@@ -1454,7 +1454,7 @@ function init_routes()
 		"tandridge.border" : {
 			"fullname"	: "Tandridge Border Path",
 			"name"		: "Tandridge Border Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 52.1,
 			"latitude"	: 51.231828,
 			"longitude"	: -0.045319,
@@ -1463,7 +1463,7 @@ function init_routes()
 		"tennyson.trail" : {
 			"fullname"	: "Tennyson Trail",
 			"name"		: "Tennyson Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 13.8,
 			"latitude"	: 50.662955,
 			"longitude"	: -1.428909,
@@ -1472,7 +1472,7 @@ function init_routes()
 		"thames.estuary" : {
 			"fullname"	: "Thames Estuary Trail",
 			"name"		: "Thames Estuary Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 115.0,
 			"latitude"	: 51.480528,
 			"longitude"	: 0.623474 ,
@@ -1481,7 +1481,7 @@ function init_routes()
 		"thames.path.south.east" : {
 			"fullname"	: "Thames Path South East Extension",
 			"name"		: "Thames Path South East Extension",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 10.5,
 			"latitude"	: 51.492500,
 			"longitude"	: 0.120850 ,
@@ -1490,7 +1490,7 @@ function init_routes()
 		"three.ridings.on.foot" : {
 			"fullname"	: "Three Ridings On Foot",
 			"name"		: "Three Ridings On Foot",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 443.7,
 			"latitude"	: 53.985165,
 			"longitude"	: -1.312866,
@@ -1499,7 +1499,7 @@ function init_routes()
 		"todmorden.centenary" : {
 			"fullname"	: "Todmorden Centenary Way",
 			"name"		: "Todmorden Centenary Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 23.7,
 			"latitude"	: 53.705853,
 			"longitude"	: -2.097702,
@@ -1508,7 +1508,7 @@ function init_routes()
 		"trans-pennine" : {
 			"fullname"	: "Trans-Pennine Trail",
 			"name"		: "Trans-Pennine Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 209.0,
 			"latitude"	: 53.589244,
 			"longitude"	: -1.609497,
@@ -1517,7 +1517,7 @@ function init_routes()
 		"tyne.estuary" : {
 			"fullname"	: "Tyne Estuary to Source",
 			"name"		: "Tyne Estuary to Source",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 87.2,
 			"latitude"	: 54.901093,
 			"longitude"	: -1.937714,
@@ -1526,7 +1526,7 @@ function init_routes()
 		"wales.coast" : {
 			"fullname"	: "Wales Coast Path",
 			"name"		: "Wales Coast Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 865.1,
 			"latitude"	: 52.442618,
 			"longitude"	: -3.477173,
@@ -1535,7 +1535,7 @@ function init_routes()
 		"wantsum.walk" : {
 			"fullname"	: "Wantsum Walk",
 			"name"		: "Wantsum Walk",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 19.1,
 			"latitude"	: 51.356346,
 			"longitude"	: 1.214676 ,
@@ -1544,7 +1544,7 @@ function init_routes()
 		"welsh.3000s" : {
 			"fullname"	: "Welsh 3000s",
 			"name"		: "Welsh 3000s",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 24.2,
 			"latitude"	: 53.133178,
 			"longitude"	: -4.017906,
@@ -1553,7 +1553,7 @@ function init_routes()
 		"west.highland.way" : {
 			"fullname"	: "West Highland Way - National Trail",
 			"name"		: "West Highland Way - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 94.1,
 			"latitude"	: 56.328721,
 			"longitude"	: -4.743347,
@@ -1562,7 +1562,7 @@ function init_routes()
 		"west.somerset.coast" : {
 			"fullname"	: "West Somerset Coast Path",
 			"name"		: "West Somerset Coast Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 25.1,
 			"latitude"	: 51.172886,
 			"longitude"	: -3.258820,
@@ -1571,7 +1571,7 @@ function init_routes()
 		"west.sussex.literary" : {
 			"fullname"	: "West Sussex Literary Trail",
 			"name"		: "West Sussex Literary Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 49.0,
 			"latitude"	: 50.953669,
 			"longitude"	: -0.526657,
@@ -1580,7 +1580,7 @@ function init_routes()
 		"wey.south" : {
 			"fullname"	: "Wey South Path",
 			"name"		: "Wey South Path",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 34.4,
 			"latitude"	: 51.072468,
 			"longitude"	: -0.535583,
@@ -1589,7 +1589,7 @@ function init_routes()
 		"wirral.circular" : {
 			"fullname"	: "Wirral Circular Trail",
 			"name"		: "Wirral Circular Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 37.1,
 			"latitude"	: 53.358338,
 			"longitude"	: -3.059692,
@@ -1598,7 +1598,7 @@ function init_routes()
 		"wychwood.way" : {
 			"fullname"	: "Wychwood Way",
 			"name"		: "Wychwood Way",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 39.7,
 			"latitude"	: 52.140231,
 			"longitude"	: -2.048950,
@@ -1607,7 +1607,7 @@ function init_routes()
 		"yorkshire.wolds" : {
 			"fullname"	: "Yorkshire Wolds Way - National Trail",
 			"name"		: "Yorkshire Wolds Way - National Trail",
-			"attr"		: "rs",
+			"attr"		: "frs",
 			"dist_route"	: 78.8,
 			"latitude"	: 53.963357,
 			"longitude"	: -0.440826,
