@@ -58,374 +58,76 @@ function initialise()
 	}
 }
 
-function on_click_global (id)
+
+function init_dropdown()
 {
-	if (id == "global_centre") {
-		map_zoom_route();
-		return;
-	}
+	var c = new Array();
+	var i = new Array();
+	var u = new Array();
+	var h = new Array();
 
-	if (id == "global_clear") {
-		var dd = document.getElementById("dropdown");
-		dd.value = 0;
+	var c_html = "";
+	var i_html = "";
+	var u_html = "";
+	var h_html = "";
 
-		for (var r in routes) {
-			hide_route (r);
-		}
-		for (var h in hills) {
-			hide_route (h);
-		}
-	}
-
-	if (id == "global_todo") {
-		map_zoom_route();
-		var todo = [
-			"west.somerset.coast",
-			"river.parrett",
-			"offas.dyke",
-			"wales.coast",
-			"sefton.coast",
-			"lancashire.coast",
-			"cumbria.coast",
-			"hadrians.wall",
-			"northumberland.coast",
-			"southern.upland.way",
-			"mull.of.galloway.trail",
-			"ayrshire.coast",
-			"five.degrees.west"
-		];
-
-		for (var i = 0; i < todo.length; i++) {
-			load_kml (todo[i], "route", 1);
-		}
-		
-		return;
-	}
-
-	if (id == "global_done") {
-		map_zoom_route();
-		for (var r in routes) {
-			if (routes[r].complete > 0) {
-				load_kml (r, "hike", 1);
-			}
-		}
-		for (var h in hills) {
-			if (hills[h].complete > 0) {
-				load_kml (h, "area_done",  1);
-				load_kml (h, "hills_done", 1);
-			}
-		}
-	}
-}
-
-function find_geoxml (url)
-{
-	var index = -1;
-	var i;
-
-	for (i = 0; i < geo.docs.length; i++) {
-		if (geo.docs[i].url == url) {
-			index = i;
-			break;
-		}
-	}
-
-	return index;
-}
-
-function show_rich()
-{
-	if (opt_rich) {
-		var ll = new google.maps.LatLng(rich_info.latitude, rich_info.longitude);
-		if (marker_rich) {
-			marker_rich.setMap (map);
+	for (id in routes) {
+		if (routes[id].complete == 100) {
+			c.push ({ key: id, fullname: routes[id].fullname });
+		} else if ("date_start" in routes[id]) {
+			i.push ({ key: id, fullname: routes[id].fullname  + " (" + routes[id].complete + "%)" });
 		} else {
-			var image = 'rich.png';
-			marker_rich = new google.maps.Marker({
-				position: ll,
-				map: map,
-				icon: image,
-				title: "Where's Rich?"
-			});
-
-			google.maps.event.addListener(marker_rich, 'click', function() {
-				  var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
-				  geo.options.infoWindow.setContent (message);
-				  geo.options.infoWindow.open (map, marker_rich);
-			});
-		}
-		if (rich_info.route) {
-			// XXX activate current route
-			if (opt_one) {
-				hide_other_routes (rich_info.route);
-			}
-			load_kml (rich_info.route, "route", 1);
-
-			// If on a route, zoom to display it
-			// XXX enable correct options and select it in the dropdown
-			map_zoom_route (rich_info.route);
-		} else {
-			// else zoom to current location
-			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
-		}
-		/*
-		var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
-		geo.options.infoWindow.setContent (message);
-		geo.options.infoWindow.open (map, marker_rich);
-		*/
-	} else {
-		if (marker_rich) {
-			marker_rich.setMap (null);
+			u.push ({ key: id, fullname: routes[id].fullname });
 		}
 	}
 
-}
+	for (id in hills) {
+		h.push ({ key: id, fullname: hills[id].fullname  + " (" + hills[id].complete + "%)" });
+	}
 
-function hide_route (id)
-{
-	var hide_url = "web/" + id;
+	c.sort(route_sort);
+	i.sort(route_sort);
+	u.sort(route_sort);
+	h.sort(route_sort);
 
-	var index;
-	var dir = "";
-
-	var count = geo.docs.length;
-
-	for (var i = 0; i < count; i++) {
-		url = geo.docs[i].url;
-		index = url.lastIndexOf ('/');
-		dir = url.substr (0, index);
-
-		if (dir == hide_url) {
-			geo.hideDocument (geo.docs[i]);
+	if (c.length) {
+		c_html += '<optgroup id="complete" label="Complete">';
+		for (var j = 0; j < c.length; j++) {
+			c_html += '<option value="' + c[j].key +'">' + c[j].fullname + '</option>';
 		}
-	}
-}
-
-function hide_other_routes (id)
-{
-	var i;
-	var url;
-	var index;
-	var save_url = "web/" + id;
-	var dir = "";
-
-	var count = geo.docs.length;
-
-	for (var i = 0; i < count; i++) {
-		url = geo.docs[i].url;
-		index = url.lastIndexOf ('/');
-		dir = url.substr (0, index);
-
-		if (dir == save_url)
-			continue;
-
-		geo.hideDocument (geo.docs[i]);
-	}
-}
-
-function on_change_opt (id)
-{
-	var keys     = [ 'hike', 'ferry', 'camp', 'todo', 'variant', 'route', 'start' ];
-	var current_route = document.getElementById("dropdown").value;
-	var check = document.getElementById(id);
-
-	if (id == "opt_one") {
-		opt_one = check.checked;
-		if (!opt_one)
-			return;
-		// hide other routes
-		hide_other_routes (current_route);
-	} else if (id == "opt_zoom") {
-		opt_zoom = check.checked;
-		if (opt_zoom)
-			map_zoom_route (current_route);
-	} else if (id == "opt_rich") {
-		opt_rich = !opt_rich;
-		show_rich();
-	}
-}
-
-function on_change_show (id)
-{
-	var dd = document.getElementById("dropdown");
-	var selection = dd.value;
-
-	switch (id) {
-		//XXX need to hide no-longer-displayed routes
-		case 'show_comp':
-			show_comp = !show_comp;
-			if (!show_comp) {
-				for (id in routes) {
-					if ("complete" in routes[id]) {
-						if (routes[id].complete == 100) {
-							hide_route (id);
-						}
-					}
-				}
-			}
-			break;
-		case 'show_inco':
-			show_inco = !show_inco;
-			if (!show_inco) {
-				for (id in routes) {
-					if ("complete" in routes[id]) {
-						if (routes[id].complete < 100) {
-							hide_route (id);
-						}
-					}
-				}
-			}
-			break;
-		case 'show_unst':
-			show_unst = !show_unst;
-			if (!show_unst) {
-				for (id in routes) {
-					if (!("date_start" in routes[id])) {
-						hide_route (id);
-					}
-				}
-			}
-			break;
-		case 'show_hill':
-			show_hill = !show_hill;
-			if (!show_hill) {
-				for (id in hills) {
-					hide_route (id);
-				}
-			}
-			break;
+		c_html += '</optgroup>';
 	}
 
-	make_dropdown();
-	dd.value = selection;
-
-	if (opt_one) {
-		hide_other_routes (dd.value);
-	}
-
-	if (dd.value == "") {
-		dd.value = 0;
-	}
-}
-
-function load_kml (id, key, visible)
-{
-	var base = "web/";
-	var url = "";
-
-	url = base + id + "/" + key + ".kml";
-
-	var i = find_geoxml (url);
-	if (i >= 0) {
-		if (visible) {
-			geo.showDocument (geo.docs[i]);
-		} else {
-			geo.hideDocument (geo.docs[i]);
+	if (i.length) {
+		i_html += '<optgroup id="incomplete" label="Incomplete">';
+		for (var j = 0; j < i.length; j++) {
+			i_html += '<option value="' + i[j].key +'">' + i[j].fullname + '</option>';
 		}
-	} else {
-		if (visible)
-			geo.parse (url);
-	}
-}
-
-function init_options()
-{
-	var t;
-
-	t = document.getElementById ("kml_camp");    t.checked = kml["camp"];
-	t = document.getElementById ("kml_extra");   t.checked = kml["extra"];
-	t = document.getElementById ("kml_ferry");   t.checked = kml["ferry"];
-	t = document.getElementById ("kml_hike");    t.checked = kml["hike"];
-	t = document.getElementById ("kml_route");   t.checked = kml["route"];
-	t = document.getElementById ("kml_start");   t.checked = kml["start"];
-	t = document.getElementById ("kml_todo");    t.checked = kml["todo"];
-	t = document.getElementById ("kml_variant"); t.checked = kml["variant"];
-
-	t = document.getElementById ("opt_one");     t.checked = opt_one;
-	t = document.getElementById ("opt_zoom");    t.checked = opt_zoom;
-	t = document.getElementById ("opt_rich");    t.checked = opt_rich;
-                                                    
-	t = document.getElementById ("show_comp");   t.checked = show_comp;
-	t = document.getElementById ("show_inco");   t.checked = show_inco;
-	t = document.getElementById ("show_unst");   t.checked = show_unst;
-	t = document.getElementById ("show_hill");   t.checked = show_hill;
-}
-
-function on_change_kml (id)
-{
-	var route_key = document.getElementById("dropdown").value;
-	var check = document.getElementById(id);
-
-	var name = id.substr (4);
-	var key = id[4];
-
-	kml[name] = check.checked;
-
-	if (route_key in routes) {
-		load_kml (route_key, name, routes[route_key][key]);
-	}
-	if (route_key in hills) {
-		load_kml (route_key, name, hills[route_key][key]);
-	}
-}
-
-function on_change_hill (id)
-{
-	var attr = hills[id].attr;
-
-	if (opt_one) {
-		hide_other_routes (id)
+		i_html += '</optgroup>';
 	}
 
-	if (kml['hike'] && (attr.indexOf ('h')) >= 0) {
-		if (kml_hike) {
-			load_kml (id, 'hills_done', 1);
-			load_kml (id, 'area_done',  1);
+	if (u.length) {
+		u_html += '<optgroup id="unstarted" label="Unstarted">';
+		for (var j = 0; j < u.length; j++) {
+			u_html += '<option value="' + u[j].key +'">' + u[j].fullname + '</option>';
 		}
+		u_html += '</optgroup>';
 	}
 
-	if (kml['todo'] && (attr.indexOf ('t')) >= 0) {
-		if (kml_todo) {
-			load_kml (id, 'hills_todo', 1);
-			load_kml (id, 'area_todo',  1);
+	if (h.length) {
+		h_html += '<optgroup id="hills" label="Hills">';
+		for (var j = 0; j < h.length; j++) {
+			h_html += '<option value="' + h[j].key +'">' + h[j].fullname + '</option>';
 		}
+		h_html += '</optgroup>';
 	}
 
-	if (opt_zoom) {
-		map_zoom_ll (hills[id].latitude, hills[id].longitude, hills[id].zoom);
-	}
-}
+	show_html["comp"] = c_html;
+	show_html["inco"] = i_html;
+	show_html["unst"] = u_html;
+	show_html["hill"] = h_html;
 
-function on_change_hike (id)
-{
-	var sel = document.getElementById (id);
-	var option = sel.options[sel.selectedIndex].value;
-
-	if (option in hills) {
-		on_change_hill (option);
-		return;
-	}
-
-	var files = [ 'hike', 'ferry', 'camp', 'todo', 'variant', 'route', 'start' ];
-
-	if (opt_one) {
-		hide_other_routes (option);
-	}
-
-	if (!option || (option == "0"))
-		return;
-
-	for (i = 0; i < files.length; i++) {
-		var key = files[i][0];
-		if (routes[option].attr.indexOf (key) < 0)
-			continue;
-		if (kml[files[i]])
-			load_kml (option, files[i], 1);
-	}
-
-	if (opt_zoom) {
-		map_zoom_route (option);
-	}
+	make_dropdown (0);
 }
 
 function init_hills()
@@ -467,6 +169,29 @@ function init_hills()
 			"zoom"		: 7
 		}
 	};
+}
+
+function init_options()
+{
+	var t;
+
+	t = document.getElementById ("kml_camp");    t.checked = kml["camp"];
+	t = document.getElementById ("kml_extra");   t.checked = kml["extra"];
+	t = document.getElementById ("kml_ferry");   t.checked = kml["ferry"];
+	t = document.getElementById ("kml_hike");    t.checked = kml["hike"];
+	t = document.getElementById ("kml_route");   t.checked = kml["route"];
+	t = document.getElementById ("kml_start");   t.checked = kml["start"];
+	t = document.getElementById ("kml_todo");    t.checked = kml["todo"];
+	t = document.getElementById ("kml_variant"); t.checked = kml["variant"];
+
+	t = document.getElementById ("opt_one");     t.checked = opt_one;
+	t = document.getElementById ("opt_zoom");    t.checked = opt_zoom;
+	t = document.getElementById ("opt_rich");    t.checked = opt_rich;
+                                                    
+	t = document.getElementById ("show_comp");   t.checked = show_comp;
+	t = document.getElementById ("show_inco");   t.checked = show_inco;
+	t = document.getElementById ("show_unst");   t.checked = show_unst;
+	t = document.getElementById ("show_hill");   t.checked = show_hill;
 }
 
 function init_routes()
@@ -1891,9 +1616,82 @@ function init_routes()
 	};
 }
 
-function route_sort(a,b)
+
+function find_geoxml (url)
 {
-	return (a.fullname > b.fullname);
+	var index = -1;
+	var i;
+
+	for (i = 0; i < geo.docs.length; i++) {
+		if (geo.docs[i].url == url) {
+			index = i;
+			break;
+		}
+	}
+
+	return index;
+}
+
+function hide_other_routes (id)
+{
+	var i;
+	var url;
+	var index;
+	var save_url = "web/" + id;
+	var dir = "";
+
+	var count = geo.docs.length;
+
+	for (var i = 0; i < count; i++) {
+		url = geo.docs[i].url;
+		index = url.lastIndexOf ('/');
+		dir = url.substr (0, index);
+
+		if (dir == save_url)
+			continue;
+
+		geo.hideDocument (geo.docs[i]);
+	}
+}
+
+function hide_route (id)
+{
+	var hide_url = "web/" + id;
+
+	var index;
+	var dir = "";
+
+	var count = geo.docs.length;
+
+	for (var i = 0; i < count; i++) {
+		url = geo.docs[i].url;
+		index = url.lastIndexOf ('/');
+		dir = url.substr (0, index);
+
+		if (dir == hide_url) {
+			geo.hideDocument (geo.docs[i]);
+		}
+	}
+}
+
+function load_kml (id, key, visible)
+{
+	var base = "web/";
+	var url = "";
+
+	url = base + id + "/" + key + ".kml";
+
+	var i = find_geoxml (url);
+	if (i >= 0) {
+		if (visible) {
+			geo.showDocument (geo.docs[i]);
+		} else {
+			geo.hideDocument (geo.docs[i]);
+		}
+	} else {
+		if (visible)
+			geo.parse (url);
+	}
 }
 
 function make_dropdown (selection)
@@ -1910,75 +1708,57 @@ function make_dropdown (selection)
 	dd.value = selection;
 }
 
-function init_dropdown()
+function route_sort(a,b)
 {
-	var c = new Array();
-	var i = new Array();
-	var u = new Array();
-	var h = new Array();
+	return (a.fullname > b.fullname);
+}
 
-	var c_html = "";
-	var i_html = "";
-	var u_html = "";
-	var h_html = "";
-
-	for (id in routes) {
-		if (routes[id].complete == 100) {
-			c.push ({ key: id, fullname: routes[id].fullname });
-		} else if ("date_start" in routes[id]) {
-			i.push ({ key: id, fullname: routes[id].fullname  + " (" + routes[id].complete + "%)" });
+function show_rich()
+{
+	if (opt_rich) {
+		var ll = new google.maps.LatLng(rich_info.latitude, rich_info.longitude);
+		if (marker_rich) {
+			marker_rich.setMap (map);
 		} else {
-			u.push ({ key: id, fullname: routes[id].fullname });
+			var image = 'rich.png';
+			marker_rich = new google.maps.Marker({
+				position: ll,
+				map: map,
+				icon: image,
+				title: "Where's Rich?"
+			});
+
+			google.maps.event.addListener(marker_rich, 'click', function() {
+				  var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
+				  geo.options.infoWindow.setContent (message);
+				  geo.options.infoWindow.open (map, marker_rich);
+			});
+		}
+		if (rich_info.route) {
+			// XXX activate current route
+			if (opt_one) {
+				hide_other_routes (rich_info.route);
+			}
+			load_kml (rich_info.route, "route", 1);
+
+			// If on a route, zoom to display it
+			// XXX enable correct options and select it in the dropdown
+			map_zoom_route (rich_info.route);
+		} else {
+			// else zoom to current location
+			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
+		}
+		/*
+		var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
+		geo.options.infoWindow.setContent (message);
+		geo.options.infoWindow.open (map, marker_rich);
+		*/
+	} else {
+		if (marker_rich) {
+			marker_rich.setMap (null);
 		}
 	}
 
-	for (id in hills) {
-		h.push ({ key: id, fullname: hills[id].fullname  + " (" + hills[id].complete + "%)" });
-	}
-
-	c.sort(route_sort);
-	i.sort(route_sort);
-	u.sort(route_sort);
-	h.sort(route_sort);
-
-	if (c.length) {
-		c_html += '<optgroup id="complete" label="Complete">';
-		for (var j = 0; j < c.length; j++) {
-			c_html += '<option value="' + c[j].key +'">' + c[j].fullname + '</option>';
-		}
-		c_html += '</optgroup>';
-	}
-
-	if (i.length) {
-		i_html += '<optgroup id="incomplete" label="Incomplete">';
-		for (var j = 0; j < i.length; j++) {
-			i_html += '<option value="' + i[j].key +'">' + i[j].fullname + '</option>';
-		}
-		i_html += '</optgroup>';
-	}
-
-	if (u.length) {
-		u_html += '<optgroup id="unstarted" label="Unstarted">';
-		for (var j = 0; j < u.length; j++) {
-			u_html += '<option value="' + u[j].key +'">' + u[j].fullname + '</option>';
-		}
-		u_html += '</optgroup>';
-	}
-
-	if (h.length) {
-		h_html += '<optgroup id="hills" label="Hills">';
-		for (var j = 0; j < h.length; j++) {
-			h_html += '<option value="' + h[j].key +'">' + h[j].fullname + '</option>';
-		}
-		h_html += '</optgroup>';
-	}
-
-	show_html["comp"] = c_html;
-	show_html["inco"] = i_html;
-	show_html["unst"] = u_html;
-	show_html["hill"] = h_html;
-
-	make_dropdown (0);
 }
 
 
@@ -2007,6 +1787,24 @@ function map_init()
 	return map;
 }
 
+function map_zoom_ll (lat, lon, zoom)
+{
+	if (!lat || !lon || !zoom)
+		return false;
+
+	// bounds of UK
+	if ((lat < 49) || (lat > 59))
+		return false;
+
+	if ((lon < -8) || (lon > 2))
+		return false;
+
+	map.setCenter (new google.maps.LatLng(lat, lon));
+	map.setZoom (zoom);
+
+	return true;
+}
+
 function map_zoom_route (id)
 {
 	var lat;
@@ -2026,21 +1824,227 @@ function map_zoom_route (id)
 	}
 }
 
-function map_zoom_ll (lat, lon, zoom)
+
+function on_change_hike (id)
 {
-	if (!lat || !lon || !zoom)
-		return false;
+	var sel = document.getElementById (id);
+	var option = sel.options[sel.selectedIndex].value;
 
-	// bounds of UK
-	if ((lat < 49) || (lat > 59))
-		return false;
+	if (option in hills) {
+		on_change_hill (option);
+		return;
+	}
 
-	if ((lon < -8) || (lon > 2))
-		return false;
+	var files = [ 'hike', 'ferry', 'camp', 'todo', 'variant', 'route', 'start' ];
 
-	map.setCenter (new google.maps.LatLng(lat, lon));
-	map.setZoom (zoom);
+	if (opt_one) {
+		hide_other_routes (option);
+	}
 
-	return true;
+	if (!option || (option == "0"))
+		return;
+
+	for (i = 0; i < files.length; i++) {
+		var key = files[i][0];
+		if (routes[option].attr.indexOf (key) < 0)
+			continue;
+		if (kml[files[i]])
+			load_kml (option, files[i], 1);
+	}
+
+	if (opt_zoom) {
+		map_zoom_route (option);
+	}
 }
+
+function on_change_hill (id)
+{
+	var attr = hills[id].attr;
+
+	if (opt_one) {
+		hide_other_routes (id)
+	}
+
+	if (kml['hike'] && (attr.indexOf ('h')) >= 0) {
+		if (kml_hike) {
+			load_kml (id, 'hills_done', 1);
+			load_kml (id, 'area_done',  1);
+		}
+	}
+
+	if (kml['todo'] && (attr.indexOf ('t')) >= 0) {
+		if (kml_todo) {
+			load_kml (id, 'hills_todo', 1);
+			load_kml (id, 'area_todo',  1);
+		}
+	}
+
+	if (opt_zoom) {
+		map_zoom_ll (hills[id].latitude, hills[id].longitude, hills[id].zoom);
+	}
+}
+
+function on_change_kml (id)
+{
+	var route_key = document.getElementById("dropdown").value;
+	var check = document.getElementById(id);
+
+	var name = id.substr (4);
+	var key = id[4];
+
+	kml[name] = check.checked;
+
+	if (route_key in routes) {
+		load_kml (route_key, name, routes[route_key][key]);
+	}
+	if (route_key in hills) {
+		load_kml (route_key, name, hills[route_key][key]);
+	}
+}
+
+function on_change_opt (id)
+{
+	var keys     = [ 'hike', 'ferry', 'camp', 'todo', 'variant', 'route', 'start' ];
+	var current_route = document.getElementById("dropdown").value;
+	var check = document.getElementById(id);
+
+	if (id == "opt_one") {
+		opt_one = check.checked;
+		if (!opt_one)
+			return;
+		// hide other routes
+		hide_other_routes (current_route);
+	} else if (id == "opt_zoom") {
+		opt_zoom = check.checked;
+		if (opt_zoom)
+			map_zoom_route (current_route);
+	} else if (id == "opt_rich") {
+		opt_rich = !opt_rich;
+		show_rich();
+	}
+}
+
+function on_change_show (id)
+{
+	var dd = document.getElementById("dropdown");
+	var selection = dd.value;
+
+	switch (id) {
+		//XXX need to hide no-longer-displayed routes
+		case 'show_comp':
+			show_comp = !show_comp;
+			if (!show_comp) {
+				for (id in routes) {
+					if ("complete" in routes[id]) {
+						if (routes[id].complete == 100) {
+							hide_route (id);
+						}
+					}
+				}
+			}
+			break;
+		case 'show_inco':
+			show_inco = !show_inco;
+			if (!show_inco) {
+				for (id in routes) {
+					if ("complete" in routes[id]) {
+						if (routes[id].complete < 100) {
+							hide_route (id);
+						}
+					}
+				}
+			}
+			break;
+		case 'show_unst':
+			show_unst = !show_unst;
+			if (!show_unst) {
+				for (id in routes) {
+					if (!("date_start" in routes[id])) {
+						hide_route (id);
+					}
+				}
+			}
+			break;
+		case 'show_hill':
+			show_hill = !show_hill;
+			if (!show_hill) {
+				for (id in hills) {
+					hide_route (id);
+				}
+			}
+			break;
+	}
+
+	make_dropdown();
+	dd.value = selection;
+
+	if (opt_one) {
+		hide_other_routes (dd.value);
+	}
+
+	if (dd.value == "") {
+		dd.value = 0;
+	}
+}
+
+function on_click_global (id)
+{
+	if (id == "global_centre") {
+		map_zoom_route();
+		return;
+	}
+
+	if (id == "global_clear") {
+		var dd = document.getElementById("dropdown");
+		dd.value = 0;
+
+		for (var r in routes) {
+			hide_route (r);
+		}
+		for (var h in hills) {
+			hide_route (h);
+		}
+	}
+
+	if (id == "global_todo") {
+		map_zoom_route();
+		var todo = [
+			"west.somerset.coast",
+			"river.parrett",
+			"offas.dyke",
+			"wales.coast",
+			"sefton.coast",
+			"lancashire.coast",
+			"cumbria.coast",
+			"hadrians.wall",
+			"northumberland.coast",
+			"southern.upland.way",
+			"mull.of.galloway.trail",
+			"ayrshire.coast",
+			"five.degrees.west"
+		];
+
+		for (var i = 0; i < todo.length; i++) {
+			load_kml (todo[i], "route", 1);
+		}
+		
+		return;
+	}
+
+	if (id == "global_done") {
+		map_zoom_route();
+		for (var r in routes) {
+			if (routes[r].complete > 0) {
+				load_kml (r, "hike", 1);
+			}
+		}
+		for (var h in hills) {
+			if (hills[h].complete > 0) {
+				load_kml (h, "area_done",  1);
+				load_kml (h, "hills_done", 1);
+			}
+		}
+	}
+}
+
 
