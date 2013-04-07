@@ -1,6 +1,6 @@
 var routes = null;
 var hills  = null;
-var geo = null;
+var geo    = null;
 var map    = null;
 
 var opt_one  = true;
@@ -20,19 +20,22 @@ var show_html = new Array();
 	show_html["hill"] = "";
 
 var kml = new Array();
-	kml["camp"]    = false;
-	kml["extra"]   = true;
-	kml["ferry"]   = true;
 	kml["hike"]    = true;
-	kml["route"]   = true;
-	kml["start"]   = true;
+	kml["ferry"]   = true;
 	kml["todo"]    = true;
-	kml["variant"] = false;
+	kml["variant"] = true;
+	kml["route"]   = true;
+	kml["camp"]    = false;
+	kml["area"]    = true;
+	kml["start"]   = true;
+	kml["finish"]  = false;
+	kml["extra"]   = false;
+
+var url_base = "web/";
 
 function initialise()
 {
 	init_routes();
-	init_hills();
 	init_dropdown();
 	init_options();
 
@@ -72,17 +75,17 @@ function init_dropdown()
 	var h_html = "";
 
 	for (id in routes) {
-		if (routes[id].complete == 100) {
-			c.push ({ key: id, fullname: routes[id].fullname });
-		} else if ("date_start" in routes[id]) {
-			i.push ({ key: id, fullname: routes[id].fullname  + " (" + routes[id].complete + "%)" });
+		if ("dist_route" in routes[id]) {
+			if (("complete" in routes[id]) && (routes[id].complete == 100)) {
+				c.push ({ key: id, fullname: routes[id].fullname });
+			} else if ("date_start" in routes[id]) {
+				i.push ({ key: id, fullname: routes[id].fullname  + " (" + routes[id].complete + "%)" });
+			} else {
+				u.push ({ key: id, fullname: routes[id].fullname });
+			}
 		} else {
-			u.push ({ key: id, fullname: routes[id].fullname });
+			h.push ({ key: id, fullname: routes[id].fullname  + " (" + routes[id].complete + "%)" });
 		}
-	}
-
-	for (id in hills) {
-		h.push ({ key: id, fullname: hills[id].fullname  + " (" + hills[id].complete + "%)" });
 	}
 
 	c.sort(route_sort);
@@ -130,68 +133,31 @@ function init_dropdown()
 	make_dropdown (0);
 }
 
-function init_hills()
-{
-	hills = {
-		// Incomplete
-		"wainwrights" : {
-			"fullname"	: "Wainwrights &mdash; Lake District",
-			"name"		: "Wainwrights",
-			"attr"		: "AawchPps",
-			"date_start"	: "2012-10-22",
-			"date_end"	: "0000-00-00",
-			"days_walked"	: 7,
-			"days_camped"	: 6,
-			"days_other"	: 1,
-			"dist_walked"	: 104.0,
-			"complete"	: 11,
-			"custom"	: "",
-			"latitude"	: 54.484200,
-			"longitude"	: -3.079490,
-			"zoom"		: 10
-			/*
-			Hikes			hills_done	area_done
-			To Do			hills_todo	area_todo
-			Extra			hike
-			Camp			camp
-			*/
-		},
-
-		// Unstarted
-		"munros" : {
-			"fullname"	: "Munros &mdash; Scotland",
-			"name"		: "Munros",
-			"attr"		: "ap",
-			"complete"	: 0,
-			"custom"	: "",
-			"latitude"	: 56.670616,
-			"longitude"	: -4.224243,
-			"zoom"		: 7
-		}
-	};
-}
-
 function init_options()
 {
 	var t;
 
-	t = document.getElementById ("kml_camp");    t.checked = kml["camp"];
-	t = document.getElementById ("kml_extra");   t.checked = kml["extra"];
-	t = document.getElementById ("kml_ferry");   t.checked = kml["ferry"];
-	t = document.getElementById ("kml_hike");    t.checked = kml["hike"];
-	t = document.getElementById ("kml_route");   t.checked = kml["route"];
-	t = document.getElementById ("kml_start");   t.checked = kml["start"];
-	t = document.getElementById ("kml_todo");    t.checked = kml["todo"];
-	t = document.getElementById ("kml_variant"); t.checked = kml["variant"];
+	t = document.getElementById ("kml_variant");	t.checked = kml["variant"];
+	t = document.getElementById ("kml_hike");	t.checked = kml["hike"];
+	t = document.getElementById ("kml_ferry");	t.checked = kml["ferry"];
+	t = document.getElementById ("kml_todo");	t.checked = kml["todo"];
+	t = document.getElementById ("kml_variant");	t.checked = kml["variant"];
+	t = document.getElementById ("kml_route");	t.checked = kml["route"];
 
-	t = document.getElementById ("opt_one");     t.checked = opt_one;
-	t = document.getElementById ("opt_zoom");    t.checked = opt_zoom;
-	t = document.getElementById ("opt_rich");    t.checked = opt_rich;
-                                                    
-	t = document.getElementById ("show_comp");   t.checked = show_comp;
-	t = document.getElementById ("show_inco");   t.checked = show_inco;
-	t = document.getElementById ("show_unst");   t.checked = show_unst;
-	t = document.getElementById ("show_hill");   t.checked = show_hill;
+	t = document.getElementById ("kml_camp");	t.checked = kml["camp"];
+	t = document.getElementById ("kml_area");	t.checked = kml["area"];
+	t = document.getElementById ("kml_start");	t.checked = kml["start"];
+	t = document.getElementById ("kml_finish");	t.checked = kml["finish"];
+	t = document.getElementById ("kml_extra");	t.checked = kml["extra"];
+
+	t = document.getElementById ("opt_one");	t.checked = opt_one;
+	t = document.getElementById ("opt_zoom");	t.checked = opt_zoom;
+	t = document.getElementById ("opt_rich");	t.checked = opt_rich;
+
+	t = document.getElementById ("show_comp");	t.checked = show_comp;
+	t = document.getElementById ("show_inco");	t.checked = show_inco;
+	t = document.getElementById ("show_unst");	t.checked = show_unst;
+	t = document.getElementById ("show_hill");	t.checked = show_hill;
 }
 
 function init_routes()
@@ -1550,6 +1516,31 @@ function init_routes()
 			"latitude"	: 53.963357,
 			"longitude"	: -0.440826,
 			"zoom"		: 10
+		},
+
+		// Hills
+		"munros" : {
+			"fullname"	: "Munros &mdash; Scotland",
+			"name"		: "Munros",
+			"attr"		: "ap",
+			"complete"	: 0,
+			"latitude"	: 56.670616,
+			"longitude"	: -4.224243,
+			"zoom"		: 7
+		},
+		"wainwrights" : {
+			"fullname"	: "Wainwrights &mdash; Lake District",
+			"name"		: "Wainwrights",
+			"attr"		: "AawchPps",
+			"date_start"	: "2012-10-22",
+			"days_walked"	: 7,
+			"days_camped"	: 6,
+			"days_other"	: 1,
+			"dist_walked"	: 104.0,
+			"complete"	: 11,
+			"latitude"	: 54.484200,
+			"longitude"	: -3.079490,
+			"zoom"		: 10
 		}
 	};
 }
@@ -1627,8 +1618,9 @@ function load_kml (id, key, visible)
 			geo.hideDocument (geo.docs[i]);
 		}
 	} else {
-		if (visible)
+		if (visible) {
 			geo.parse (url);
+		}
 	}
 }
 
@@ -1735,7 +1727,7 @@ function map_init()
 		streetViewControl: false,
 		overviewMapControl: false,
 		styles: my_styles,
-		mapTypeId: google.maps.MapTypeId.SATELLITE		// ROADMAP, TERRAIN, HYBRID, SATELLITE
+		mapTypeId: google.maps.MapTypeId.ROADMAP		// ROADMAP, TERRAIN, HYBRID, SATELLITE
 	});
 
 	return map;
@@ -1783,6 +1775,9 @@ function on_change_hike (id)
 {
 	var sel = document.getElementById (id);
 	var option = sel.options[sel.selectedIndex].value;
+
+	show_route_new (option);
+	return;
 
 	if (option in hills) {
 		on_change_hill (option);
@@ -2011,4 +2006,86 @@ function on_click_global (id)
 	}
 }
 
+
+function kml_load_new (name, type)
+{
+	var url = "";
+
+	url = url_base + name + "/" + type + ".kml";
+
+	var i = find_geoxml (url);
+	if (i >= 0) {
+		geo.showDocument (geo.docs[i]);
+	} else {
+		geo.parse (url);
+	}
+}
+
+function show_route_new (name)
+{
+	if (!(name in routes))
+		return;
+
+	if (opt_one) {
+		hide_other_routes (name);
+	}
+
+	var attr = routes[name].attr;
+	var hill = !("dist_route" in routes[name]);
+
+	if (kml["ferry"]) {
+		// What?
+	}
+
+	if (kml["hike"]) {
+		if ((!hill) || ((extra == true) && (hill == true))) {
+			if (attr.indexOf ('h') >= 0) kml_load_new (name, "hike");
+		}
+		if (attr.indexOf ('P') >= 0) kml_load_new (name, "hills_done");
+	}
+
+	if (kml["route"]) {
+		if (attr.indexOf ('r') >= 0) kml_load_new (name, "route");
+	}
+
+	if (kml["area"]) {
+		if (attr.indexOf ('A') >= 0) kml_load_new (name, "area_done");
+	}
+
+	if (kml["camp"]) {
+		if ((!hill) || ((extra == true) && (hill == true))) {
+			if (attr.indexOf ('c') >= 0) kml_load_new (name, "camp");
+		}
+	}
+
+	if (kml["extra"]) {
+		if (attr.indexOf ('x') >= 0) {
+			// load extras
+		}
+	}
+
+	if (kml["finish"]) {
+		if (attr.indexOf ('f') >= 0) kml_load_new (name, "finish");
+	}
+
+	if (kml["start"]) {
+		if (attr.indexOf ('s') >= 0) kml_load_new (name, "start");
+	}
+
+	if (kml["todo"]) {
+		if (kml["area"]) {
+			if (attr.indexOf ('a') >= 0) kml_load_new (name, "area_todo");
+		}
+		if (attr.indexOf ('t') >= 0) kml_load_new (name, "todo");
+		if (attr.indexOf ('p') >= 0) kml_load_new (name, "hills_todo");
+	}
+
+	if (kml["variant"]) {
+		if (attr.indexOf ('v') >= 0) kml_load_new (name, "variant");
+	}
+
+	if (opt_zoom) {
+		map_zoom_route (name);
+	}
+}
 
