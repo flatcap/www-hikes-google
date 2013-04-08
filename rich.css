@@ -23,7 +23,6 @@ body {
 
 h1 {
 	font-size: 120%;
-	margin-top: 0;
 }
 
 h2 {
@@ -70,5 +69,10 @@ div#options {
 
 form, select {
 	width: 100%;
+}
+
+span.subtle {
+	font-size: 75%;
+	color: #888;
 }
 

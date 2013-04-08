@@ -12,7 +12,7 @@
  * more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * this program. If not, see http://www.gnu.org/licenses/ 
+ * this program. If not, see http://www.gnu.org/licenses/
  */
 
 var route_list  = null;		// Array of all route data
@@ -64,6 +64,21 @@ String.prototype.contains = function (key)
 }
 
 /**
+ * Date.diff - Compare two dates
+ * @str: Date in any date(1) format
+ *
+ * Compare a string against this date.
+ *
+ * Return: n Difference in days
+ */
+Date.prototype.diff = function (str)
+{
+	var d = new Date(str);
+
+	return Math.floor ((this - d) / 86400000);
+}
+
+/**
  * initialise - Start up
  *
  * Set up the Google map, dropdown and geoXML3 helper.
@@ -100,8 +115,8 @@ function initialise()
  * Sort the route_list by fullname.
  *
  * Return:	-1	a precedes b
- * 		 0	a identical to b
- * 		 1	a follows b
+ *		 0	a identical to b
+ *		 1	a follows b
  */
 function route_sort(a,b)
 {
@@ -150,7 +165,7 @@ function init_options()
  * @url: url of kml document
  *
  * Return:	 n	Index in docs array
- * 		-1	url doesn't exist
+ *		-1	url doesn't exist
  */
 function find_geoxml (url)
 {
@@ -233,7 +248,7 @@ function show_rich()
 			if (opt_one) {
 				hide_other_routes (rich_info.route);
 			}
-			show_kml (rich_info.route, "route");
+			show_route (rich_info.route);
 
 			// If on a route, zoom to display it
 			// XXX enable correct options and select it in the dropdown
@@ -245,7 +260,7 @@ function show_rich()
 		}
 
 		// Display infoWindow immediately
-		//geo.options.infoWindow.open (map, marker_rich);
+		geo.options.infoWindow.open (map, marker_rich);
 	} else {
 		marker_rich.setMap (null);
 	}
@@ -384,7 +399,7 @@ function show_route (route)
 function get_url (route, type)
 {
 	var url = url_base + route;
-	
+
 	if (type) {
 		url += "/" + type + ".kml";
 	}
@@ -551,6 +566,68 @@ function dd_select (route)
 
 
 /**
+ * create_message - Create the popup message
+ */
+function create_message()
+{
+	/* date_bed date_route date_seen latitude longitude message route */
+	var m = "";
+	var e;
+	var today = new Date();
+
+	m += '<img style="float: left;" src="flatcap.png">';
+	m += '<div style="margin-left: 70px;">';
+	m += '<h2>Rich</h2>';
+
+	m += '<span class="subtle">(last seen ';
+	e = today.diff (rich_info.date_seen);
+	if (e < 1) {
+		m += "today";
+	} else if (e < 2) {
+		m += "yesterday";
+	} else if (e < 8) {
+		m += e + " days ago";
+	} else {
+		m += "on " + rich_info.date_seen;
+	}
+	m += ')</span><br><br>';
+
+	if (rich_info.route) {
+		if (rich_info.date_route) {
+			var d = today.diff (rich_info.date_route) + 1;
+			m += '<b>Day ' + d + '</b> of the <b>' + route_list[rich_info.route].fullname + '</b>';
+
+			if (rich_info.percentage) {
+				m += " (~" + rich_info.percentage + "%)";
+			}
+		} else {
+			m += 'Walking the <b>' + route_list[rich_info.route].fullname + '</b>';
+		}
+		m += "<br>";
+	}
+
+	if (rich_info.latitude && rich_info.longitude) {
+		m += '<span class="subtle">lat/long: ';
+		m += rich_info.latitude.toFixed(6) + ',' + rich_info.longitude.toFixed(6);
+		m += '</span><br>';
+	}
+
+	m += "<br>";
+
+	e = today.diff (rich_info.date_bed);
+	if (e > 7) {
+		m += "Hasn't seen a bed for " + e + ' days<br><br>';
+	}
+
+	if (rich_info.message) {
+		m += '<b>&ldquo;' + rich_info.message + '&rdquo;</b>';
+	}
+
+	m += '</div>';
+	return m;
+}
+
+/**
  * map_create_rich - Create a Google.maps.Marker
  *
  * Create a marker to show Rich's location.
@@ -567,10 +644,13 @@ function map_create_rich()
 	});
 
 	google.maps.event.addListener(marker, 'click', function() {
-		  var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
-		  geo.options.infoWindow.setContent (message);
-		  geo.options.infoWindow.open (map, marker);
+		var message = create_message();
+
+		geo.options.infoWindow.setContent (message);
+		geo.options.infoWindow.open (map, marker);
 	});
+
+	return marker;
 }
 
 /**
@@ -598,7 +678,7 @@ function map_init()
 		streetViewControl: false,
 		overviewMapControl: false,
 		styles: my_styles,
-		mapTypeId: google.maps.MapTypeId.SATELLITE	// ROADMAP, TERRAIN, HYBRID, SATELLITE
+		mapTypeId: google.maps.MapTypeId.ROADMAP	// ROADMAP, TERRAIN, HYBRID, SATELLITE
 	});
 
 	// Escape will close the infoWindow
