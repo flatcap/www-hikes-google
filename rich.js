@@ -570,7 +570,6 @@ function dd_select (route)
  */
 function create_message()
 {
-	/* date_bed date_route date_seen latitude longitude message route */
 	var m = "";
 	var e;
 	var today = new Date();
@@ -616,7 +615,7 @@ function create_message()
 
 	e = today.diff (rich_info.date_bed);
 	if (e > 7) {
-		m += "Hasn't seen a bed for " + e + ' days<br><br>';
+		m += "Last saw a bed " + e + ' days ago.<br><br>';
 	}
 
 	if (rich_info.message) {
