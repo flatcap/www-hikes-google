@@ -25,6 +25,11 @@ body {
 	background: black;
 }
 
+div.geoxml3_infowindow {
+	background: white;
+	color: black;
+}
+
 h1 {
 	font-size: 120%;
 }
@@ -69,5 +74,9 @@ div#options {
 	position: fixed;
 	bottom: 1em;
 	width: 30%;
+}
+
+form, select {
+	width: 100%;
 }
 

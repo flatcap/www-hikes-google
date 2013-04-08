@@ -8,7 +8,7 @@ var opt_zoom = true;
 var opt_rich = true;
 var marker_rich = null;
 
-var show_comp = true;
+var show_comp = false;
 var show_inco = false;
 var show_unst = false;
 var show_hill = true;
@@ -66,6 +66,31 @@ function initialise()
 	}
 }
 
+
+function make_dropdown (selection)
+{
+	var dd = document.getElementById ("dropdown");
+	var html = '<option value="0">Pick a route...</option>';
+
+	if (show_comp) html += show_html["comp"];
+	if (show_inco) html += show_html["inco"];
+	if (show_unst) html += show_html["unst"];
+	if (show_hill) html += show_html["hill"];
+
+	dd.innerHTML = html;
+	dd.value = selection;
+}
+
+function route_sort(a,b)
+{
+	if (a.fullname > b.fullname) {
+		return 1;
+	} else if (a.fullname < b.fullname) {
+		return -1;
+	} else {
+		return 0;
+	}
+}
 
 function init_dropdown()
 {
@@ -1553,30 +1578,25 @@ function init_routes()
 
 function find_geoxml (url)
 {
-	var index = -1;
 	var i;
 
 	for (i = 0; i < geo.docs.length; i++) {
 		if (geo.docs[i].url == url) {
-			index = i;
-			break;
+			return i;
 		}
 	}
 
-	return index;
+	return -1;
 }
 
-function hide_other_routes (id)
+function hide_other_routes (route)
 {
-	var i;
 	var url;
 	var index;
-	var save_url = "web/" + id;
-	var dir = "";
+	var save_url = get_url (route);
+	var dir;
 
-	var count = geo.docs.length;
-
-	for (var i = 0; i < count; i++) {
+	for (var i = 0; i < geo.docs.length; i++) {
 		url = geo.docs[i].url;
 		index = url.lastIndexOf ('/');
 		dir = url.substr (0, index);
@@ -1589,16 +1609,14 @@ function hide_other_routes (id)
 	}
 }
 
-function hide_route (id)
+function hide_route (route)
 {
-	var hide_url = "web/" + id;
+	var hide_url = get_url (route);
 
 	var index;
-	var dir = "";
+	var dir;
 
-	var count = geo.docs.length;
-
-	for (var i = 0; i < count; i++) {
+	for (var i = 0; i < geo.docs.length; i++) {
 		url = geo.docs[i].url;
 		index = url.lastIndexOf ('/');
 		dir = url.substr (0, index);
@@ -1627,38 +1645,13 @@ function load_kml (id, key, visible)
 	}
 }
 
-function make_dropdown (selection)
-{
-	var dd = document.getElementById ("dropdown");
-	var html = '<option value="0">Pick a route...</option>';
-
-	if (show_comp) html += show_html["comp"];
-	if (show_inco) html += show_html["inco"];
-	if (show_unst) html += show_html["unst"];
-	if (show_hill) html += show_html["hill"];
-
-	dd.innerHTML = html;
-	dd.value = selection;
-}
-
-function route_sort(a,b)
-{
-	if (a.fullname > b.fullname) {
-		return 1;
-	} else if (a.fullname < b.fullname) {
-		return -1;
-	} else {
-		return 0;
-	}
-}
-
-function select_dropdown (id)
+function select_dropdown (route)
 {
 	var dd = document.getElementById ("dropdown");
 	for (var i = 0; i < dd.options.length; i++) {
-		if (dd.options[i].value == id) {
+		if (dd.options[i].value == route) {
 			dd.options[i].selected = true;
-			return;
+			break;
 		}
 	}
 }
@@ -1853,7 +1846,10 @@ function on_change_kml (id)
 
 	kml[name] = check.checked;
 
-	var url = url_base + route_key + "/" + name + ".kml";
+	show_route_new (route_key);
+	return;
+
+	var url = get_url (route_key, name);
 	var i = find_geoxml (url);
 	if (i >= 0) {
 		if (kml[name]) {
@@ -1979,6 +1975,7 @@ function on_click_global (id)
 	if (id == "global_todo") {
 		map_zoom_route();
 		var todo = [
+			// XXX move out to json
 			"west.somerset.coast",
 			"river.parrett",
 			"offas.dyke",
@@ -2018,7 +2015,7 @@ function on_click_global (id)
 }
 
 
-function show_route_new (route)
+function show_route_old (route)
 {
 	if (!(route in route_list)) {
 		return;
@@ -2033,12 +2030,16 @@ function show_route_new (route)
 	var hike  = false;
 	var todo  = false;
 	var ferry = false;
+	var extra = false;
 
-	if (kml["ferry"]) {
-		if (attr.contains ('f')) {
-			show_kml (route, "ferry");
-			ferry = true;
-		}
+	if (kml["extra"] && attr.contains ('x')) {
+		// load extras
+		extra = true;
+	}
+
+	if (kml["ferry"] && attr.contains ('f')) {
+		show_kml (route, "ferry");
+		ferry = true;
 	}
 
 	if (kml["hike"]) {
@@ -2054,10 +2055,8 @@ function show_route_new (route)
 	}
 
 	if (kml["todo"]) {
-		if (kml["area"]) {
-			if (attr.contains ('a')) {
-				show_kml (route, "area_todo");
-			}
+		if (kml["area"] && attr.contains ('a')) {
+			show_kml (route, "area_todo");
 		}
 		if (attr.contains ('t')) {
 			show_kml (route, "todo");
@@ -2076,20 +2075,23 @@ function show_route_new (route)
 		}
 	}
 
-	if (kml["area"] && attr.contains ('A')) {
+	if (kml["area"] && attr.contains ('A') && kml["hike"]) {
 		show_kml (route, "area_done");
-	}
-
-	if (kml["camp"]) {
-		if ((!hill) || ((extra == true) && (hill == true))) {
-			if (attr.contains ('c')) {
-				show_kml (route, "camp");
+	} else {
+		if (hill) {
+			if (!kml["hike"]) {
+				hide_kml (route, "area_done");
+			}
+			if (!kml["todo"]) {
+				hide_kml (route, "area_todo");
 			}
 		}
 	}
 
-	if (kml["extra"] && attr.contains ('x')) {
-		// load extras
+	if (kml["camp"] && attr.contains ('c')) {
+		if ((!hill) || ((extra == true) && (hill == true))) {
+			show_kml (route, "camp");
+		}
 	}
 
 	if (kml["finish"] && attr.contains ('f')) {
@@ -2109,29 +2111,129 @@ function show_route_new (route)
 	}
 }
 
-
-function get_url (route, type)
+function show_route_new (route)
 {
-	return url_base + route + "/" + type + ".kml";
-}
+	if (!(route in route_list)) {
+		return;
+	}
 
-function find_geoxml_new (url)
-{
-	var i;
+	if (opt_one) {
+		hide_other_routes (route);
+	}
 
-	for (i = 0; i < geo.docs.length; i++) {
-		if (geo.docs[i].url == url) {
-			return i;
+	var attr  = route_list[route].attr;
+	var hill  = !("dist_route" in route_list[route]);
+	var extra = (!hill) || (kml["extra"] == true);
+	var hike  = false;
+	var todo  = false;
+	var ferry = false;
+	var walked = false;
+
+	if ((kml["start"] == true) && attr.contains ('s')) {
+		show_kml (route, "start");
+	} else {
+		hide_kml (route, "start");
+	}
+
+	if ((kml["finish"] == true) && attr.contains ('e')) {
+		show_kml (route, "finish");
+	} else {
+		hide_kml (route, "finish");
+	}
+
+	if (hill) {
+		if ((kml["hike"] == true) && attr.contains ('P')) {
+			show_kml (route, "hills_done");
+		} else {
+			hide_kml (route, "hills_done");
+		}
+
+		if ((kml["todo"] == true) && attr.contains ('p')) {
+			show_kml (route, "hills_todo");
+		} else {
+			hide_kml (route, "hills_todo");
+		}
+
+		if ((kml["area"] == true) && kml["hike"] && attr.contains ('A')) {
+			show_kml (route, "area_done");
+		} else {
+			hide_kml (route, "area_done");
+		}
+
+		if ((kml["area"] == true) && kml["todo"] && attr.contains ('a')) {
+			show_kml (route, "area_todo");
+		} else {
+			hide_kml (route, "area_todo");
+		}
+	} else {
+		if ((kml["variant"] == true) && attr.contains ('v')) {
+			show_kml (route, "variant");
+		} else {
+			hide_kml (route, "variant");
 		}
 	}
 
-	return -1;
+	if ((kml["extra"] == true) && attr.contains ('x')) {
+		// show extras
+	} else {
+		// hide extras
+	}
+
+	if ((kml["camp"] == true) && attr.contains ('c') && extra) {
+		show_kml (route, "camp");
+	} else {
+		hide_kml (route, "camp");
+	}
+
+	if ((kml["hike"] == true) && attr.contains ('h') && extra) {
+		show_kml (route, "hike");
+		hike = true;
+	} else {
+		hide_kml (route, "hike");
+	}
+
+	if ((kml["todo"] == true) && attr.contains ('t') && extra) {
+		show_kml (route, "todo");
+		todo = true;
+	} else {
+		hide_kml (route, "todo");
+	}
+
+	if ((kml["ferry"] == true) && attr.contains ('f') && extra) {
+		show_kml (route, "ferry");
+		ferry = true;
+	} else {
+		hide_kml (route, "ferry");
+	}
+
+	walked = hike || todo || ferry;
+
+	if ((kml["route"] == true) && attr.contains ('r') && (!walked)) {
+		show_kml (route, "route");
+	} else {
+		hide_kml (route, "route");
+	}
+
+	if (opt_zoom) {
+		map_zoom_route (route);
+	}
+}
+
+
+function get_url (route, type)
+{
+	var url = url_base + route;
+	
+	if (type)
+		url += "/" + type + ".kml";
+
+	return url;
 }
 
 function show_kml (route, type)
 {
 	var url = get_url (route, type);
-	var i = find_geoxml_new (url);
+	var i = find_geoxml (url);
 	if (i >= 0) {
 		geo.showDocument (geo.docs[i]);
 	} else {
@@ -2142,9 +2244,10 @@ function show_kml (route, type)
 function hide_kml (route, type)
 {
 	var url = get_url (route, type);
-	var i = find_geoxml_new (url);
+	var i = find_geoxml (url);
 	if (i >= 0) {
 		geo.hideDocument (geo.docs[i]);
 	}
 }
+
 
