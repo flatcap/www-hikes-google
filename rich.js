@@ -244,29 +244,27 @@ function route_sort(a,b)
  */
 function init_options()
 {
-	var t;
+	document.getElementById ("kml_variant")	.checked = kml["variant"];
+	document.getElementById ("kml_hike")	.checked = kml["hike"];
+	document.getElementById ("kml_ferry")	.checked = kml["ferry"];
+	document.getElementById ("kml_todo")	.checked = kml["todo"];
+	document.getElementById ("kml_variant")	.checked = kml["variant"];
+	document.getElementById ("kml_route")	.checked = kml["route"];
 
-	t = document.getElementById ("kml_variant");	t.checked = kml["variant"];
-	t = document.getElementById ("kml_hike");	t.checked = kml["hike"];
-	t = document.getElementById ("kml_ferry");	t.checked = kml["ferry"];
-	t = document.getElementById ("kml_todo");	t.checked = kml["todo"];
-	t = document.getElementById ("kml_variant");	t.checked = kml["variant"];
-	t = document.getElementById ("kml_route");	t.checked = kml["route"];
+	document.getElementById ("kml_camp")	.checked = kml["camp"];
+	document.getElementById ("kml_area")	.checked = kml["area"];
+	document.getElementById ("kml_start")	.checked = kml["start"];
+	document.getElementById ("kml_end")	.checked = kml["end"];
+	document.getElementById ("kml_extra")	.checked = kml["extra"];
 
-	t = document.getElementById ("kml_camp");	t.checked = kml["camp"];
-	t = document.getElementById ("kml_area");	t.checked = kml["area"];
-	t = document.getElementById ("kml_start");	t.checked = kml["start"];
-	t = document.getElementById ("kml_end");	t.checked = kml["end"];
-	t = document.getElementById ("kml_extra");	t.checked = kml["extra"];
+	document.getElementById ("opt_one")	.checked = opt_one;
+	document.getElementById ("opt_zoom")	.checked = opt_zoom;
+	document.getElementById ("opt_rich")	.checked = opt_rich;
 
-	t = document.getElementById ("opt_one");	t.checked = opt_one;
-	t = document.getElementById ("opt_zoom");	t.checked = opt_zoom;
-	t = document.getElementById ("opt_rich");	t.checked = opt_rich;
-
-	t = document.getElementById ("show_comp");	t.checked = show_comp;
-	t = document.getElementById ("show_inco");	t.checked = show_inco;
-	t = document.getElementById ("show_unst");	t.checked = show_unst;
-	t = document.getElementById ("show_hill");	t.checked = show_hill;
+	document.getElementById ("show_comp")	.checked = show_comp;
+	document.getElementById ("show_inco")	.checked = show_inco;
+	document.getElementById ("show_unst")	.checked = show_unst;
+	document.getElementById ("show_hill")	.checked = show_hill;
 }
 
 
