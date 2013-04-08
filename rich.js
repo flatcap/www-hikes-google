@@ -44,7 +44,7 @@ var kml = new Array();		// Display:
 	kml["camp"]    = false;		// Overnight stops
 	kml["area"]    = true;		// Region of hill set
 	kml["start"]   = true;		// Marker showing start of route
-	kml["finish"]  = false;		// Marker showing end of route
+	kml["end"]     = false;		// Marker showing end of route
 	kml["extra"]   = false;		// Custom data for route
 
 var url_base = "web/";			// Directory containing kml data
@@ -256,7 +256,7 @@ function init_options()
 	t = document.getElementById ("kml_camp");	t.checked = kml["camp"];
 	t = document.getElementById ("kml_area");	t.checked = kml["area"];
 	t = document.getElementById ("kml_start");	t.checked = kml["start"];
-	t = document.getElementById ("kml_finish");	t.checked = kml["finish"];
+	t = document.getElementById ("kml_end");	t.checked = kml["end"];
 	t = document.getElementById ("kml_extra");	t.checked = kml["extra"];
 
 	t = document.getElementById ("opt_one");	t.checked = opt_one;
@@ -701,10 +701,10 @@ function show_route (route)
 		hide_kml (route, "start");
 	}
 
-	if ((kml["finish"] == true) && attr.contains ('e')) {
-		show_kml (route, "finish");
+	if ((kml["end"] == true) && attr.contains ('e')) {
+		show_kml (route, "end");
 	} else {
-		hide_kml (route, "finish");
+		hide_kml (route, "end");
 	}
 
 	if (hill) {
