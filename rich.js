@@ -52,18 +52,11 @@ function initialise()
 		singleInfoWindow: true
 	});
 
-	var dd = document.getElementById("dropdown");
-	dd.value = "0";
-	dd.focus();
+	marker_rich = map_create_rich();
 
 	show_rich();
 
-	document.onkeyup = function(e) {
-		e = window.event || e;
-		if (e.keyCode == 27) {
-			geo.options.infoWindow.close();
-		}
-	}
+	document.getElementById("dropdown").focus();
 }
 
 
@@ -1641,23 +1634,8 @@ function select_dropdown (route)
 function show_rich()
 {
 	if (opt_rich) {
-		if (marker_rich) {
-			marker_rich.setMap (map);
-		} else {
-			var image = 'rich.png';
-			marker_rich = new google.maps.Marker({
-				position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
-				map: map,
-				icon: image,
-				title: "Where's Rich?"
-			});
+		marker_rich.setMap (map);
 
-			google.maps.event.addListener(marker_rich, 'click', function() {
-				  var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
-				  geo.options.infoWindow.setContent (message);
-				  geo.options.infoWindow.open (map, marker_rich);
-			});
-		}
 		if (rich_info.route) {
 			// XXX activate current route
 			if (opt_one) {
@@ -1673,19 +1651,31 @@ function show_rich()
 			// else zoom to current location
 			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
 		}
-		/*
-		var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
-		geo.options.infoWindow.setContent (message);
-		geo.options.infoWindow.open (map, marker_rich);
-		*/
+
+		// Display infoWindow immediately
+		//geo.options.infoWindow.open (map, marker_rich);
 	} else {
-		if (marker_rich) {
-			marker_rich.setMap (null);
-		}
+		marker_rich.setMap (null);
 	}
 
 }
 
+
+function map_create_rich()
+{
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
+		map: map,
+		icon: 'rich.png';
+		title: "Where's Rich?"
+	});
+
+	google.maps.event.addListener(marker, 'click', function() {
+		  var message = '<div style="float: left; height: 100%;"><img src="flatcap.png"></div><h1>Rich</h1>' + rich_info.date + ': ' + rich_info.message;
+		  geo.options.infoWindow.setContent (message);
+		  geo.options.infoWindow.open (map, marker);
+	});
+}
 
 function map_init()
 {
@@ -1708,6 +1698,14 @@ function map_init()
 		styles: my_styles,
 		mapTypeId: google.maps.MapTypeId.SATELLITE		// ROADMAP, TERRAIN, HYBRID, SATELLITE
 	});
+
+	// Escape will close the infoWindow
+	document.onkeyup = function(e) {
+		e = window.event || e;
+		if (e.keyCode == 27) {
+			geo.options.infoWindow.close();
+		}
+	}
 
 	return map;
 }
@@ -1775,7 +1773,6 @@ function on_change_kml (id)
 
 function on_change_opt (id)
 {
-	var keys     = [ 'hike', 'ferry', 'camp', 'todo', 'variant', 'route', 'start' ];
 	var current_route = document.getElementById("dropdown").value;
 	var check = document.getElementById(id);
 
@@ -1784,7 +1781,6 @@ function on_change_opt (id)
 		if (!opt_one) {
 			return;
 		}
-		// hide other routes
 		hide_other_routes (current_route);
 	} else if (id == "opt_zoom") {
 		opt_zoom = check.checked;
