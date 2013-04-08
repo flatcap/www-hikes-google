@@ -72,7 +72,7 @@ String.prototype.contains = function (key)
 function initialise()
 {
 	route_list = init_routes();
-	var dd = init_dropdown();
+	var dd = dd_init();
 	init_options();
 
 	map = map_init();
@@ -92,14 +92,14 @@ function initialise()
 
 
 /**
- * make_dropdown - Populate the dropdown box
+ * dd_populate - Populate the dropdown box
  *
  * Dropdown contents depend on four bools (show_*).
  * After the rebuild, try to keep the previous selected item.
  *
  * Return: DOM select object
  */
-function make_dropdown()
+function dd_populate()
 {
 	var dd = document.getElementById ("dropdown");
 	var value = dd.value;
@@ -113,18 +113,18 @@ function make_dropdown()
 	dd.innerHTML = html;
 
 	// If possible, leave the selection unchanged
-	select_dropdown (value);
+	dd_select (value);
 
 	return dd;
 }
 
 /**
- * select_dropdown - Pick a dropdown entry by value
+ * dd_select - Pick a dropdown entry by value
  * @route: Name of the route
  *
  * Select entry in dropdown by route name
  */
-function select_dropdown (route)
+function dd_select (route)
 {
 	var dd = document.getElementById ("dropdown");
 	for (var i = 0; i < dd.options.length; i++) {
@@ -136,13 +136,13 @@ function select_dropdown (route)
 }
 
 /**
- * init_dropdown - Create HTML for dropdown
+ * dd_init - Create HTML for dropdown
  *
  * Create the HTML for the dropdown from the route_list.
  *
  * Return: DOM select object
  */
-function init_dropdown()
+function dd_init()
 {
 	var c = new Array();
 	var i = new Array();
@@ -210,7 +210,7 @@ function init_dropdown()
 	show_html["unst"] = u_html;
 	show_html["hill"] = h_html;
 
-	return make_dropdown();
+	return dd_populate();
 }
 
 
@@ -361,7 +361,7 @@ function show_rich()
 			// If on a route, zoom to display it
 			// XXX enable correct options and select it in the dropdown
 			map_zoom_route (rich_info.route);
-			select_dropdown (rich_info.route);
+			dd_select (rich_info.route);
 		} else {
 			// otherwise zoom to current location
 			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
@@ -753,7 +753,7 @@ function on_show (id)
 		case 'show_hill': show_hill = !show_hill; break;
 	}
 
-	var dd = make_dropdown();
+	var dd = dd_populate();
 
 	for (var r in route_list) {
 		if (!show_comp && ("complete" in route_list[r]) && (route_list[r].complete == 100)) {
