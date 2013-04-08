@@ -60,9 +60,10 @@ function initialise()
 }
 
 
-function make_dropdown (selection)
+function make_dropdown()
 {
 	var dd = document.getElementById ("dropdown");
+	var value = dd.value;
 	var html = '<option value="0">Pick a route...</option>';
 
 	if (show_comp) html += show_html["comp"];
@@ -71,7 +72,9 @@ function make_dropdown (selection)
 	if (show_hill) html += show_html["hill"];
 
 	dd.innerHTML = html;
-	dd.value = selection;
+
+	// If possible, leave the selection unchanged
+	select_dropdown (value);
 
 	return dd;
 }
@@ -155,7 +158,7 @@ function init_dropdown()
 	show_html["unst"] = u_html;
 	show_html["hill"] = h_html;
 
-	return make_dropdown (0);
+	return make_dropdown();
 }
 
 function init_options()
@@ -283,7 +286,7 @@ function map_create_rich()
 	var marker = new google.maps.Marker({
 		position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
 		map: map,
-		icon: 'rich.png';
+		icon: 'rich.png',
 		title: "Where's Rich?"
 	});
 
@@ -412,9 +415,6 @@ function on_change_opt (id)
 
 function on_change_show (id)
 {
-	var dd = document.getElementById("dropdown");
-	var selection = dd.value;
-
 	switch (id) {
 		//XXX need to hide no-longer-displayed routes
 		case 'show_comp':
@@ -461,15 +461,10 @@ function on_change_show (id)
 			break;
 	}
 
-	make_dropdown();
-	dd.value = selection;
+	var dd = make_dropdown();
 
 	if (opt_one) {
 		hide_other_routes (dd.value);
-	}
-
-	if (dd.value == "") {
-		dd.value = 0;
 	}
 }
 
