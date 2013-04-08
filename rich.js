@@ -92,50 +92,6 @@ function initialise()
 
 
 /**
- * dd_populate - Populate the dropdown box
- *
- * Dropdown contents depend on four bools (show_*).
- * After the rebuild, try to keep the previous selected item.
- *
- * Return: DOM select object
- */
-function dd_populate()
-{
-	var dd = document.getElementById ("dropdown");
-	var value = dd.value;
-	var html = "";
-
-	if (show_comp) html += show_html["comp"];
-	if (show_inco) html += show_html["inco"];
-	if (show_unst) html += show_html["unst"];
-	if (show_hill) html += show_html["hill"];
-
-	dd.innerHTML = html;
-
-	// If possible, leave the selection unchanged
-	dd_select (value);
-
-	return dd;
-}
-
-/**
- * dd_select - Pick a dropdown entry by value
- * @route: Name of the route
- *
- * Select entry in dropdown by route name
- */
-function dd_select (route)
-{
-	var dd = document.getElementById ("dropdown");
-	for (var i = 0; i < dd.options.length; i++) {
-		if (dd.options[i].value == route) {
-			dd.options[i].selected = true;
-			break;
-		}
-	}
-}
-
-/**
  * dd_init - Create HTML for dropdown
  *
  * Create the HTML for the dropdown from the route_list.
@@ -211,6 +167,50 @@ function dd_init()
 	show_html["hill"] = h_html;
 
 	return dd_populate();
+}
+
+/**
+ * dd_populate - Populate the dropdown box
+ *
+ * Dropdown contents depend on four bools (show_*).
+ * After the rebuild, try to keep the previous selected item.
+ *
+ * Return: DOM select object
+ */
+function dd_populate()
+{
+	var dd = document.getElementById ("dropdown");
+	var value = dd.value;
+	var html = "";
+
+	if (show_comp) html += show_html["comp"];
+	if (show_inco) html += show_html["inco"];
+	if (show_unst) html += show_html["unst"];
+	if (show_hill) html += show_html["hill"];
+
+	dd.innerHTML = html;
+
+	// If possible, leave the selection unchanged
+	dd_select (value);
+
+	return dd;
+}
+
+/**
+ * dd_select - Pick a dropdown entry by value
+ * @route: Name of the route
+ *
+ * Select entry in dropdown by route name
+ */
+function dd_select (route)
+{
+	var dd = document.getElementById ("dropdown");
+	for (var i = 0; i < dd.options.length; i++) {
+		if (dd.options[i].value == route) {
+			dd.options[i].selected = true;
+			break;
+		}
+	}
 }
 
 
