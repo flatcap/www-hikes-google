@@ -8,7 +8,7 @@ var opt_zoom = true;
 var opt_rich = true;
 var marker_rich = null;
 
-var show_comp = false;
+var show_comp = true;
 var show_inco = false;
 var show_unst = false;
 var show_hill = true;
