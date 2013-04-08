@@ -1,6 +1,7 @@
 <?php
 
 $filename = "rich.json";
+$log_file = "data.log";
 
 function valid_coords ($latitude, $longitude)
 {
@@ -112,11 +113,11 @@ function put_json ($info)
 	$str = "rich_info = $str";
 
 	file_put_contents ($filename, $str);
+	file_put_contents ($log_file, $str, FILE_APPEND);
 }
 
 function main()
 {
-	$percentage = -1;
 	$info = get_json();
 
 	$date_bed   = get_url_variable ("bed");
@@ -138,7 +139,7 @@ function main()
 	}
 
 	if ($wp !== false) {
-		if (!get_waypoint ($info->route, $wp, $info->latitude, $info->longitude, $percentage)) {
+		if (!get_waypoint ($info->route, $wp, $info->latitude, $info->longitude, $info->percentage)) {
 			$wp = "invalid";
 		}
 	}
@@ -170,7 +171,7 @@ function main()
 	printf ("route = %s\n",      $info->route);
 	printf ("start = %s\n",      $info->date_route);
 	printf ("wp    = %s\n",      $wp);
-	printf ("%%age  = %d\n",     $percentage);
+	printf ("%%age  = %d\n",     $info->percentage);
 
 	put_json ($info);
 }
