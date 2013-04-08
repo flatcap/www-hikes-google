@@ -17,15 +17,6 @@ div#user {
 }
 
 body {
-	/*
-	background: white;
-	color: black;
-	*/
-	color: white;
-	background: black;
-}
-
-div.geoxml3_infowindow {
 	background: white;
 	color: black;
 }
