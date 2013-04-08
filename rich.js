@@ -51,7 +51,7 @@ var url_base = "web/";			// Directory containing kml data
 
 /**
  * String.contains - Does the string contain this character
- * @key:	Character to look for
+ * @key: Character to look for
  *
  * Extend the String class with a "contains" method.
  * Search the string for a given character.
@@ -120,7 +120,7 @@ function make_dropdown()
 
 /**
  * select_dropdown - Pick a dropdown entry by value
- * @route:	Shortname of the route
+ * @route: Name of the route
  *
  * Select entry in dropdown by route name
  */
@@ -154,17 +154,17 @@ function init_dropdown()
 	var u_html = "";
 	var h_html = "";
 
-	for (id in route_list) {
-		if ("dist_route" in route_list[id]) {
-			if (("complete" in route_list[id]) && (route_list[id].complete == 100)) {
-				c.push ({ key: id, fullname: route_list[id].fullname });
-			} else if ("date_start" in route_list[id]) {
-				i.push ({ key: id, fullname: route_list[id].fullname  + " (" + route_list[id].complete + "%)" });
+	for (var r in route_list) {
+		if ("dist_route" in route_list[r]) {
+			if (("complete" in route_list[r]) && (route_list[r].complete == 100)) {
+				c.push ({ key: r, fullname: route_list[r].fullname });
+			} else if ("date_start" in route_list[r]) {
+				i.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
 			} else {
-				u.push ({ key: id, fullname: route_list[id].fullname });
+				u.push ({ key: r, fullname: route_list[r].fullname });
 			}
 		} else {
-			h.push ({ key: id, fullname: route_list[id].fullname  + " (" + route_list[id].complete + "%)" });
+			h.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
 		}
 	}
 
@@ -216,8 +216,8 @@ function init_dropdown()
 
 /**
  * route_sort - Sort two route_list items by fullname
- * @a:	Item 1
- * @b	Item 2
+ * @a: Item 1
+ * @b: Item 2
  *
  * Sort helper function.
  * Sort the route_list by fullname.
@@ -272,16 +272,14 @@ function init_options()
 
 /**
  * find_geoxml - Find the geoXML3 document by its url
- * @url:	url of kml document
+ * @url: url of kml document
  *
  * Return:	 n	Index in docs array
  * 		-1	url doesn't exist
  */
 function find_geoxml (url)
 {
-	var i;
-
-	for (i = 0; i < geo.docs.length; i++) {
+	for (var i = 0; i < geo.docs.length; i++) {
 		if (geo.docs[i].url == url) {
 			return i;
 		}
@@ -504,7 +502,7 @@ function map_zoom_route (route)
 
 /**
  * on_change_hike - Event handler for hike dropdown
- * @id: ID of droprown
+ * @id: ID of dropdown
  *
  * When the user selects a different hike, display it.
  */
@@ -565,33 +563,6 @@ function on_change_opt (id)
 
 
 /**
- * update_route_visibility - Show/hide routes to match dropdown
- * @id: Route name
- *
- * If the user turns off the list of "Complete Routes", then any
- * routes in that list should be hidden.
- */
-function update_route_visibility (id)
-{
-	// Hide any routes that aren't displayed in the dropdown
-	for (id in route_list) {
-		if (!show_comp && ("complete" in route_list[id]) && (route_list[id].complete == 100)) {
-			hide_route (id);
-		}
-		if (!show_inco && ("complete" in route_list[id]) && (route_list[id].complete < 100)) {
-			hide_route (id);
-		}
-		if (!show_unst && !("date_start" in route_list[id])) {
-			hide_route (id);
-		}
-		if (!show_hill) {
-			hide_route (id);
-		}
-
-	}
-}
-
-/**
  * on_change_show - Event hander for route list display options
  * @id: ID of checkbox
  *
@@ -613,7 +584,20 @@ function on_change_show (id)
 
 	var dd = make_dropdown();
 
-	update_route_visibility (id);
+	for (var r in route_list) {
+		if (!show_comp && ("complete" in route_list[r]) && (route_list[r].complete == 100)) {
+			hide_route (r);
+		}
+		if (!show_inco && ("complete" in route_list[r]) && (route_list[r].complete < 100)) {
+			hide_route (r);
+		}
+		if (!show_unst && !("date_start" in route_list[r])) {
+			hide_route (r);
+		}
+		if (!show_hill) {
+			hide_route (r);
+		}
+	}
 
 	if (opt_one) {
 		hide_other_routes (dd.value);
