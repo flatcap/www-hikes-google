@@ -602,20 +602,22 @@ function create_message()
 		} else {
 			m += 'Walking the <b>' + route_list[rich_info.route].fullname + '</b>';
 		}
-		m += "<br>";
+		m += '<br>';
+	} else {
+		m += 'Not currently on a route<br>';
 	}
 
 	if (rich_info.latitude && rich_info.longitude) {
-		m += '<span class="subtle">lat/long: ';
-		m += rich_info.latitude.toFixed(6) + ',' + rich_info.longitude.toFixed(6);
-		m += '</span><br>';
+		var lat = parseFloat (rich_info.latitude);
+		var lon = parseFloat (rich_info.longitude);
+		m += '<span class="subtle">lat/long: ' + lat.toFixed(6) + ',' + lon.toFixed(6) + '</span><br>';
 	}
 
-	m += "<br>";
+	m += '<br>';
 
 	e = today.diff (rich_info.date_bed);
 	if (e > 7) {
-		m += "Last saw a bed " + e + ' days ago.<br><br>';
+		m += 'Last saw a bed ' + e + ' days ago.<br><br>';
 	}
 
 	if (rich_info.message) {
@@ -677,7 +679,7 @@ function map_init()
 		streetViewControl: false,
 		overviewMapControl: false,
 		styles: my_styles,
-		mapTypeId: google.maps.MapTypeId.ROADMAP	// ROADMAP, TERRAIN, HYBRID, SATELLITE
+		mapTypeId: google.maps.MapTypeId.SATELLITE	// ROADMAP, TERRAIN, HYBRID, SATELLITE
 	});
 
 	// Escape will close the infoWindow
