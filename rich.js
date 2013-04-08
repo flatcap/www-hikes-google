@@ -63,7 +63,7 @@ function make_dropdown()
 {
 	var dd = document.getElementById ("dropdown");
 	var value = dd.value;
-	var html = '<option value="0">Pick a route...</option>';
+	var html = "";
 
 	if (show_comp) html += show_html["comp"];
 	if (show_inco) html += show_html["inco"];
@@ -215,9 +215,9 @@ function find_geoxml (url)
 
 function hide_other_routes (route)
 {
+	var save_url = get_url (route);
 	var url;
 	var index;
-	var save_url = get_url (route);
 	var dir;
 
 	for (var i = 0; i < geo.docs.length; i++) {
@@ -225,18 +225,16 @@ function hide_other_routes (route)
 		index = url.lastIndexOf ('/');
 		dir = url.substr (0, index);
 
-		if (dir == save_url) {
-			continue;
+		if (dir != save_url) {
+			geo.hideDocument (geo.docs[i]);
 		}
-
-		geo.hideDocument (geo.docs[i]);
 	}
 }
 
 function hide_route (route)
 {
 	var hide_url = get_url (route);
-
+	var url;
 	var index;
 	var dir;
 
@@ -253,12 +251,11 @@ function hide_route (route)
 
 function show_rich()
 {
-	// rich_info is in rich.json
+	// rich_info is from rich.json
 	if (opt_rich) {
 		marker_rich.setMap (map);
 
 		if (rich_info.route) {
-			// XXX activate current route
 			if (opt_one) {
 				hide_other_routes (rich_info.route);
 			}
@@ -269,7 +266,7 @@ function show_rich()
 			map_zoom_route (rich_info.route);
 			select_dropdown (rich_info.route);
 		} else {
-			// else zoom to current location
+			// otherwise zoom to current location
 			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
 		}
 
@@ -284,7 +281,7 @@ function show_rich()
 
 function map_create_rich()
 {
-	// rich_info is in rich.json
+	// rich_info is from rich.json
 	var marker = new google.maps.Marker({
 		position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
 		map: map,
@@ -455,38 +452,39 @@ function on_change_show (id)
 
 function on_click_global (id)
 {
-	if (id == "global_centre") {
-		map_zoom_route();
-		return;
-	}
+	switch (id) {
+		case "global_centre":
+			map_zoom_route();
+			break;
 
-	if (id == "global_clear") {
-		var dd = document.getElementById("dropdown");
-		dd.selectedIndex = 0;
-
-		for (var r in route_list) {
-			hide_route (r);
-		}
-	}
-
-	if (id == "global_todo") {
-		map_zoom_route();
-
-		// todo_list is in todo.json
-		for (var i = 0; i < todo_list.length; i++) {
-			show_kml (todo_list[i], "route");
-		}
-
-		return;
-	}
-
-	if (id == "global_done") {
-		map_zoom_route();
-		for (var r in route_list) {
-			if (route_list[r].complete > 0) {
-				show_kml (r, "hike");
+		case "global_clear":
+			var dd = document.getElementById("dropdown");
+			dd.selectedIndex = -1;
+			for (var r in route_list) {
+				hide_route (r);
 			}
-		}
+			break;
+
+		case "global_todo":
+			if (opt_zoom) {
+				map_zoom_route();
+			}
+			// todo_list is from todo.json
+			for (var i = 0; i < todo_list.length; i++) {
+				show_kml (todo_list[i], "route");
+			}
+			break;
+
+		case "global_done":
+			if (opt_zoom) {
+				map_zoom_route();
+			}
+			for (var r in route_list) {
+				if (route_list[r].complete > 0) {
+					show_kml (r, "hike");
+				}
+			}
+			break;
 	}
 }
 
@@ -603,8 +601,9 @@ function get_url (route, type)
 {
 	var url = url_base + route;
 	
-	if (type)
+	if (type) {
 		url += "/" + type + ".kml";
+	}
 
 	return url;
 }
