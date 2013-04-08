@@ -501,12 +501,12 @@ function map_zoom_route (route)
 
 
 /**
- * on_change_hike - Event handler for hike dropdown
+ * on_hike - Event handler for hike dropdown
  * @id: ID of dropdown
  *
  * When the user selects a different hike, display it.
  */
-function on_change_hike (id)
+function on_hike (id)
 {
 	var sel = document.getElementById (id);
 	var option = sel.options[sel.selectedIndex].value;
@@ -515,13 +515,13 @@ function on_change_hike (id)
 }
 
 /**
- * on_change_kml - Event handler for kml display options
+ * on_kml - Event handler for kml display options
  * @id: ID of checkbox
  *
  * When the user changes a kml display option update the routes
  * shown on the map accordinly.
  */
-function on_change_kml (id)
+function on_kml (id)
 {
 	var route_key = document.getElementById("dropdown").value;
 	var check = document.getElementById(id);
@@ -534,13 +534,13 @@ function on_change_kml (id)
 }
 
 /**
- * on_change_opt - Event handler for global options
+ * on_opt - Event handler for global options
  * @id: ID of checkbox
  *
  * When the user changes any of the global map options, update
  * the display of the route(s) accordingly.
  */
-function on_change_opt (id)
+function on_opt (id)
 {
 	var current_route = document.getElementById("dropdown").value;
 	var check = document.getElementById(id);
@@ -561,9 +561,8 @@ function on_change_opt (id)
 	}
 }
 
-
 /**
- * on_change_show - Event hander for route list display options
+ * on_show - Event hander for route list display options
  * @id: ID of checkbox
  *
  * Toggle whether a class of routes is displayed in the dropdown.
@@ -573,7 +572,7 @@ function on_change_opt (id)
  *	Unstarted routes
  *	Sets of hills
  */
-function on_change_show (id)
+function on_show (id)
 {
 	switch (id) {
 		case 'show_comp': show_comp = !show_comp; break;
@@ -605,12 +604,12 @@ function on_change_show (id)
 }
 
 /**
- * on_click_global - Event hander for buttons
+ * on_global - Event hander for buttons
  * @id: ID of button
  *
  * Perform some global actions on the map.
  */
-function on_click_global (id)
+function on_global (id)
 {
 	switch (id) {
 		case "global_centre":
