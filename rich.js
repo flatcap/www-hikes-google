@@ -79,14 +79,14 @@ function make_dropdown()
 	return dd;
 }
 
-function route_sort(a,b)
+function select_dropdown (route)
 {
-	if (a.fullname > b.fullname) {
-		return 1;
-	} else if (a.fullname < b.fullname) {
-		return -1;
-	} else {
-		return 0;
+	var dd = document.getElementById ("dropdown");
+	for (var i = 0; i < dd.options.length; i++) {
+		if (dd.options[i].value == route) {
+			dd.options[i].selected = true;
+			break;
+		}
 	}
 }
 
@@ -159,6 +159,18 @@ function init_dropdown()
 	show_html["hill"] = h_html;
 
 	return make_dropdown();
+}
+
+
+function route_sort(a,b)
+{
+	if (a.fullname > b.fullname) {
+		return 1;
+	} else if (a.fullname < b.fullname) {
+		return -1;
+	} else {
+		return 0;
+	}
 }
 
 function init_options()
@@ -236,17 +248,6 @@ function hide_route (route)
 
 		if (dir == hide_url) {
 			geo.hideDocument (geo.docs[i]);
-		}
-	}
-}
-
-function select_dropdown (route)
-{
-	var dd = document.getElementById ("dropdown");
-	for (var i = 0; i < dd.options.length; i++) {
-		if (dd.options[i].value == route) {
-			dd.options[i].selected = true;
-			break;
 		}
 	}
 }
