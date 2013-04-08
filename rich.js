@@ -254,6 +254,7 @@ function hide_route (route)
 
 function show_rich()
 {
+	// rich_info is in rich.json
 	if (opt_rich) {
 		marker_rich.setMap (map);
 
@@ -284,6 +285,7 @@ function show_rich()
 
 function map_create_rich()
 {
+	// rich_info is in rich.json
 	var marker = new google.maps.Marker({
 		position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
 		map: map,
@@ -399,10 +401,9 @@ function on_change_opt (id)
 
 	if (id == "opt_one") {
 		opt_one = check.checked;
-		if (!opt_one) {
-			return;
+		if (opt_one) {
+			hide_other_routes (current_route);
 		}
-		hide_other_routes (current_route);
 	} else if (id == "opt_zoom") {
 		opt_zoom = check.checked;
 		if (opt_zoom) {
@@ -414,55 +415,39 @@ function on_change_opt (id)
 	}
 }
 
+
+function update_route_visibility (id)
+{
+	// Hide any routes that aren't displayed in the dropdown
+	for (id in route_list) {
+		if (!show_comp && ("complete" in route_list[id]) && (route_list[id].complete == 100)) {
+			hide_route (id);
+		}
+		if (!show_inco && ("complete" in route_list[id]) && (route_list[id].complete < 100)) {
+			hide_route (id);
+		}
+		if (!show_unst && !("date_start" in route_list[id])) {
+			hide_route (id);
+		}
+		if (!show_hill) {
+			hide_route (id);
+		}
+
+	}
+}
+
 function on_change_show (id)
 {
 	switch (id) {
-		//XXX need to hide no-longer-displayed routes
-		case 'show_comp':
-			show_comp = !show_comp;
-			if (!show_comp) {
-				for (id in route_list) {
-					if ("complete" in route_list[id]) {
-						if (route_list[id].complete == 100) {
-							hide_route (id);
-						}
-					}
-				}
-			}
-			break;
-		case 'show_inco':
-			show_inco = !show_inco;
-			if (!show_inco) {
-				for (id in route_list) {
-					if ("complete" in route_list[id]) {
-						if (route_list[id].complete < 100) {
-							hide_route (id);
-						}
-					}
-				}
-			}
-			break;
-		case 'show_unst':
-			show_unst = !show_unst;
-			if (!show_unst) {
-				for (id in route_list) {
-					if (!("date_start" in route_list[id])) {
-						hide_route (id);
-					}
-				}
-			}
-			break;
-		case 'show_hill':
-			show_hill = !show_hill;
-			if (!show_hill) {
-				for (id in hills) {
-					hide_route (id);
-				}
-			}
-			break;
+		case 'show_comp': show_comp = !show_comp; break;
+		case 'show_inco': show_inco = !show_inco; break;
+		case 'show_unst': show_unst = !show_unst; break;
+		case 'show_hill': show_hill = !show_hill; break;
 	}
 
 	var dd = make_dropdown();
+
+	update_route_visibility (id);
 
 	if (opt_one) {
 		hide_other_routes (dd.value);
