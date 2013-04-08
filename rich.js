@@ -377,6 +377,180 @@ function show_rich()
 
 }
 
+/**
+ * show_route - Display/hide a route on the map
+ * @route: Route name
+ *
+ * For a given route, display its data on the map.
+ * Take into account the global options kml[*].
+ *
+ * route_list[@route].attr tells us what kml exists.
+ * kml[*] tells us what the use wants displayed.
+ *
+ * Use show_kml(), hide_kml() to do the work.
+ */
+function show_route (route)
+{
+	if (!(route in route_list)) {
+		return;
+	}
+
+	if (opt_one) {
+		hide_other_routes (route);
+	}
+
+	var attr  = route_list[route].attr;
+	var hill  = !("dist_route" in route_list[route]);
+	var extra = (!hill) || (kml["extra"] == true);
+	var hike  = false;
+	var todo  = false;
+	var ferry = false;
+	var walked = false;
+
+	if ((kml["start"] == true) && attr.contains ('s')) {
+		show_kml (route, "start");
+	} else {
+		hide_kml (route, "start");
+	}
+
+	if ((kml["end"] == true) && attr.contains ('e')) {
+		show_kml (route, "end");
+	} else {
+		hide_kml (route, "end");
+	}
+
+	if (hill) {
+		if ((kml["hike"] == true) && attr.contains ('P')) {
+			show_kml (route, "hills_done");
+		} else {
+			hide_kml (route, "hills_done");
+		}
+
+		if ((kml["todo"] == true) && attr.contains ('p')) {
+			show_kml (route, "hills_todo");
+		} else {
+			hide_kml (route, "hills_todo");
+		}
+
+		if ((kml["area"] == true) && kml["hike"] && attr.contains ('A')) {
+			show_kml (route, "area_done");
+		} else {
+			hide_kml (route, "area_done");
+		}
+
+		if ((kml["area"] == true) && kml["todo"] && attr.contains ('a')) {
+			show_kml (route, "area_todo");
+		} else {
+			hide_kml (route, "area_todo");
+		}
+	} else {
+		if ((kml["variant"] == true) && attr.contains ('v')) {
+			show_kml (route, "variant");
+		} else {
+			hide_kml (route, "variant");
+		}
+	}
+
+	if ((kml["extra"] == true) && attr.contains ('x')) {
+		// show extras
+	} else {
+		// hide extras
+	}
+
+	if ((kml["camp"] == true) && attr.contains ('c') && extra) {
+		show_kml (route, "camp");
+	} else {
+		hide_kml (route, "camp");
+	}
+
+	if ((kml["hike"] == true) && attr.contains ('h') && extra) {
+		show_kml (route, "hike");
+		hike = true;
+	} else {
+		hide_kml (route, "hike");
+	}
+
+	if ((kml["todo"] == true) && attr.contains ('t') && extra) {
+		show_kml (route, "todo");
+		todo = true;
+	} else {
+		hide_kml (route, "todo");
+	}
+
+	if ((kml["ferry"] == true) && attr.contains ('f') && extra) {
+		show_kml (route, "ferry");
+		ferry = true;
+	} else {
+		hide_kml (route, "ferry");
+	}
+
+	walked = hike || todo || ferry;
+
+	if ((kml["route"] == true) && attr.contains ('r') && (!walked)) {
+		show_kml (route, "route");
+	} else {
+		hide_kml (route, "route");
+	}
+
+	if (opt_zoom) {
+		map_zoom_route (route);
+	}
+}
+
+/**
+ * get_url - Get the location of the kml for a route
+ * @route: Route name
+ * @type: Data type, e.g. "hike"
+ *
+ * Create a url from the base directory and the route's name and type.
+ *
+ * Return: url of route
+ */
+function get_url (route, type)
+{
+	var url = url_base + route;
+	
+	if (type) {
+		url += "/" + type + ".kml";
+	}
+
+	return url;
+}
+
+/**
+ * show_kml - Display one kml on the map
+ * @route: Route name
+ * @type: Data type, e.g. "hike"
+ *
+ * Load and display one kml file on the map.
+ */
+function show_kml (route, type)
+{
+	var url = get_url (route, type);
+	var i = find_geoxml (url);
+	if (i >= 0) {
+		geo.showDocument (geo.docs[i]);
+	} else {
+		geo.parse (url);
+	}
+}
+
+/**
+ * hide_kml - Hide one piece of route data
+ * @route: Route name
+ * @type: Data type, e.g. "hike"
+ *
+ * Hide one element of one route on the map.
+ */
+function hide_kml (route, type)
+{
+	var url = get_url (route, type);
+	var i = find_geoxml (url);
+	if (i >= 0) {
+		geo.hideDocument (geo.docs[i]);
+	}
+}
+
 
 /**
  * map_create_rich - Create a Google.maps.Marker
@@ -646,180 +820,4 @@ function on_global (id)
 			break;
 	}
 }
-
-
-/**
- * show_route - Display/hide a route on the map
- * @route: Route name
- *
- * For a given route, display its data on the map.
- * Take into account the global options kml[*].
- *
- * route_list[@route].attr tells us what kml exists.
- * kml[*] tells us what the use wants displayed.
- *
- * Use show_kml(), hide_kml() to do the work.
- */
-function show_route (route)
-{
-	if (!(route in route_list)) {
-		return;
-	}
-
-	if (opt_one) {
-		hide_other_routes (route);
-	}
-
-	var attr  = route_list[route].attr;
-	var hill  = !("dist_route" in route_list[route]);
-	var extra = (!hill) || (kml["extra"] == true);
-	var hike  = false;
-	var todo  = false;
-	var ferry = false;
-	var walked = false;
-
-	if ((kml["start"] == true) && attr.contains ('s')) {
-		show_kml (route, "start");
-	} else {
-		hide_kml (route, "start");
-	}
-
-	if ((kml["end"] == true) && attr.contains ('e')) {
-		show_kml (route, "end");
-	} else {
-		hide_kml (route, "end");
-	}
-
-	if (hill) {
-		if ((kml["hike"] == true) && attr.contains ('P')) {
-			show_kml (route, "hills_done");
-		} else {
-			hide_kml (route, "hills_done");
-		}
-
-		if ((kml["todo"] == true) && attr.contains ('p')) {
-			show_kml (route, "hills_todo");
-		} else {
-			hide_kml (route, "hills_todo");
-		}
-
-		if ((kml["area"] == true) && kml["hike"] && attr.contains ('A')) {
-			show_kml (route, "area_done");
-		} else {
-			hide_kml (route, "area_done");
-		}
-
-		if ((kml["area"] == true) && kml["todo"] && attr.contains ('a')) {
-			show_kml (route, "area_todo");
-		} else {
-			hide_kml (route, "area_todo");
-		}
-	} else {
-		if ((kml["variant"] == true) && attr.contains ('v')) {
-			show_kml (route, "variant");
-		} else {
-			hide_kml (route, "variant");
-		}
-	}
-
-	if ((kml["extra"] == true) && attr.contains ('x')) {
-		// show extras
-	} else {
-		// hide extras
-	}
-
-	if ((kml["camp"] == true) && attr.contains ('c') && extra) {
-		show_kml (route, "camp");
-	} else {
-		hide_kml (route, "camp");
-	}
-
-	if ((kml["hike"] == true) && attr.contains ('h') && extra) {
-		show_kml (route, "hike");
-		hike = true;
-	} else {
-		hide_kml (route, "hike");
-	}
-
-	if ((kml["todo"] == true) && attr.contains ('t') && extra) {
-		show_kml (route, "todo");
-		todo = true;
-	} else {
-		hide_kml (route, "todo");
-	}
-
-	if ((kml["ferry"] == true) && attr.contains ('f') && extra) {
-		show_kml (route, "ferry");
-		ferry = true;
-	} else {
-		hide_kml (route, "ferry");
-	}
-
-	walked = hike || todo || ferry;
-
-	if ((kml["route"] == true) && attr.contains ('r') && (!walked)) {
-		show_kml (route, "route");
-	} else {
-		hide_kml (route, "route");
-	}
-
-	if (opt_zoom) {
-		map_zoom_route (route);
-	}
-}
-
-/**
- * get_url - Get the location of the kml for a route
- * @route: Route name
- * @type: Data type, e.g. "hike"
- *
- * Create a url from the base directory and the route's name and type.
- *
- * Return: url of route
- */
-function get_url (route, type)
-{
-	var url = url_base + route;
-	
-	if (type) {
-		url += "/" + type + ".kml";
-	}
-
-	return url;
-}
-
-/**
- * show_kml - Display one kml on the map
- * @route: Route name
- * @type: Data type, e.g. "hike"
- *
- * Load and display one kml file on the map.
- */
-function show_kml (route, type)
-{
-	var url = get_url (route, type);
-	var i = find_geoxml (url);
-	if (i >= 0) {
-		geo.showDocument (geo.docs[i]);
-	} else {
-		geo.parse (url);
-	}
-}
-
-/**
- * hide_kml - Hide one piece of route data
- * @route: Route name
- * @type: Data type, e.g. "hike"
- *
- * Hide one element of one route on the map.
- */
-function hide_kml (route, type)
-{
-	var url = get_url (route, type);
-	var i = find_geoxml (url);
-	if (i >= 0) {
-		geo.hideDocument (geo.docs[i]);
-	}
-}
-
 
