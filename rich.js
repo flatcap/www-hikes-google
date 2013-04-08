@@ -1627,24 +1627,6 @@ function hide_route (route)
 	}
 }
 
-function load_kml (id, key, visible)
-{
-	var url = url_base + id + "/" + key + ".kml";
-
-	var i = find_geoxml (url);
-	if (i >= 0) {
-		if (visible) {
-			geo.showDocument (geo.docs[i]);
-		} else {
-			geo.hideDocument (geo.docs[i]);
-		}
-	} else {
-		if (visible) {
-			geo.parse (url);
-		}
-	}
-}
-
 function select_dropdown (route)
 {
 	var dd = document.getElementById ("dropdown");
@@ -1681,7 +1663,7 @@ function show_rich()
 			if (opt_one) {
 				hide_other_routes (rich_info.route);
 			}
-			load_kml (rich_info.route, "route", 1);
+			show_kml (rich_info.route, "route");
 
 			// If on a route, zoom to display it
 			// XXX enable correct options and select it in the dropdown
@@ -1777,63 +1759,6 @@ function on_change_hike (id)
 	var option = sel.options[sel.selectedIndex].value;
 
 	show_route_new (option);
-	return;
-
-	if (option in hills) {
-		on_change_hill (option);
-		return;
-	}
-
-	var files = [ 'hike', 'ferry', 'camp', 'todo', 'variant', 'route', 'start' ];
-
-	if (opt_one) {
-		hide_other_routes (option);
-	}
-
-	if (!option || (option == "0")) {
-		return;
-	}
-
-	for (i = 0; i < files.length; i++) {
-		var key = files[i][0];
-		if (routes[option].attr.indexOf (key) < 0) {
-			continue;
-		}
-		if (kml[files[i]]) {
-			load_kml (option, files[i], 1);
-		}
-	}
-
-	if (opt_zoom) {
-		map_zoom_route (option);
-	}
-}
-
-function on_change_hill (id)
-{
-	var attr = hills[id].attr;
-
-	if (opt_one) {
-		hide_other_routes (id)
-	}
-
-	if (kml['hike'] && attr.contains ('h')) {
-		if (kml_hike) {
-			load_kml (id, 'hills_done', 1);
-			load_kml (id, 'area_done',  1);
-		}
-	}
-
-	if (kml['todo'] && attr.contains ('t')) {
-		if (kml_todo) {
-			load_kml (id, 'hills_todo', 1);
-			load_kml (id, 'area_todo',  1);
-		}
-	}
-
-	if (opt_zoom) {
-		map_zoom_ll (hills[id].latitude, hills[id].longitude, hills[id].zoom);
-	}
 }
 
 function on_change_kml (id)
@@ -1842,26 +1767,8 @@ function on_change_kml (id)
 	var check = document.getElementById(id);
 
 	var name = id.substr (4);
-	var key = id[4];
 
 	kml[name] = check.checked;
-
-	show_route_new (route_key);
-	return;
-
-	var url = get_url (route_key, name);
-	var i = find_geoxml (url);
-	if (i >= 0) {
-		if (kml[name]) {
-			geo.showDocument (geo.docs[i]);
-		} else {
-			geo.hideDocument (geo.docs[i]);
-		}
-	} else {
-		if (kml[name]) {
-			geo.parse (url);
-		}
-	}
 
 	show_route_new (route_key);
 }
@@ -1992,7 +1899,7 @@ function on_click_global (id)
 		];
 
 		for (var i = 0; i < todo.length; i++) {
-			load_kml (todo[i], "route", 1);
+			show_kml (todo[i], "route");
 		}
 
 		return;
@@ -2002,114 +1909,18 @@ function on_click_global (id)
 		map_zoom_route();
 		for (var r in route_list) {
 			if (route_list[r].complete > 0) {
-				load_kml (r, "hike", 1);
+				show_kml (r, "hike");
 			}
 		}
 		for (var h in hills) {
 			if (hills[h].complete > 0) {
-				load_kml (h, "area_done",  1);
-				load_kml (h, "hills_done", 1);
+				show_kml (h, "area_done");
+				show_kml (h, "hills_done");
 			}
 		}
 	}
 }
 
-
-function show_route_old (route)
-{
-	if (!(route in route_list)) {
-		return;
-	}
-
-	if (opt_one) {
-		hide_other_routes (route);
-	}
-
-	var attr  = route_list[route].attr;
-	var hill  = !("dist_route" in route_list[route]);
-	var hike  = false;
-	var todo  = false;
-	var ferry = false;
-	var extra = false;
-
-	if (kml["extra"] && attr.contains ('x')) {
-		// load extras
-		extra = true;
-	}
-
-	if (kml["ferry"] && attr.contains ('f')) {
-		show_kml (route, "ferry");
-		ferry = true;
-	}
-
-	if (kml["hike"]) {
-		if ((!hill) || ((extra == true) && (hill == true))) {
-			if (attr.contains ('h')) {
-				show_kml (route, "hike");
-				hike = true;
-			}
-		}
-		if (attr.contains ('P')) {
-			show_kml (route, "hills_done");
-		}
-	}
-
-	if (kml["todo"]) {
-		if (kml["area"] && attr.contains ('a')) {
-			show_kml (route, "area_todo");
-		}
-		if (attr.contains ('t')) {
-			show_kml (route, "todo");
-			todo = true;
-		}
-		if (attr.contains ('p')) {
-			show_kml (route, "hills_todo");
-		}
-	}
-
-	if (kml["route"]) {
-		if (attr.contains ('r') && !hike && !todo && !ferry) {
-			show_kml (route, "route");
-		} else {
-			hide_kml (route, "route");
-		}
-	}
-
-	if (kml["area"] && attr.contains ('A') && kml["hike"]) {
-		show_kml (route, "area_done");
-	} else {
-		if (hill) {
-			if (!kml["hike"]) {
-				hide_kml (route, "area_done");
-			}
-			if (!kml["todo"]) {
-				hide_kml (route, "area_todo");
-			}
-		}
-	}
-
-	if (kml["camp"] && attr.contains ('c')) {
-		if ((!hill) || ((extra == true) && (hill == true))) {
-			show_kml (route, "camp");
-		}
-	}
-
-	if (kml["finish"] && attr.contains ('f')) {
-		show_kml (route, "finish");
-	}
-
-	if (kml["start"] && attr.contains ('s')) {
-		show_kml (route, "start");
-	}
-
-	if (kml["variant"] && attr.contains ('v')) {
-		show_kml (route, "variant");
-	}
-
-	if (opt_zoom) {
-		map_zoom_route (route);
-	}
-}
 
 function show_route_new (route)
 {
@@ -2218,7 +2029,6 @@ function show_route_new (route)
 		map_zoom_route (route);
 	}
 }
-
 
 function get_url (route, type)
 {
