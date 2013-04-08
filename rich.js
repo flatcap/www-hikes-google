@@ -1,5 +1,4 @@
 var route_list = null;
-var hills  = null;
 var geo    = null;
 var map    = null;
 
@@ -463,13 +462,10 @@ function on_click_global (id)
 
 	if (id == "global_clear") {
 		var dd = document.getElementById("dropdown");
-		dd.value = 0;
+		dd.selectedIndex = 0;
 
 		for (var r in route_list) {
 			hide_route (r);
-		}
-		for (var h in hills) {
-			hide_route (h);
 		}
 	}
 
@@ -489,12 +485,6 @@ function on_click_global (id)
 		for (var r in route_list) {
 			if (route_list[r].complete > 0) {
 				show_kml (r, "hike");
-			}
-		}
-		for (var h in hills) {
-			if (hills[h].complete > 0) {
-				show_kml (h, "area_done");
-				show_kml (h, "hills_done");
 			}
 		}
 	}
