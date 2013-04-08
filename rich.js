@@ -92,129 +92,6 @@ function initialise()
 
 
 /**
- * dd_init - Create HTML for dropdown
- *
- * Create the HTML for the dropdown from the route_list.
- *
- * Return: DOM select object
- */
-function dd_init()
-{
-	var c = new Array();
-	var i = new Array();
-	var u = new Array();
-	var h = new Array();
-
-	var c_html = "";
-	var i_html = "";
-	var u_html = "";
-	var h_html = "";
-
-	for (var r in route_list) {
-		if ("dist_route" in route_list[r]) {
-			if (("complete" in route_list[r]) && (route_list[r].complete == 100)) {
-				c.push ({ key: r, fullname: route_list[r].fullname });
-			} else if ("date_start" in route_list[r]) {
-				i.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
-			} else {
-				u.push ({ key: r, fullname: route_list[r].fullname });
-			}
-		} else {
-			h.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
-		}
-	}
-
-	c.sort(route_sort);
-	i.sort(route_sort);
-	u.sort(route_sort);
-	h.sort(route_sort);
-
-	if (c.length) {
-		c_html += '<optgroup id="complete" label="Complete">';
-		for (var j = 0; j < c.length; j++) {
-			c_html += '<option value="' + c[j].key +'">' + c[j].fullname + '</option>';
-		}
-		c_html += '</optgroup>';
-	}
-
-	if (i.length) {
-		i_html += '<optgroup id="incomplete" label="Incomplete">';
-		for (var j = 0; j < i.length; j++) {
-			i_html += '<option value="' + i[j].key +'">' + i[j].fullname + '</option>';
-		}
-		i_html += '</optgroup>';
-	}
-
-	if (u.length) {
-		u_html += '<optgroup id="unstarted" label="Unstarted">';
-		for (var j = 0; j < u.length; j++) {
-			u_html += '<option value="' + u[j].key +'">' + u[j].fullname + '</option>';
-		}
-		u_html += '</optgroup>';
-	}
-
-	if (h.length) {
-		h_html += '<optgroup id="hills" label="Hills">';
-		for (var j = 0; j < h.length; j++) {
-			h_html += '<option value="' + h[j].key +'">' + h[j].fullname + '</option>';
-		}
-		h_html += '</optgroup>';
-	}
-
-	show_html["comp"] = c_html;
-	show_html["inco"] = i_html;
-	show_html["unst"] = u_html;
-	show_html["hill"] = h_html;
-
-	return dd_populate();
-}
-
-/**
- * dd_populate - Populate the dropdown box
- *
- * Dropdown contents depend on four bools (show_*).
- * After the rebuild, try to keep the previous selected item.
- *
- * Return: DOM select object
- */
-function dd_populate()
-{
-	var dd = document.getElementById ("dropdown");
-	var value = dd.value;
-	var html = "";
-
-	if (show_comp) html += show_html["comp"];
-	if (show_inco) html += show_html["inco"];
-	if (show_unst) html += show_html["unst"];
-	if (show_hill) html += show_html["hill"];
-
-	dd.innerHTML = html;
-
-	// If possible, leave the selection unchanged
-	dd_select (value);
-
-	return dd;
-}
-
-/**
- * dd_select - Pick a dropdown entry by value
- * @route: Name of the route
- *
- * Select entry in dropdown by route name
- */
-function dd_select (route)
-{
-	var dd = document.getElementById ("dropdown");
-	for (var i = 0; i < dd.options.length; i++) {
-		if (dd.options[i].value == route) {
-			dd.options[i].selected = true;
-			break;
-		}
-	}
-}
-
-
-/**
  * route_sort - Sort two route_list items by fullname
  * @a: Item 1
  * @b: Item 2
@@ -551,6 +428,129 @@ function hide_kml (route, type)
 
 
 /**
+ * dd_init - Create HTML for dropdown
+ *
+ * Create the HTML for the dropdown from the route_list.
+ *
+ * Return: DOM select object
+ */
+function dd_init()
+{
+	var c = new Array();
+	var i = new Array();
+	var u = new Array();
+	var h = new Array();
+
+	var c_html = "";
+	var i_html = "";
+	var u_html = "";
+	var h_html = "";
+
+	for (var r in route_list) {
+		if ("dist_route" in route_list[r]) {
+			if (("complete" in route_list[r]) && (route_list[r].complete == 100)) {
+				c.push ({ key: r, fullname: route_list[r].fullname });
+			} else if ("date_start" in route_list[r]) {
+				i.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
+			} else {
+				u.push ({ key: r, fullname: route_list[r].fullname });
+			}
+		} else {
+			h.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
+		}
+	}
+
+	c.sort(route_sort);
+	i.sort(route_sort);
+	u.sort(route_sort);
+	h.sort(route_sort);
+
+	if (c.length) {
+		c_html += '<optgroup id="complete" label="Complete">';
+		for (var j = 0; j < c.length; j++) {
+			c_html += '<option value="' + c[j].key +'">' + c[j].fullname + '</option>';
+		}
+		c_html += '</optgroup>';
+	}
+
+	if (i.length) {
+		i_html += '<optgroup id="incomplete" label="Incomplete">';
+		for (var j = 0; j < i.length; j++) {
+			i_html += '<option value="' + i[j].key +'">' + i[j].fullname + '</option>';
+		}
+		i_html += '</optgroup>';
+	}
+
+	if (u.length) {
+		u_html += '<optgroup id="unstarted" label="Unstarted">';
+		for (var j = 0; j < u.length; j++) {
+			u_html += '<option value="' + u[j].key +'">' + u[j].fullname + '</option>';
+		}
+		u_html += '</optgroup>';
+	}
+
+	if (h.length) {
+		h_html += '<optgroup id="hills" label="Hills">';
+		for (var j = 0; j < h.length; j++) {
+			h_html += '<option value="' + h[j].key +'">' + h[j].fullname + '</option>';
+		}
+		h_html += '</optgroup>';
+	}
+
+	show_html["comp"] = c_html;
+	show_html["inco"] = i_html;
+	show_html["unst"] = u_html;
+	show_html["hill"] = h_html;
+
+	return dd_populate();
+}
+
+/**
+ * dd_populate - Populate the dropdown box
+ *
+ * Dropdown contents depend on four bools (show_*).
+ * After the rebuild, try to keep the previous selected item.
+ *
+ * Return: DOM select object
+ */
+function dd_populate()
+{
+	var dd = document.getElementById ("dropdown");
+	var value = dd.value;
+	var html = "";
+
+	if (show_comp) html += show_html["comp"];
+	if (show_inco) html += show_html["inco"];
+	if (show_unst) html += show_html["unst"];
+	if (show_hill) html += show_html["hill"];
+
+	dd.innerHTML = html;
+
+	// If possible, leave the selection unchanged
+	dd_select (value);
+
+	return dd;
+}
+
+/**
+ * dd_select - Pick a dropdown entry by value
+ * @route: Name of the route
+ *
+ * Select entry in dropdown by route name
+ */
+function dd_select (route)
+{
+	var dd = document.getElementById ("dropdown");
+	for (var i = 0; i < dd.options.length; i++) {
+		if (dd.options[i].value == route) {
+			dd.options[i].selected = true;
+			break;
+		}
+	}
+}
+
+
+/**
  * map_create_rich - Create a Google.maps.Marker
  *
  * Create a marker to show Rich's location.
@@ -673,6 +673,50 @@ function map_zoom_route (route)
 
 
 /**
+ * on_global - Event hander for buttons
+ * @id: ID of button
+ *
+ * Perform some global actions on the map.
+ */
+function on_global (id)
+{
+	switch (id) {
+		case "global_centre":
+			map_zoom_route();
+			break;
+
+		case "global_clear":
+			var dd = document.getElementById("dropdown");
+			dd.selectedIndex = -1;
+			for (var r in route_list) {
+				hide_route (r);
+			}
+			break;
+
+		case "global_todo":
+			if (opt_zoom) {
+				map_zoom_route();
+			}
+			// todo_list is from todo.json
+			for (var i = 0; i < todo_list.length; i++) {
+				show_kml (todo_list[i], "route");
+			}
+			break;
+
+		case "global_done":
+			if (opt_zoom) {
+				map_zoom_route();
+			}
+			for (var r in route_list) {
+				if (route_list[r].complete > 0) {
+					show_kml (r, "hike");
+				}
+			}
+			break;
+	}
+}
+
+/**
  * on_hike - Event handler for hike dropdown
  * @id: ID of dropdown
  *
@@ -772,50 +816,6 @@ function on_show (id)
 
 	if (opt_one) {
 		hide_other_routes (dd.value);
-	}
-}
-
-/**
- * on_global - Event hander for buttons
- * @id: ID of button
- *
- * Perform some global actions on the map.
- */
-function on_global (id)
-{
-	switch (id) {
-		case "global_centre":
-			map_zoom_route();
-			break;
-
-		case "global_clear":
-			var dd = document.getElementById("dropdown");
-			dd.selectedIndex = -1;
-			for (var r in route_list) {
-				hide_route (r);
-			}
-			break;
-
-		case "global_todo":
-			if (opt_zoom) {
-				map_zoom_route();
-			}
-			// todo_list is from todo.json
-			for (var i = 0; i < todo_list.length; i++) {
-				show_kml (todo_list[i], "route");
-			}
-			break;
-
-		case "global_done":
-			if (opt_zoom) {
-				map_zoom_route();
-			}
-			for (var r in route_list) {
-				if (route_list[r].complete > 0) {
-					show_kml (r, "hike");
-				}
-			}
-			break;
 	}
 }
 
