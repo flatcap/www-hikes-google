@@ -2,13 +2,13 @@
 
 $filename = "rich.json";
 
-function valid_coords ($lat, $lon)
+function valid_coords ($latitude, $longitude)
 {
 	// bounds of UK
-	if (($lat < 49) || ($lat > 59))
+	if (($latitude < 49) || ($latitude > 59))
 		return false;
 
-	if (($lon < -8) || ($lon > 2))
+	if (($longitude < -8) || ($longitude > 2))
 		return false;
 
 	return true;
@@ -36,17 +36,17 @@ function valid_date ($date)
 	return strftime ("%Y-%m-%d", $unix);
 }
 
-function get_waypoint ($route, $wp, &$lat, &$lon)
+function get_waypoint ($route, $wp, &$latitude, &$longitude, &$percentage)
 {
 	$map = array();
 	$retval = 0;
+	$percentage = -1;
 
 	$path = "web";
 	$route = "$path/$route/route.xml";
 	$wp = "WP$wp";
 
-	$map = exec ("grep -w $wp $route");
-
+	$map = exec ("grep -nw $wp $route");
 	$parts = explode ('"', $map);
 	if (count ($parts) < 7)
 		return false;
@@ -58,8 +58,16 @@ function get_waypoint ($route, $wp, &$lat, &$lon)
 		return false;
 	}
 
-	$lat = $conv_lat;
-	$lon = $conv_lon;
+	$latitude = $conv_lat;
+	$longitude = $conv_lon;
+
+	$map = exec ("wc -l $route");
+
+	$num = intval ($parts[0]);
+	$lines = intval ($map);
+
+	// Round percentage to the nearest 5%
+	$percentage = 5 * round ($num * 20 / $lines);
 
 	return true;
 }
@@ -108,43 +116,61 @@ function put_json ($info)
 
 function main()
 {
+	$percentage = -1;
 	$info = get_json();
 
-	$lat = get_url_variable ("lat");
-	$lon = get_url_variable ("lon");
-	$msg = get_url_variable ("msg");
-	$dat = get_url_variable ("date");
-	$wpt = get_url_variable ("wp");
-	$rte = get_url_variable ("route");
+	$date_bed   = get_url_variable ("bed");
+	$date_seen  = get_url_variable ("date");
+	$date_route = get_url_variable ("start");
+	$latitude   = get_url_variable ("lat");
+	$longitude  = get_url_variable ("lon");
+	$message    = get_url_variable ("msg");
+	$route      = get_url_variable ("route");
+	$wp         = get_url_variable ("wp");
 
-	if (valid_coords ($lat, $lon)) {
-		$info->latitude  = $lat;
-		$info->longitude = $lon;
+	if (valid_coords ($latitude, $longitude)) {
+		$info->latitude  = $latitude;
+		$info->longitude = $longitude;
 	}
 
-	if (valid_route ($rte)) {
-		$info->route = $rte;
+	if (valid_route ($route)) {
+		$info->route = $route;
 	}
 
-	if ($wpt !== false) {
-		if (!get_waypoint ($info->route, $wpt, $info->latitude, $info->longitude)) {
-			$wpt = "invalid";
+	if ($wp !== false) {
+		if (!get_waypoint ($info->route, $wp, $info->latitude, $info->longitude, $percentage)) {
+			$wp = "invalid";
 		}
 	}
 
-	$info->date = valid_date ($dat);
+	$info->date_seen = valid_date ($dat);
 
-	if ($msg !== false) {
-		$info->message = $msg;
+	if ($date_route !== false) {
+		if (!empty ($date_route))
+			$date_route = valid_date ($date_route);
+		$info->date_route = $date_route;
+	}
+
+	if ($date_bed !== false) {
+		if (!empty ($date_bed))
+			$date_bed = valid_date ($date_bed);
+		$info->date_bed = $date_bed;
+	}
+
+	if ($message !== false) {
+		$info->message = $message;
 	}
 
 	printf ("<pre>\n");
-	printf ("date  = %s (%s)\n", $info->date,strftime ("%A %-d %B %Y", strtotime ($info->date)));
+	printf ("bed   = %s\n",      $info->date_bed);
+	printf ("date  = %s (%s)\n", $info->date_seen, strftime ("%A %-d %B %Y", strtotime ($info->date_seen)));
 	printf ("lat   = %0.6f\n",   $info->latitude);
 	printf ("lon   = %0.6f\n",   $info->longitude);
-	printf ("route = %s\n",      $info->route);
-	printf ("wp    = %s\n",      $wpt);
 	printf ("msg   = %s\n",      $info->message);
+	printf ("route = %s\n",      $info->route);
+	printf ("start = %s\n",      $info->date_route);
+	printf ("wp    = %s\n",      $wp);
+	printf ("%%age  = %d\n",     $percentage);
 
 	put_json ($info);
 }
@@ -152,5 +178,6 @@ function main()
 
 date_default_timezone_set('Europe/London');
 
+echo "<pre>";
 main();
 
