@@ -108,6 +108,7 @@ function get_json()
 function put_json ($info)
 {
 	global $filename;
+	global $log_file;
 
 	$str = json_encode ($info, JSON_PRETTY_PRINT);
 	$str = "rich_info = $str";
