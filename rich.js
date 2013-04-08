@@ -490,25 +490,10 @@ function on_click_global (id)
 
 	if (id == "global_todo") {
 		map_zoom_route();
-		var todo = [
-			// XXX move out to json
-			"west.somerset.coast",
-			"river.parrett",
-			"offas.dyke",
-			"wales.coast",
-			"sefton.coast",
-			"lancashire.coast",
-			"cumbria.coast",
-			"hadrians.wall",
-			"northumberland.coast",
-			"southern.upland.way",
-			"mull.of.galloway.trail",
-			"ayrshire.coast",
-			"five.degrees.west"
-		];
 
-		for (var i = 0; i < todo.length; i++) {
-			show_kml (todo[i], "route");
+		// todo_list is in todo.json
+		for (var i = 0; i < todo_list.length; i++) {
+			show_kml (todo_list[i], "route");
 		}
 
 		return;
