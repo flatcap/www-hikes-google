@@ -25,7 +25,7 @@ var opt_rich    = true;		// Show Rich's location
 var marker_rich = null;		// Google map marker showing Rich's location
 			// Show list of:
 var show_comp   = true;		// Completed routes
-var show_inco   = false;	// Incomplete routes
+var show_inco   = true;		// Incomplete routes
 var show_unst   = false;	// Unstarted routes
 var show_hill   = true;		// Sets of hills
 
