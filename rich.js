@@ -342,9 +342,15 @@ function show_route (route)
 	}
 
 	if ((kml["extra"] == true) && attr.contains ('x')) {
-		// show extras
+		var list = route_list[route].custom.split(',');
+		for (var i = 0; i < list.length; i++) {
+			show_kml (route, list[i]);
+		}
 	} else {
-		// hide extras
+		var list = route_list[route].custom.split(',');
+		for (var i = 0; i < list.length; i++) {
+			hide_kml (route, list[i]);
+		}
 	}
 
 	if ((kml["camp"] == true) && attr.contains ('c') && extra) {

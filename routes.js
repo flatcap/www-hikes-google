@@ -149,7 +149,7 @@ function init_routes()
 		"south.west.coast" : {
 			"fullname"	: "South West Coast Path &mdash; National Trail",
 			"name"		: "South West Coast",
-			"attr"		: "cefhrs",
+			"attr"		: "cefhrsx",
 			"dist_route"	: 630.0,
 			"date_start"	: "2012-04-30",
 			"date_end"	: "2012-06-23",
@@ -808,7 +808,7 @@ function init_routes()
 		"five.degrees.west" : {
 			"fullname"	: "Five Degrees West",
 			"name"		: "Five Degrees West",
-			"attr"		: "ers",
+			"attr"		: "ersx",
 			"dist_route"	: 290,
 			"latitude"	: 57.106419,
 			"longitude"	: -4.943848,
@@ -1286,11 +1286,12 @@ function init_routes()
 		"welsh.3000s" : {
 			"fullname"	: "Welsh 3000s",
 			"name"		: "Welsh 3000s",
-			"attr"		: "ers",
+			"attr"		: "ersx",
 			"dist_route"	: 24.2,
 			"latitude"	: 53.133178,
 			"longitude"	: -4.017906,
-			"zoom"		: 12
+			"zoom"		: 12,
+			"custom"	: "peaks"
 		},
 		"west.highland.way" : {
 			"fullname"	: "West Highland Way - National Trail",
