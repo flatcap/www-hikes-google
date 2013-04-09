@@ -182,7 +182,7 @@ function init_routes()
 		"three.towers" : {
 			"fullname"	: "Three Towers",
 			"name"		: "Three Towers",
-			"attr"		: "ehrs",
+			"attr"		: "ehrsx",
 			"dist_route"	: 45.0,
 			"date_start"	: "2010-04-10",
 			"date_end"	: "2010-04-10",
@@ -193,7 +193,8 @@ function init_routes()
 			"complete"	: 100,
 			"latitude"	: 51.510025,
 			"longitude"	: -1.198196,
-			"zoom"		: 11
+			"zoom"		: 11,
+			"custom"	: "checkpoints"
 		},
 		"white.cliffs" : {
 			"fullname"	: "White Cliffs Country Trails",
@@ -214,7 +215,7 @@ function init_routes()
 		"yorkshire.three.peaks" : {
 			"fullname"	: "Yorkshire Three Peaks",
 			"name"		: "Yorkshire Three Peaks",
-			"attr"		: "ehrs",
+			"attr"		: "ehrsx",
 			"dist_route"	: 24.5,
 			"date_start"	: "2011-08-03",
 			"date_end"	: "2011-08-03",
@@ -225,7 +226,8 @@ function init_routes()
 			"complete"	: 100,
 			"latitude"	: 54.188959,
 			"longitude"	: -2.333221,
-			"zoom"		: 12
+			"zoom"		: 12,
+			"custom"	: "peaks"
 		},
 
 		// Incomplete routes
