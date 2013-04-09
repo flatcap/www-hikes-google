@@ -341,15 +341,16 @@ function show_route (route)
 		}
 	}
 
-	if ((kml["extra"] == true) && attr.contains ('x')) {
+	if (attr.contains ('x') && ("custom" in route_list[route])) {
 		var list = route_list[route].custom.split(',');
-		for (var i = 0; i < list.length; i++) {
-			show_kml (route, list[i]);
-		}
-	} else {
-		var list = route_list[route].custom.split(',');
-		for (var i = 0; i < list.length; i++) {
-			hide_kml (route, list[i]);
+		if (kml["extra"] == true) {
+			for (var i = 0; i < list.length; i++) {
+				show_kml (route, list[i]);
+			}
+		} else {
+			for (var i = 0; i < list.length; i++) {
+				hide_kml (route, list[i]);
+			}
 		}
 	}
 
