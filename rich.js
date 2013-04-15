@@ -290,7 +290,7 @@ function show_route (route)
 	}
 
 	var attr  = route_list[route].attr;
-	var hill  = !("dist_route" in route_list[route]);
+	var hill  = !(("dist_route" in route_list[route]) && (route_list[route].dist_route > 0));
 	var extra = (!hill) || (kml["extra"] == true);
 	var hike  = false;
 	var todo  = false;
