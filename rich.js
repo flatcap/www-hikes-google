@@ -45,7 +45,7 @@ var kml = new Array();		// Display:
 	kml["area"]    = true;		// Region of hill set
 	kml["start"]   = true;		// Marker showing start of route
 	kml["end"]     = false;		// Marker showing end of route
-	kml["extra"]   = true;		// Custom data for route
+	kml["extra"]   = false;		// Custom data for route
 
 var url_base = "web/";			// Directory containing kml data
 
