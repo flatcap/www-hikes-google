@@ -147,7 +147,7 @@ function main()
 		$info->percentage = 0;
 	}
 
-	$info->date_seen = valid_date ($dat);
+	$info->date_seen = valid_date ($date_seen);
 
 	if ($date_route !== false) {
 		if (!empty ($date_route))
@@ -164,6 +164,14 @@ function main()
 	if ($message !== false) {
 		$info->message = $message;
 	}
+
+	if (!isset ($info->date_bed))   $info->date_bed   = "";
+	if (!isset ($info->latitude))   $info->latitude   = "";
+	if (!isset ($info->longitude))  $info->longitude  = "";
+	if (!isset ($info->message))    $info->message    = "";
+	if (!isset ($info->route))      $info->route      = "";
+	if (!isset ($info->date_route)) $info->date_route = "";
+	if (!isset ($info->percentage)) $info->percentage = "";
 
 	printf ("<pre>\n");
 	printf ("bed   = %s\n",      $info->date_bed);
