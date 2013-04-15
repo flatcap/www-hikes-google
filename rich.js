@@ -469,13 +469,15 @@ function dd_init()
 	var h_html = "";
 
 	for (var r in route_list) {
-		if ("dist_route" in route_list[r]) {
-			if (("complete" in route_list[r]) && (route_list[r].complete == 100)) {
-				c.push ({ key: r, fullname: route_list[r].fullname });
-			} else if ("date_start" in route_list[r]) {
-				i.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
-			} else {
-				u.push ({ key: r, fullname: route_list[r].fullname });
+		if (("dist_route" in route_list[r]) && (route_list[r].dist_route > 0)) {
+			if ("complete" in route_list[r]) {
+				if (route_list[r].complete == 100) {
+					c.push ({ key: r, fullname: route_list[r].fullname });
+				} else if (route_list[r].complete > 0) {
+					i.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
+				} else {
+					u.push ({ key: r, fullname: route_list[r].fullname });
+				}
 			}
 		} else {
 			h.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
