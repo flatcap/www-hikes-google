@@ -143,6 +143,8 @@ function main()
 		if (!get_waypoint ($info->route, $wp, $info->latitude, $info->longitude, $info->percentage)) {
 			$wp = "invalid";
 		}
+	} else {
+		$info->percentage = 0;
 	}
 
 	$info->date_seen = valid_date ($dat);
