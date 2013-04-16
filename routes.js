@@ -971,8 +971,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"mull.of.galloway.trail" : {
-			"fullname"	: "Mull Of Galloway Trail",
-			"name"		: "Mull Of Galloway Trail",
+			"fullname"	: "Mull of Galloway Trail",
+			"name"		: "Mull of Galloway Trail",
 			"attr"		: "ers",
 			"dist_route"	: 36,
 			"date_start"	: "",
@@ -1770,7 +1770,7 @@ function init_routes()
 			"custom"	: ""
 		},
 		"three.ridings" : {
-			"fullname"	: "Three Ridings On Foot",
+			"fullname"	: "Three Ridings on Foot",
 			"name"		: "Three Ridings",
 			"attr"		: "ers",
 			"dist_route"	: 444,
