@@ -22,7 +22,7 @@ function valid_route ($route)
 	if (empty ($route))
 		return true;
 
-	$path = "web";
+	$path = "routes";
 	$filename = "$path/$route/route.xml";
 
 	return file_exists ($filename);
@@ -43,7 +43,7 @@ function get_waypoint ($route, $wp, &$latitude, &$longitude, &$percentage)
 	$retval = 0;
 	$percentage = -1;
 
-	$path = "web";
+	$path = "routes";
 	$route = "$path/$route/route.xml";
 	$wp = "WP$wp";
 

@@ -47,7 +47,7 @@ var kml = new Array();		// Display:
 	kml["end"]     = false;		// Marker showing end of route
 	kml["extra"]   = false;		// Custom data for route
 
-var url_base = "web/";			// Directory containing kml data
+var url_base = "routes/";			// Directory containing kml data
 
 /**
  * String.contains - Does the string contain this character
