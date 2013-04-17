@@ -3,6 +3,22 @@
 $filename = "rich.json";
 $log_file = "data.log";
 
+function decode_dashed (&$coord)
+{
+	$pos = strpos ($coord, "'");
+	if ($pos === false) {
+		return;
+	}
+
+	$whole = substr ($coord, 0, $pos);
+	$fract = substr ($coord, $pos+1);
+	if ($whole < 0) {
+		$fract *= -1;
+	}
+
+	$coord = $whole + ($fract / 60);
+}
+
 function valid_coords ($latitude, $longitude)
 {
 	// bounds of UK
@@ -129,6 +145,9 @@ function main()
 	$message    = get_url_variable ("msg");
 	$route      = get_url_variable ("route");
 	$wp         = get_url_variable ("wp");
+
+	decode_dashed ($latitude);
+	decode_dashed ($longitude);
 
 	if (valid_coords ($latitude, $longitude)) {
 		$info->latitude  = $latitude;
