@@ -17,7 +17,7 @@
 		<script type="text/javascript" src="analytics.js"></script>
 	</head>
 	<body onload="initialise()">
-		<div id="canvas"></div>
+		<div class="fixed"><div id="canvas"></div></div>
 		<div id="user">
 			<h1>Rich's Routes</h1>
 			<form action="">
@@ -31,14 +31,14 @@
 				<input onclick="on_global(this.id)" id="global_clear"  value="Clear All"  type="button" />
 				<hr />
 				<h2>Display:</h2>
-				<div class="left">
+				<div class="columns">
 					<label><img src="green.png"  alt="green"  height="20" width="20" /> <input id="kml_hike"    onchange="on_kml(this.id)" type="checkbox" />Hikes           </label><br />
 					<label><img src="blue.png"   alt="blue"   height="20" width="20" /> <input id="kml_ferry"   onchange="on_kml(this.id)" type="checkbox" />River crossings </label><br />
 					<label><img src="red.png"    alt="red"    height="20" width="20" /> <input id="kml_todo"    onchange="on_kml(this.id)" type="checkbox" />To Do           </label><br />
 					<label><img src="yellow.png" alt="yellow" height="20" width="20" /> <input id="kml_variant" onchange="on_kml(this.id)" type="checkbox" />Alternate routes</label><br />
 					<label><img src="purple.png" alt="purple" height="20" width="20" /> <input id="kml_route"   onchange="on_kml(this.id)" type="checkbox" />Not started     </label><br />
 				</div>
-				<div class="right">
+				<div class="columns">
 					<label><img src="tent.png"   alt="tent"   height="20" width="20" /> <input id="kml_camp"    onchange="on_kml(this.id)" type="checkbox" />Camp sites      </label><br />
 					<label><img src="area.png"   alt="area"   height="20" width="20" /> <input id="kml_area"    onchange="on_kml(this.id)" type="checkbox" />Areas           </label><br />
 					<label><img src="start.png"  alt="start"  height="20" width="20" /> <input id="kml_start"   onchange="on_kml(this.id)" type="checkbox" />Start of route  </label><br />
@@ -46,14 +46,14 @@
 					<label><img src="extra.png"  alt="extra"  height="20" width="20" /> <input id="kml_extra"   onchange="on_kml(this.id)" type="checkbox" />Extras          </label><br />
 				</div>
 				<hr />
-				<div class="left">
+				<div class="columns">
 					<h2>Options:</h2>
 					<label><input id="opt_one"  onchange="on_opt(this.id)" type="checkbox" />One route at a time</label><br />
 					<label><input id="opt_zoom" onchange="on_opt(this.id)" type="checkbox" />Zoom in on route   </label><br />
 					<label><input id="opt_rich" onchange="on_opt(this.id)" type="checkbox" />Where's Rich?      </label><br />
 					<br />
 				</div>
-				<div class="right">
+				<div class="columns">
 					<h2>Show:</h2>
 					<label><input id="show_comp" onchange="on_show(this.id)" type="checkbox" />Completed Hikes </label><br />
 					<label><input id="show_inco" onchange="on_show(this.id)" type="checkbox" />Incomplete Hikes</label><br />
