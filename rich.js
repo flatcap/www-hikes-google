@@ -260,7 +260,7 @@ function show_rich()
 		}
 
 		// Display infoWindow immediately
-		geo.options.infoWindow.open (map, marker_rich);
+		map_marker_display();
 	} else {
 		marker_rich.setMap (null);
 	}
@@ -576,6 +576,8 @@ function dd_select (route)
 
 /**
  * create_message - Create the popup message
+ *
+ * Create the "Where's Rich" popup message
  */
 function create_message()
 {
@@ -638,6 +640,19 @@ function create_message()
 }
 
 /**
+ * map_marker_display - Show the popup message
+ *
+ * Display the "Where's Rich" popup message.
+ */
+function map_marker_display()
+{
+	var message = create_message();
+
+	geo.options.infoWindow.setContent (message);
+	geo.options.infoWindow.open (map, marker_rich);
+}
+
+/**
  * map_create_rich - Create a Google.maps.Marker
  *
  * Create a marker to show Rich's location.
@@ -646,19 +661,14 @@ function create_message()
 function map_create_rich()
 {
 	// rich_info is from rich.json
-	var marker = new google.maps.Marker({
+	marker = new google.maps.Marker({
 		position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
 		map: map,
 		icon: 'rich.png',
 		title: "Where's Rich?"
 	});
 
-	google.maps.event.addListener(marker, 'click', function() {
-		var message = create_message();
-
-		geo.options.infoWindow.setContent (message);
-		geo.options.infoWindow.open (map, marker);
-	});
+	google.maps.event.addListener(marker, 'click', map_marker_display);
 
 	return marker;
 }
