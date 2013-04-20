@@ -69,6 +69,23 @@ function init_routes()
 			"zoom"		: 10,
 			"custom"	: ""
 		},
+		"berwick.coast" : {
+			"fullname"	: "Berwickshire Coastal Path",
+			"name"		: "Berwick Coast",
+			"attr"		: "ers",
+			"dist_route"	: 29,
+			"date_start"	: "",
+			"date_end"	: "",
+			"days_walked"	: 0,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 0,
+			"complete"	: 0,
+			"latitude"	: 55.866667,
+			"longitude"	: -2.166667,
+			"zoom"		: 11,
+			"custom"	: ""
+		},
 		"calderdale.way" : {
 			"fullname"	: "Calderdale Way",
 			"name"		: "Calderdale Way",
