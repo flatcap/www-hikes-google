@@ -254,13 +254,13 @@ function show_rich()
 			// XXX enable correct options and select it in the dropdown
 			map_zoom_route (rich_info.route);
 			dd_select (rich_info.route);
+
+			// Display infoWindow immediately
+			map_marker_display();
 		} else {
 			// otherwise zoom to current location
 			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
 		}
-
-		// Display infoWindow immediately
-		map_marker_display();
 	} else {
 		marker_rich.setMap (null);
 	}
