@@ -18,6 +18,23 @@ function init_routes()
 			"zoom"		: 11,
 			"custom"	: ""
 		},
+		"annandale.way" : {
+			"fullname"	: "Annandale Way",
+			"name"		: "Annandale Way",
+			"attr"		: "ers",
+			"dist_route"	: 53,
+			"date_start"	: "",
+			"date_end"	: "",
+			"days_walked"	: 0,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 0,
+			"complete"	: 0,
+			"latitude"	: 55.160880,
+			"longitude"	: -3.305511,
+			"zoom"		: 11,
+			"custom"	: ""
+		},
 		"arden.way" : {
 			"fullname"	: "Arden Way",
 			"name"		: "Arden Way",
