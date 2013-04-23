@@ -32,7 +32,7 @@ function init_routes()
 			"complete"	: 0,
 			"latitude"	: 55.160880,
 			"longitude"	: -3.305511,
-			"zoom"		: 11,
+			"zoom"		: 10,
 			"custom"	: ""
 		},
 		"arden.way" : {
