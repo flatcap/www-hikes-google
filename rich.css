@@ -4,7 +4,11 @@ html, body, #canvas {
 	height: 100%;
 }
 
-#canvas {
+div.fixed {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
 	width: 70%;
 	border-right: 2px solid black;
 	float: left;
@@ -14,6 +18,7 @@ div#user {
 	padding: 0 0 0 0;
 	float: left;
 	width: 28%;
+	padding-left: 71%;
 }
 
 body {
@@ -45,14 +50,9 @@ label {
 	user-select: none;
 }
 
-div.left {
+div.columns {
 	float: left;
-	width: 50%;
 	vertical-align: top;
-}
-
-div.right {
-	margin-left: 50%;
 }
 
 label {
@@ -61,18 +61,16 @@ label {
 	padding-left: 1em;
 }
 
-div#options {
-	position: fixed;
-	bottom: 1em;
-	width: 30%;
-}
-
 form, select {
-	width: 100%;
+	width: 99%;
 }
 
 span.subtle {
 	font-size: 75%;
 	color: #888;
+}
+
+hr {
+	clear: both;
 }
 
