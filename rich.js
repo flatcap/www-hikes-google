@@ -767,7 +767,7 @@ function map_zoom_route (route)
 	if (lat && lon && zoom) {
 		map_zoom_ll (lat, lon, zoom);
 	} else {
-		map_zoom_ll (54.699234, -4.943848, 6);	// UK
+		map_zoom_ll (54.699234, -3.143848, 6);	// UK
 	}
 }
 

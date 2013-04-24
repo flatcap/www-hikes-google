@@ -1769,23 +1769,6 @@ function init_routes()
 			"zoom"		: 9,
 			"custom"	: ""
 		},
-		"thames.path.south.east" : {
-			"fullname"	: "Thames Path South East Extension",
-			"name"		: "Thames Path South East",
-			"attr"		: "ers",
-			"dist_route"	: 11,
-			"date_start"	: "",
-			"date_end"	: "",
-			"days_walked"	: 0,
-			"days_camped"	: 0,
-			"days_other"	: 0,
-			"dist_walked"	: 0,
-			"complete"	: 0,
-			"latitude"	: 51.492500,
-			"longitude"	: 0.120850,
-			"zoom"		: 12,
-			"custom"	: ""
-		},
 		"thanet.coast" : {
 			"fullname"	: "Thanet Coastal Path",
 			"name"		: "Thanet Coast",
