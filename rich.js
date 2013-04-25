@@ -251,8 +251,10 @@ function show_rich()
 			show_route (rich_info.route);
 
 			// If on a route, zoom to display it
+			if (opt_zoom) {
+				map_zoom_route (rich_info.route);
+			}
 			// XXX enable correct options and select it in the dropdown
-			map_zoom_route (rich_info.route);
 			dd_select (rich_info.route);
 
 			// Display infoWindow immediately
@@ -708,6 +710,13 @@ function map_init()
 			geo.options.infoWindow.close();
 		}
 	}
+
+	google.maps.event.addListener(map, 'click', function(event) {
+		var c = document.getElementById ("coords");
+		var lat = event.latLng.lat().toFixed(6);
+		var lon = event.latLng.lng().toFixed(6);
+		c.innerHTML = lat + "," + lon + " (" + map.getZoom() + ")";
+	});
 
 	return map;
 }
