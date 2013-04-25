@@ -1993,7 +1993,7 @@ function init_routes()
 		"wey.navigation" : {
 			"fullname"	: "Wey Navigation",
 			"name"		: "Wey Navigation",
-			"attr"		: "ehrst",
+			"attr"		: "ehrstv",
 			"dist_route"	: 19,
 			"date_start"	: "2013-02-08",
 			"date_end"	: "",
@@ -2005,23 +2005,6 @@ function init_routes()
 			"latitude"	: 51.282535,
 			"longitude"	: -0.534897,
 			"zoom"		: 11,
-			"custom"	: ""
-		},
-		"wey.south" : {
-			"fullname"	: "Wey South Path",
-			"name"		: "Wey South",
-			"attr"		: "ers",
-			"dist_route"	: 34,
-			"date_start"	: "",
-			"date_end"	: "",
-			"days_walked"	: 0,
-			"days_camped"	: 0,
-			"days_other"	: 0,
-			"dist_walked"	: 0,
-			"complete"	: 0,
-			"latitude"	: 51.072468,
-			"longitude"	: -0.535583,
-			"zoom"		: 10,
 			"custom"	: ""
 		},
 		"white.cliffs" : {
