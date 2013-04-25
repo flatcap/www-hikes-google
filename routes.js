@@ -631,8 +631,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"glyndwrs.way" : {
-			"fullname"	: "Glyndwrs Way &mdash; National Trail",
-			"name"		: "Glyndwrs Way",
+			"fullname"	: "Glyndwr's Way &mdash; National Trail",
+			"name"		: "Glyndwr's Way",
 			"attr"		: "ers",
 			"dist_route"	: 137,
 			"date_start"	: "",
@@ -716,8 +716,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"hadrians.coast" : {
-			"fullname"	: "Hadrians Coastal Route",
-			"name"		: "Hadrians Coast",
+			"fullname"	: "Hadrian's Coastal Route",
+			"name"		: "Hadrian's Coast",
 			"attr"		: "ers",
 			"dist_route"	: 78,
 			"date_start"	: "",
@@ -733,8 +733,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"hadrians.wall" : {
-			"fullname"	: "Hadrians Wall Path &mdash; National Trail",
-			"name"		: "Hadrians Wall",
+			"fullname"	: "Hadrian's Wall Path &mdash; National Trail",
+			"name"		: "Hadrian's Wall",
 			"attr"		: "ehrst",
 			"dist_route"	: 86,
 			"date_start"	: "2012-10-14",
@@ -801,8 +801,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"isaacs.tea.trail" : {
-			"fullname"	: "Isaacs Tea Trail",
-			"name"		: "Isaacs Tea Trail",
+			"fullname"	: "Isaac's Tea Trail",
+			"name"		: "Isaac's Tea Trail",
 			"attr"		: "ers",
 			"dist_route"	: 37,
 			"date_start"	: "",
@@ -988,8 +988,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"monarchs.way" : {
-			"fullname"	: "Monarchs Way",
-			"name"		: "Monarchs Way",
+			"fullname"	: "Monarch's Way",
+			"name"		: "Monarch's Way",
 			"attr"		: "ers",
 			"dist_route"	: 565,
 			"date_start"	: "",
@@ -1107,8 +1107,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"offas.dyke" : {
-			"fullname"	: "Offas Dyke Path &mdash; National Trail",
-			"name"		: "Offas Dyke",
+			"fullname"	: "Offa's Dyke Path &mdash; National Trail",
+			"name"		: "Offa's Dyke",
 			"attr"		: "ers",
 			"dist_route"	: 178,
 			"date_start"	: "",
@@ -1260,8 +1260,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"pilgrims.way" : {
-			"fullname"	: "Pilgrims Way",
-			"name"		: "Pilgrims Way",
+			"fullname"	: "Pilgrim's Way",
+			"name"		: "Pilgrim's Way",
 			"attr"		: "cehrst",
 			"dist_route"	: 132,
 			"date_start"	: "2013-02-04",
@@ -1566,8 +1566,8 @@ function init_routes()
 			"custom"	: ""
 		},
 		"st.cuthberts" : {
-			"fullname"	: "St Cuthberts Way",
-			"name"		: "St Cuthberts Way",
+			"fullname"	: "St Cuthbert's Way",
+			"name"		: "St Cuthbert's Way",
 			"attr"		: "ers",
 			"dist_route"	: 64,
 			"date_start"	: "",
