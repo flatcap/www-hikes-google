@@ -706,34 +706,44 @@ function map_init()
 	// Escape will close the infoWindow
 	document.onkeydown = function(e) {
 		e = window.event || e;
-		e.preventDefault();
 		switch (e.keyCode) {
 			case 27:	// Escape
 				geo.options.infoWindow.close();
+				e.preventDefault();
 				break;
 			case 61:	// +
 			case 107:	// KP+
 				map.setZoom(map.getZoom()+1);
+				e.preventDefault();
 				break;
 			case 173:	// -
 			case 109:	// KP-
 				map.setZoom(map.getZoom()-1);
+				e.preventDefault();
 				break;
 			case 37:	// Left arrow
 				map.panBy(-100,0);
+				e.preventDefault();
 				break;
 			case 38:	// Up arrow
 				map.panBy(0,-100);
+				e.preventDefault();
 				break;
 			case 39:	// Right arrow
 				map.panBy(100,0);
+				e.preventDefault();
 				break;
 			case 40:	// Down arrow
 				map.panBy(0,100);
+				e.preventDefault();
 				break;
+			/*
+			default:
+				var c = document.getElementById ("coords");
+				c.innerHTML = e.keyCode;
+				break;
+			*/
 		}
-		//var c = document.getElementById ("coords");
-		//c.innerHTML = e.keyCode;
 	}
 
 	google.maps.event.addListener(map, 'click', function(event) {

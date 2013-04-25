@@ -1837,7 +1837,7 @@ function init_routes()
 			"zoom"		: 13,
 			"custom"	: ""
 		},
-		"trans-pennine" : {
+		"trans.pennine" : {
 			"fullname"	: "Trans-Pennine Trail",
 			"name"		: "Trans-Pennine",
 			"attr"		: "ers",
