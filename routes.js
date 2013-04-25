@@ -1412,9 +1412,9 @@ function init_routes()
 			"zoom"		: 8,
 			"custom"	: ""
 		},
-		"shakespeare.way" : {
-			"fullname"	: "Shakespeare Way",
-			"name"		: "Shakespeare Way",
+		"shakespeares.way" : {
+			"fullname"	: "Shakespeare's Way",
+			"name"		: "Shakespeare's Way",
 			"attr"		: "ers",
 			"dist_route"	: 129,
 			"date_start"	: "",
@@ -1990,9 +1990,9 @@ function init_routes()
 			"zoom"		: 11,
 			"custom"	: ""
 		},
-		"wey.navigation" : {
-			"fullname"	: "Wey Navigation",
-			"name"		: "Wey Navigation",
+		"wey.navigations" : {
+			"fullname"	: "Wey Navigations",
+			"name"		: "Wey Navigations",
 			"attr"		: "ehrstv",
 			"dist_route"	: 19,
 			"date_start"	: "2013-02-08",
