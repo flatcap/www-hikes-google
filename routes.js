@@ -472,8 +472,8 @@ function init_routes()
 			"days_other"	: 4,
 			"dist_walked"	: 721,
 			"complete"	: 82,
-			"latitude"	: 53.225768,
-			"longitude"	: -0.681152,
+			"latitude"	: 54.699234,
+			"longitude"	: -4.943848,
 			"zoom"		: 6,
 			"custom"	: ""
 		},
