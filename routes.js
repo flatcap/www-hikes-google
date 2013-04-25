@@ -2002,9 +2002,9 @@ function init_routes()
 			"days_other"	: 0,
 			"dist_walked"	: 17,
 			"complete"	: 89,
-			"latitude"	: 51.162983,
-			"longitude"	: -0.531464,
-			"zoom"		: 10,
+			"latitude"	: 51.282535,
+			"longitude"	: -0.534897,
+			"zoom"		: 11,
 			"custom"	: ""
 		},
 		"white.cliffs" : {

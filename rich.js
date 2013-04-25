@@ -251,10 +251,8 @@ function show_rich()
 			show_route (rich_info.route);
 
 			// If on a route, zoom to display it
-			if (opt_zoom) {
-				map_zoom_route (rich_info.route);
-			}
 			// XXX enable correct options and select it in the dropdown
+			map_zoom_route (rich_info.route);
 			dd_select (rich_info.route);
 
 			// Display infoWindow immediately
@@ -704,54 +702,12 @@ function map_init()
 	});
 
 	// Escape will close the infoWindow
-	document.onkeydown = function(e) {
+	document.onkeyup = function(e) {
 		e = window.event || e;
-		switch (e.keyCode) {
-			case 27:	// Escape
-				geo.options.infoWindow.close();
-				e.preventDefault();
-				break;
-			case 61:	// +
-			case 107:	// KP+
-				map.setZoom(map.getZoom()+1);
-				e.preventDefault();
-				break;
-			case 173:	// -
-			case 109:	// KP-
-				map.setZoom(map.getZoom()-1);
-				e.preventDefault();
-				break;
-			case 37:	// Left arrow
-				map.panBy(-100,0);
-				e.preventDefault();
-				break;
-			case 38:	// Up arrow
-				map.panBy(0,-100);
-				e.preventDefault();
-				break;
-			case 39:	// Right arrow
-				map.panBy(100,0);
-				e.preventDefault();
-				break;
-			case 40:	// Down arrow
-				map.panBy(0,100);
-				e.preventDefault();
-				break;
-			/*
-			default:
-				var c = document.getElementById ("coords");
-				c.innerHTML = e.keyCode;
-				break;
-			*/
+		if (e.keyCode == 27) {
+			geo.options.infoWindow.close();
 		}
 	}
-
-	google.maps.event.addListener(map, 'click', function(event) {
-		var c = document.getElementById ("coords");
-		var lat = event.latLng.lat().toFixed(6);
-		var lon = event.latLng.lng().toFixed(6);
-		c.innerHTML = lat + "," + lon + " (" + map.getZoom() + ")";
-	});
 
 	return map;
 }
