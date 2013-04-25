@@ -1208,9 +1208,9 @@ function init_routes()
 			"zoom"		: 9,
 			"custom"	: ""
 		},
-		"pembrokshire.coast" : {
-			"fullname"	: "Pembrokshire Coast Path &mdash; National Trail",
-			"name"		: "Pembrokshire Coast",
+		"pembrokeshire.coast" : {
+			"fullname"	: "Pembrokeshire Coast Path &mdash; National Trail",
+			"name"		: "Pembrokeshire Coast",
 			"attr"		: "ers",
 			"dist_route"	: 182,
 			"date_start"	: "",
