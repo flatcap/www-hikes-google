@@ -2041,23 +2041,6 @@ function init_routes()
 			"zoom"		: 11,
 			"custom"	: ""
 		},
-		"wychwood.way" : {
-			"fullname"	: "Wychwood Way",
-			"name"		: "Wychwood Way",
-			"attr"		: "ers",
-			"dist_route"	: 40,
-			"date_start"	: "",
-			"date_end"	: "",
-			"days_walked"	: 0,
-			"days_camped"	: 0,
-			"days_other"	: 0,
-			"dist_walked"	: 0,
-			"complete"	: 0,
-			"latitude"	: 52.140231,
-			"longitude"	: -2.048950,
-			"zoom"		: 11,
-			"custom"	: ""
-		},
 		"wysis.way" : {
 			"fullname"	: "Wysis Way",
 			"name"		: "Wysis Way",
