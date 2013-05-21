@@ -851,6 +851,43 @@ function init_routes()
 			"zoom"		: 11,
 			"custom"	: ""
 		},
+
+		"join.1" : {
+			"fullname"	: "Join up 1",
+			"name"		: "Join 1",
+			"attr"		: "cehrs",
+			"dist_route"	: 61,
+			"date_start"	: "2013-05-01",
+			"date_end"	: "2013-05-04",
+			"days_walked"	: 4,
+			"days_camped"	: 3,
+			"days_other"	: 0,
+			"dist_walked"	: 61,
+			"complete"	: 100,
+			"latitude"	: 51.346054,
+			"longitude"	: -2.923737,
+			"zoom"		: 10,
+			"custom"	: ""
+		},
+
+		"join.2" : {
+			"fullname"	: "Join up 2",
+			"name"		: "Join 2",
+			"attr"		: "ehrs",
+			"dist_route"	: 5,
+			"date_start"	: "2013-05-07",
+			"date_end"	: "2013-05-07",
+			"days_walked"	: 1,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 5,
+			"complete"	: 100,
+			"latitude"	: 51.621747,
+			"longitude"	: -2.654057,
+			"zoom"		: 13,
+			"custom"	: ""
+		},
+
 		"kent.coast" : {
 			"fullname"	: "Kent Coast Path",
 			"name"		: "Kent Coast",
