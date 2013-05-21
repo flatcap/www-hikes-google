@@ -966,16 +966,34 @@ function on_show (id)
 	var dd = dd_populate();
 
 	for (var r in route_list) {
-		if (!show_comp && ("complete" in route_list[r]) && (route_list[r].complete == 100)) {
+		var complete = 0;
+		var dist_route = 0;
+		var route = false;
+		var attr = route_list[r].attr;
+
+		if ("complete" in route_list[r]) {
+			complete = route_list[r].complete;
+		}
+		if ("dist_route" in route_list[r]) {
+			dist_route = route_list[r].dist_route;
+		}
+		if (attr.contains ('r')) {
+			route = true;
+		}
+
+		if (!show_comp && route && (complete == 100)) {
 			hide_route (r);
 		}
-		if (!show_inco && ("complete" in route_list[r]) && (route_list[r].complete < 100)) {
+		if (!show_inco && route && (complete < 100)) {
 			hide_route (r);
 		}
-		if (!show_unst && !("date_start" in route_list[r])) {
+		if (!show_unst && route && (complete == 0)) {
 			hide_route (r);
 		}
-		if (!show_hill) {
+		if (!show_join && !route && (complete == 100) && (dist_route > 0)) {
+			hide_route (r);
+		}
+		if (!show_hill && !route && (dist_route == 0)) {
 			hide_route (r);
 		}
 	}
