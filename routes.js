@@ -853,9 +853,9 @@ function init_routes()
 		},
 
 		"join.1" : {
-			"fullname"	: "Join up 1",
-			"name"		: "Join 1",
-			"attr"		: "cehrs",
+			"fullname"	: "Bridgwater to Avonmouth",
+			"name"		: "Bridgwater to Avonmouth",
+			"attr"		: "cehs",
 			"dist_route"	: 61,
 			"date_start"	: "2013-05-01",
 			"date_end"	: "2013-05-04",
@@ -871,9 +871,9 @@ function init_routes()
 		},
 
 		"join.2" : {
-			"fullname"	: "Join up 2",
-			"name"		: "Join 2",
-			"attr"		: "ehrs",
+			"fullname"	: "Aust to Chepstow",
+			"name"		: "Aust to Chepstow",
+			"attr"		: "ehs",
 			"dist_route"	: 5,
 			"date_start"	: "2013-05-07",
 			"date_end"	: "2013-05-07",

@@ -28,12 +28,14 @@ var show_comp   = true;		// Completed routes
 var show_inco   = true;		// Incomplete routes
 var show_unst   = false;	// Unstarted routes
 var show_hill   = true;		// Sets of hills
+var show_join   = true;		// Non-route joins
 
 var show_html = new Array();	// Keep the select HTML to rebuild the dropdown
 	show_html["comp"] = "";		// Completed routes
 	show_html["inco"] = "";		// Incomplete routes
 	show_html["unst"] = "";		// Unstarted routes
 	show_html["hill"] = "";		// Sets of hills
+	show_join["join"] = "";		// Non-route joins
 
 var kml = new Array();		// Display:
 	kml["hike"]    = true;		// Hikes or Climbed hills
@@ -47,7 +49,7 @@ var kml = new Array();		// Display:
 	kml["end"]     = false;		// Marker showing end of route
 	kml["extra"]   = false;		// Custom data for route
 
-var url_base = "routes/";			// Directory containing kml data
+var url_base = "routes/";	// Directory containing kml data
 
 /**
  * String.contains - Does the string contain this character
@@ -157,6 +159,7 @@ function init_options()
 	document.getElementById ("show_inco")	.checked = show_inco;
 	document.getElementById ("show_unst")	.checked = show_unst;
 	document.getElementById ("show_hill")	.checked = show_hill;
+	document.getElementById ("show_join")	.checked = show_join;
 }
 
 
@@ -464,17 +467,24 @@ function dd_init()
 	var i = new Array();
 	var u = new Array();
 	var h = new Array();
+	var j = new Array();
 
 	var c_html = "";
 	var i_html = "";
 	var u_html = "";
 	var h_html = "";
+	var j_html = "";
 
 	for (var r in route_list) {
 		if (("dist_route" in route_list[r]) && (route_list[r].dist_route > 0)) {
 			if ("complete" in route_list[r]) {
 				if (route_list[r].complete == 100) {
-					c.push ({ key: r, fullname: route_list[r].fullname });
+					var attr = route_list[r].attr;
+					if (attr.contains ('r')) {
+						c.push ({ key: r, fullname: route_list[r].fullname });
+					} else {
+						j.push ({ key: r, fullname: route_list[r].fullname });
+					}
 				} else if (route_list[r].complete > 0) {
 					i.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });
 				} else {
@@ -490,43 +500,53 @@ function dd_init()
 	i.sort(route_sort);
 	u.sort(route_sort);
 	h.sort(route_sort);
+	j.sort(route_sort);
 
 	if (c.length) {
 		c_html += '<optgroup id="complete" label="Complete">';
-		for (var j = 0; j < c.length; j++) {
-			c_html += '<option value="' + c[j].key +'">' + c[j].fullname + '</option>';
+		for (var x = 0; x < c.length; x++) {
+			c_html += '<option value="' + c[x].key +'">' + c[x].fullname + '</option>';
 		}
 		c_html += '</optgroup>';
 	}
 
 	if (i.length) {
 		i_html += '<optgroup id="incomplete" label="Incomplete">';
-		for (var j = 0; j < i.length; j++) {
-			i_html += '<option value="' + i[j].key +'">' + i[j].fullname + '</option>';
+		for (var x = 0; x < i.length; x++) {
+			i_html += '<option value="' + i[x].key +'">' + i[x].fullname + '</option>';
 		}
 		i_html += '</optgroup>';
 	}
 
 	if (u.length) {
 		u_html += '<optgroup id="unstarted" label="Unstarted">';
-		for (var j = 0; j < u.length; j++) {
-			u_html += '<option value="' + u[j].key +'">' + u[j].fullname + '</option>';
+		for (var x = 0; x < u.length; x++) {
+			u_html += '<option value="' + u[x].key +'">' + u[x].fullname + '</option>';
 		}
 		u_html += '</optgroup>';
 	}
 
 	if (h.length) {
 		h_html += '<optgroup id="hills" label="Hills">';
-		for (var j = 0; j < h.length; j++) {
-			h_html += '<option value="' + h[j].key +'">' + h[j].fullname + '</option>';
+		for (var x = 0; x < h.length; x++) {
+			h_html += '<option value="' + h[x].key +'">' + h[x].fullname + '</option>';
 		}
 		h_html += '</optgroup>';
+	}
+
+	if (j.length) {
+		j_html += '<optgroup id="join" label="Join Ups">';
+		for (var x = 0; x < j.length; x++) {
+			j_html += '<option value="' + j[x].key +'">' + j[x].fullname + '</option>';
+		}
+		j_html += '</optgroup>';
 	}
 
 	show_html["comp"] = c_html;
 	show_html["inco"] = i_html;
 	show_html["unst"] = u_html;
 	show_html["hill"] = h_html;
+	show_html["join"] = j_html;
 
 	return dd_populate();
 }
@@ -549,6 +569,7 @@ function dd_populate()
 	if (show_inco) html += show_html["inco"];
 	if (show_unst) html += show_html["unst"];
 	if (show_hill) html += show_html["hill"];
+	if (show_join) html += show_html["join"];
 
 	dd.innerHTML = html;
 
@@ -939,6 +960,7 @@ function on_show (id)
 		case 'show_inco': show_inco = !show_inco; break;
 		case 'show_unst': show_unst = !show_unst; break;
 		case 'show_hill': show_hill = !show_hill; break;
+		case 'show_join': show_join = !show_join; break;
 	}
 
 	var dd = dd_populate();
