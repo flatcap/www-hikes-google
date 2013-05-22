@@ -158,8 +158,11 @@ function main()
 		$info->route = $route;
 	}
 
+	$info->wp = "";
 	if ($wp !== false) {
-		if (!get_waypoint ($info->route, $wp, $info->latitude, $info->longitude, $info->percentage)) {
+		if (get_waypoint ($info->route, $wp, $info->latitude, $info->longitude, $info->percentage)) {
+			$info->wp = $wp;
+		} else {
 			$wp = "invalid";
 		}
 	} else {
