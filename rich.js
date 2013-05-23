@@ -59,7 +59,7 @@ var url_base = "routes/";	// Directory containing kml data
  * Extend the String class with a "contains" method.
  * Search the string for a given character.
  *
- * Return: bool
+ * Return: boolean
  */
 String.prototype.contains = function (key)
 {
@@ -118,9 +118,9 @@ function initialise()
  * Sort helper function.
  * Sort the route_list by fullname.
  *
- * Return:	-1	a precedes b
- *		 0	a identical to b
- *		 1	a follows b
+ * Return: -1	a precedes b
+ *	    0	a identical to b
+ *	    1	a follows b
  */
 function route_sort(a,b)
 {
@@ -169,8 +169,8 @@ function init_options()
  * find_geoxml - Find the geoXML3 document by its url
  * @url: url of kml document
  *
- * Return:	 n	Index in docs array
- *		-1	url doesn't exist
+ * Return:  n	Index in docs array
+ *	   -1	url doesn't exist
  */
 function find_geoxml (url)
 {
@@ -237,11 +237,21 @@ function hide_route (route)
  * Using the data in rich.json, place a marker on the map.
  *
  * rich.json contains:
- *	date:		Date (yyyy-mm-dd), last seen
+ *	date_bed:	Date (yyyy-mm-dd), last slept in a bed
+ *	date_route:	Date (yyyy-mm-dd), started this route
+ *	date_seen:	Date (yyyy-mm-dd), last seen
  *	latitude:	Degrees latitude (decimal)
  *	longitude:	Degrees longitude (decimal)
  *	message:	Message (can contain html)
+ *	percentage:	Current %age completion of this route
  *	route:		Current route
+ *	wp:		Current waypoint
+ *
+ * estimate.json contains:
+ *	wp:		Estimated waypoint
+ *	latitude:	Estimated degrees latitude (decimal)
+ *	longitude:	Estimated degrees longitude (decimal)
+ *	percentage:	Estimated %age completion of this route
  */
 function show_rich()
 {
@@ -721,10 +731,13 @@ function create_message(estimate)
 /**
  * map_marker_display_rich - Show the popup message
  *
- * Display where Rich was last seen.
+ * Display a marker where Rich was last seen.
  */
 function map_marker_display_rich()
 {
+	if (!marker_rich)
+		return;
+
 	var message = create_message(false);
 
 	geo.options.infoWindow.setContent (message);
@@ -734,7 +747,7 @@ function map_marker_display_rich()
 /**
  * map_marker_display_estimate - Show the popup message
  *
- * Display the "Where's Rich" popup message.
+ * Display a marker where Rich is estimated to be.
  */
 function map_marker_display_estimate()
 {
@@ -772,12 +785,7 @@ function map_create_rich()
  * map_create_estimate - Create a Google.maps.Marker
  *
  * Create a marker to show Rich's estimated location.
- *
- * estimate_info.json contains:
- *	wp:		Waypoint number
- *	percentage:	Percentage complete
- *	latitude:	Degrees latitude (decimal)
- *	longitude:	Degrees longitude (decimal)
+ * Data comes from estimate.json (see show_rich() for details).
  */
 function map_create_estimate()
 {
@@ -1001,7 +1009,7 @@ function on_hike (id)
  * @id: ID of checkbox
  *
  * When the user changes a kml display option update the routes
- * shown on the map accordinly.
+ * shown on the map accordingly.
  */
 function on_kml (id)
 {
@@ -1053,6 +1061,7 @@ function on_opt (id)
  *	Incomplete routes
  *	Unstarted routes
  *	Sets of hills
+ *	Join Up routes
  */
 function on_show (id)
 {
