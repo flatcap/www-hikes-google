@@ -687,7 +687,7 @@ function map_create_rich()
 	marker = new google.maps.Marker({
 		position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
 		map: map,
-		icon: 'rich.png',
+		icon: 'r_green.png',
 		title: "Where's Rich?"
 	});
 
