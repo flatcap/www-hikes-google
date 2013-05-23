@@ -38,7 +38,7 @@ function exit_no_estimate()
 		echo "estimate = {"
 		echo "}"
 	} > $ESTIMATE
-	chmod 640 $ESTIMATE
+	chmod 644 $ESTIMATE
 	exit 0
 }
 
@@ -51,7 +51,7 @@ function exit_estimate()
 		echo "    \"longitude\": $E_LON"
 		echo "}"
 	} > $ESTIMATE
-	chmod 640 $ESTIMATE
+	chmod 644 $ESTIMATE
 	exit 0
 }
 
