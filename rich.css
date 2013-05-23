@@ -65,9 +65,21 @@ form, select {
 	width: 99%;
 }
 
-span.subtle {
+span {
 	font-size: 75%;
+	font-weight: normal;
+}
+
+span.subtle {
 	color: #888;
+}
+
+span.estimate {
+	color: #f44;
+}
+
+span.lastseen {
+	color: #0c0;
 }
 
 hr {

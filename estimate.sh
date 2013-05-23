@@ -35,7 +35,7 @@ function date_diff()
 function exit_no_estimate()
 {
 	{
-		echo "estimate = {"
+		echo "estimate_info = {"
 		echo "}"
 	} > $ESTIMATE
 	chmod 644 $ESTIMATE
@@ -45,8 +45,9 @@ function exit_no_estimate()
 function exit_estimate()
 {
 	{
-		echo "estimate = {"
-		echo "    \"wp\": \"$POSN2\","
+		echo "estimate_info = {"
+		echo "    \"wp\": $POSN2,"
+		echo "    \"percentage\": $POSN3,"
 		echo "    \"latitude\": $E_LAT,"
 		echo "    \"longitude\": $E_LON"
 		echo "}"
@@ -117,7 +118,11 @@ POSN2="${POSN2%.*}"
 
 [ "$POSN2" -gt "$NUM_WAYPOINTS" ] && $POSN2=$NUM_WAYPOINTS
 
-verbose "POSN2 = WP$POSN2 estimated WP"
+verbose "POSN2 = WP$POSN2 (ESTIMATED)"
+
+POSN3="$((100*$POSN2/$NUM_WAYPOINTS))"
+
+verbose "POSN3 = $POSN3% (ESTIMATED)"
 
 COORDS=$(grep -w WP$POSN2 $ROUTE_DIR/$ROUTE/$ROUTE_XML)
 

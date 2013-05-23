@@ -23,6 +23,7 @@ var opt_one     = true;		// Only show one route at a time
 var opt_zoom    = true;		// Zoom in to the current route
 var opt_rich    = true;		// Show Rich's location
 var marker_rich = null;		// Google map marker showing Rich's location
+var marker_esti = null;		// ... showing Rich's estimate location
 			// Show list of:
 var show_comp   = true;		// Completed routes
 var show_inco   = true;		// Incomplete routes
@@ -101,6 +102,7 @@ function initialise()
 	});
 
 	marker_rich = map_create_rich();
+	marker_esti = map_create_estimate();
 
 	show_rich();
 
@@ -246,6 +248,7 @@ function show_rich()
 	// rich_info is from rich.json
 	if (opt_rich) {
 		marker_rich.setMap (map);
+		marker_esti.setMap (map);
 
 		if (rich_info.route) {
 			if (opt_one) {
@@ -261,15 +264,15 @@ function show_rich()
 			dd_select (rich_info.route);
 
 			// Display infoWindow immediately
-			map_marker_display();
+			map_marker_display_estimate();
 		} else {
 			// otherwise zoom to current location
 			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
 		}
 	} else {
 		marker_rich.setMap (null);
+		marker_esti.setMap (null);
 	}
-
 }
 
 /**
@@ -602,77 +605,119 @@ function dd_select (route)
  *
  * Create the "Where's Rich" popup message
  */
-function create_message()
+function create_message(estimate)
 {
-	var m = "";
-	var e;
+	var message = "";
+	var elapsed = 0;
 	var today = new Date();
+	var since = null;
 
-	m += '<img style="float: left;" src="flatcap.png">';
-	m += '<div style="margin-left: 70px;">';
-	m += '<h2>Rich</h2>';
+	var latitude   = 0;
+	var longitude  = 0;
+	var percentage = 0;
 
-	m += '<span class="subtle">(last seen ';
-	e = today.diff (rich_info.date_seen);
-	if (e < 1) {
-		m += "today";
-	} else if (e < 2) {
-		m += "yesterday";
-	} else if (e < 8) {
-		m += e + " days ago";
+	if (estimate) {
+		since = today;
 	} else {
-		m += "on " + rich_info.date_seen;
+		since = new Date(rich_info.date_seen);
 	}
-	m += ')</span><br><br>';
+
+	message += '<img style="float: left;" src="flatcap.png">';
+	message += '<div style="margin-left: 70px;">';
+	message += '<h2>Rich';
+
+	if (estimate) {
+		message += ' <span class="estimate">(estimated position)</span>';
+	} else {
+		message += ' <span class="lastseen">(last seen ';
+		elapsed = today.diff (rich_info.date_seen);
+		if (elapsed < 1) {
+			message += "today";
+		} else if (elapsed < 2) {
+			message += "yesterday";
+		} else if (elapsed < 8) {
+			message += elapsed + " days ago";
+		} else {
+			message += "on " + rich_info.date_seen;
+		}
+		message += ')</span>';
+	}
+	message += '<br><br></h2>';
+
+	if (estimate) {
+		percentage = estimate_info.percentage;
+		latitude   = estimate_info.latitude;
+		longitude  = estimate_info.longitude;
+	} else {
+		percentage = rich_info.percentage;
+		latitude   = rich_info.latitude;
+		longitude  = rich_info.longitude;
+	}
 
 	if (rich_info.route) {
 		if (rich_info.date_route) {
-			var d = today.diff (rich_info.date_route) + 1;
-			m += '<b>Day ' + d + '</b> of the <b>' + route_list[rich_info.route].fullname + '</b>';
+			var d = since.diff (rich_info.date_route) + 1;
+			message += '<b>Day ' + d + '</b> of the <b>' + route_list[rich_info.route].fullname + '</b>';
 
-			if (rich_info.percentage) {
-				m += " (~" + rich_info.percentage + "%)";
+			if (percentage) {
+				message += " (" + percentage + "%)";
 			}
 		} else {
-			m += 'Walking the <b>' + route_list[rich_info.route].fullname + '</b>';
+			message += 'Walking the <b>' + route_list[rich_info.route].fullname + '</b>';
 		}
-		m += '<br>';
+		message += '<br>';
 	} else {
-		m += 'Not currently on a route<br>';
+		message += 'Not currently on a route<br>';
 	}
 
-	if (rich_info.latitude && rich_info.longitude) {
-		var lat = parseFloat (rich_info.latitude);
-		var lon = parseFloat (rich_info.longitude);
-		m += '<span class="subtle">lat/long: ' + lat.toFixed(6) + ',' + lon.toFixed(6) + '</span><br>';
+	if (latitude && longitude) {
+		var lat = parseFloat (latitude);
+		var lon = parseFloat (longitude);
+		message += '<span class="subtle">lat/long: ' + lat.toFixed(6) + ',' + lon.toFixed(6) + '</span><br>';
 	}
 
-	m += '<br>';
+	message += '<br>';
 
-	e = today.diff (rich_info.date_bed);
-	if (e > 7) {
-		m += 'Last saw a bed ' + e + ' days ago.<br><br>';
+	elapsed = since.diff (rich_info.date_bed);
+	if (elapsed > 7) {
+		message += 'Last saw a bed ' + elapsed + ' days ago.<br><br>';
 	}
 
 	if (rich_info.message) {
-		m += '<b>&ldquo;' + rich_info.message + '&rdquo;</b>';
+		message += '<b>&ldquo;' + rich_info.message + '&rdquo;</b>';
 	}
 
-	m += '</div>';
-	return m;
+	message += '</div>';
+	return message;
 }
 
 /**
- * map_marker_display - Show the popup message
+ * map_marker_display_rich - Show the popup message
  *
- * Display the "Where's Rich" popup message.
+ * Display where Rich was last seen.
  */
-function map_marker_display()
+function map_marker_display_rich()
 {
-	var message = create_message();
+	var message = create_message(false);
 
 	geo.options.infoWindow.setContent (message);
 	geo.options.infoWindow.open (map, marker_rich);
+}
+
+/**
+ * map_marker_display_estimate - Show the popup message
+ *
+ * Display the "Where's Rich" popup message.
+ */
+function map_marker_display_estimate()
+{
+	if (!marker_esti)
+		return;
+
+	var message = create_message(true);
+
+	geo.options.infoWindow.setContent (message);
+	geo.options.infoWindow.open (map, marker_esti);
 }
 
 /**
@@ -691,7 +736,37 @@ function map_create_rich()
 		title: "Where's Rich?"
 	});
 
-	google.maps.event.addListener(marker, 'click', map_marker_display);
+	google.maps.event.addListener(marker, 'click', map_marker_display_rich);
+
+	return marker;
+}
+
+/**
+ * map_create_estimate - Create a Google.maps.Marker
+ *
+ * Create a marker to show Rich's estimated location.
+ *
+ * estimate_info.json contains:
+ *	wp:		Waypoint number
+ *	latitude:	Degrees latitude (decimal)
+ *	longitude:	Degrees longitude (decimal)
+ */
+function map_create_estimate()
+{
+	if ((typeof estimate_info === 'undefined') ||
+	    (!("latitude" in estimate_info)) ||
+	    (!("longitude" in estimate_info))) {
+		return null;
+	}
+
+	marker = new google.maps.Marker({
+		position: new google.maps.LatLng(estimate_info.latitude, estimate_info.longitude),
+		map: map,
+		icon: 'r_yellow.png',
+		title: "Where's Rich?"
+	});
+
+	google.maps.event.addListener(marker, 'click', map_marker_display_estimate);
 
 	return marker;
 }
