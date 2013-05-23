@@ -247,8 +247,10 @@ function show_rich()
 {
 	// rich_info is from rich.json
 	if (opt_rich) {
-		marker_rich.setMap (map);
-		marker_esti.setMap (map);
+		if (marker_rich)
+			marker_rich.setMap (map);
+		if (marker_esti)
+			marker_esti.setMap (map);
 
 		if (rich_info.route) {
 			if (opt_one) {
@@ -264,14 +266,20 @@ function show_rich()
 			dd_select (rich_info.route);
 
 			// Display infoWindow immediately
-			map_marker_display_estimate();
+			if (marker_esti) {
+				map_marker_display_estimate();
+			} else {
+				map_marker_display_rich();
+			}
 		} else {
 			// otherwise zoom to current location
 			map_zoom_ll (rich_info.latitude, rich_info.longitude, 7);
 		}
 	} else {
-		marker_rich.setMap (null);
-		marker_esti.setMap (null);
+		if (marker_rich)
+			marker_rich.setMap (null);
+		if (marker_esti)
+			marker_esti.setMap (null);
 	}
 }
 
@@ -456,6 +464,22 @@ function hide_kml (route, type)
 	}
 }
 
+/**
+ * estimate_exists - Is there valid estimate data?
+ *
+ * Return: boolean
+ */
+function estimate_exists()
+{
+	if (typeof estimate_info === 'undefined')
+		return false;
+
+	return (("wp"         in estimate_info) &&
+		("percentage" in estimate_info) &&
+		("latitude"   in estimate_info) &&
+		("longitude"  in estimate_info))
+}
+
 
 /**
  * dd_init - Create HTML for dropdown
@@ -616,6 +640,9 @@ function create_message(estimate)
 	var longitude  = 0;
 	var percentage = 0;
 
+	if (!estimate_exists())
+		estimate = false;
+
 	if (estimate) {
 		since = today;
 	} else {
@@ -748,17 +775,16 @@ function map_create_rich()
  *
  * estimate_info.json contains:
  *	wp:		Waypoint number
+ *	percentage:	Percentage complete
  *	latitude:	Degrees latitude (decimal)
  *	longitude:	Degrees longitude (decimal)
  */
 function map_create_estimate()
 {
-	if ((typeof estimate_info === 'undefined') ||
-	    (!("latitude" in estimate_info)) ||
-	    (!("longitude" in estimate_info))) {
+	if (!estimate_exists())
 		return null;
-	}
 
+	// estimate_info is from estimate.json
 	marker = new google.maps.Marker({
 		position: new google.maps.LatLng(estimate_info.latitude, estimate_info.longitude),
 		map: map,
