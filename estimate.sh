@@ -6,6 +6,7 @@ JSON="rich.json"
 ROUTE_DIR="routes"
 ROUTE_XML="route.xml"
 ROUTE_TITLE="title.txt"
+ESTIMATE="estimate.json"
 VERBOSE=0
 
 [ "$1" = "-v" ] && VERBOSE=1
@@ -33,18 +34,24 @@ function date_diff()
 
 function exit_no_estimate()
 {
-	echo "estimate = {"
-	echo "}"
+	{
+		echo "estimate = {"
+		echo "}"
+	} > $ESTIMATE
+	chmod 640 $ESTIMATE
 	exit 0
 }
 
 function exit_estimate()
 {
-	echo "estimate = {"
-	echo "    \"wp\": \"$POSN2\","
-	echo "    \"latitude\": $E_LAT,"
-	echo "    \"longitude\": $E_LON"
-	echo "}"
+	{
+		echo "estimate = {"
+		echo "    \"wp\": \"$POSN2\","
+		echo "    \"latitude\": $E_LAT,"
+		echo "    \"longitude\": $E_LON"
+		echo "}"
+	} > $ESTIMATE
+	chmod 640 $ESTIMATE
 	exit 0
 }
 
