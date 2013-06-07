@@ -7,6 +7,7 @@ ROUTE_DIR="routes"
 ROUTE_XML="route.xml"
 ROUTE_TITLE="title.txt"
 ESTIMATE="estimate.json"
+DEF_SPEED="15"
 VERBOSE=0
 
 [ "$1" = "-v" ] && VERBOSE=1
@@ -25,11 +26,15 @@ function date_diff()
 {
 	local d1=$1
 	local d2=$2
+	local div
 
 	d1=$(date "+%s" -d "$d1")
 	d2=$(date "+%s" -d "$d2")
 
-	echo $(((d2-d1)/86400))
+	div=$(((d2-d1)/86400))
+	[ $div -lt 1 ] && div=1
+
+	echo $div
 }
 
 function exit_no_estimate()
@@ -89,12 +94,18 @@ TIME_WALKING=$(float_eval "($HOUR-8)/10")
 
 SPEED1="$(($WAYPOINT/$(date_diff $DATE_ROUTE $DATE_SEEN)))"
 
+# default speed if no data
+[ "$SPEED1" = 0 ] && SPEED1=$((DEF_SPEED*NUM_WAYPOINTS/ROUTE_LENGTH))
+
 verbose "SPEED1 = $SPEED1 waypoints/day"
 
 [ "$SPEED1" -lt  20 ] && exit_no_estimate
 [ "$SPEED1" -gt 500 ] && exit_no_estimate
 
 SPEED2="$((($ROUTE_LENGTH*$WAYPOINT/$NUM_WAYPOINTS)/$(date_diff $DATE_ROUTE $DATE_SEEN)))"
+
+# default speed if no data
+[ "$SPEED2" = 0 ] && SPEED2="$DEF_SPEED"
 
 verbose "SPEED2 = $SPEED2 miles/day"
 
