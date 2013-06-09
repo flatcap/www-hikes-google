@@ -32,7 +32,7 @@ function date_diff()
 	d2=$(date "+%s" -d "$d2")
 
 	div=$(((d2-d1)/86400))
-	[ $div -lt 1 ] && div=1
+	[ $div -lt 0 ] && div=0
 
 	echo $div
 }
@@ -92,7 +92,10 @@ HOUR="$(date '+%H')"
 
 TIME_WALKING=$(float_eval "($HOUR-8)/10")
 
-SPEED1="$(($WAYPOINT/$(date_diff $DATE_ROUTE $DATE_SEEN)))"
+DATE_DIFF="$(date_diff $DATE_ROUTE $DATE_SEEN)"
+[ "$DATE_DIFF" = 0 ] && exit_no_estimate
+
+SPEED1="$(($WAYPOINT/$DATE_DIFF))"
 
 # default speed if no data
 [ "$SPEED1" = 0 ] && SPEED1=$((DEF_SPEED*NUM_WAYPOINTS/ROUTE_LENGTH))
@@ -102,7 +105,7 @@ verbose "SPEED1 = $SPEED1 waypoints/day"
 [ "$SPEED1" -lt  20 ] && exit_no_estimate
 [ "$SPEED1" -gt 500 ] && exit_no_estimate
 
-SPEED2="$((($ROUTE_LENGTH*$WAYPOINT/$NUM_WAYPOINTS)/$(date_diff $DATE_ROUTE $DATE_SEEN)))"
+SPEED2="$((($ROUTE_LENGTH*$WAYPOINT/$NUM_WAYPOINTS)/$DATE_DIFF"
 
 # default speed if no data
 [ "$SPEED2" = 0 ] && SPEED2="$DEF_SPEED"
