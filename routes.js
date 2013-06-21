@@ -599,19 +599,19 @@ function init_routes()
 		"five.degrees.west" : {
 			"fullname"	: "Five Degrees West Challenge",
 			"name"		: "Five Degrees West",
-			"attr"		: "ersx",
+			"attr"		: "cehrstx",
 			"dist_route"	: 290,
-			"date_start"	: "",
+			"date_start"	: "2013-06-10",
 			"date_end"	: "",
-			"days_walked"	: 0,
-			"days_camped"	: 0,
+			"days_walked"	: 8,
+			"days_camped"	: 8,
 			"days_other"	: 0,
-			"dist_walked"	: 0,
-			"complete"	: 0,
+			"dist_walked"	: 120,
+			"complete"	: 40,
 			"latitude"	: 57.106419,
 			"longitude"	: -4.943848,
 			"zoom"		: 7,
-			"custom"	: "line"
+			"custom"	: "line,crossovers"
 		},
 		"gloucestershire.way" : {
 			"fullname"	: "Gloucestershire Way",
@@ -851,7 +851,6 @@ function init_routes()
 			"zoom"		: 11,
 			"custom"	: ""
 		},
-
 		"join.1" : {
 			"fullname"	: "Bridgwater to Avonmouth",
 			"name"		: "Bridgwater to Avonmouth",
@@ -869,7 +868,6 @@ function init_routes()
 			"zoom"		: 10,
 			"custom"	: ""
 		},
-
 		"join.2" : {
 			"fullname"	: "Aust to Chepstow",
 			"name"		: "Aust to Chepstow",
@@ -887,7 +885,23 @@ function init_routes()
 			"zoom"		: 13,
 			"custom"	: ""
 		},
-
+		"join.3" : {
+			"fullname"	: "Gourock to Toward Point",
+			"name"		: "Gourock to Toward Point",
+			"attr"		: "ehs",
+			"dist_route"	: 7,
+			"date_start"	: "2013-06-10",
+			"date_end"	: "2013-06-10",
+			"days_walked"	: 1,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 7,
+			"complete"	: 100,
+			"latitude"	: 51.621747,
+			"longitude"	: -2.654057,
+			"zoom"		: 13,
+			"custom"	: ""
+		},
 		"kent.coast" : {
 			"fullname"	: "Kent Coast Path",
 			"name"		: "Kent Coast",
