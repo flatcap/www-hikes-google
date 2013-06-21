@@ -888,7 +888,7 @@ function init_routes()
 		"join.3" : {
 			"fullname"	: "Gourock to Toward Point",
 			"name"		: "Gourock to Toward Point",
-			"attr"		: "ehs",
+			"attr"		: "efhs",
 			"dist_route"	: 7,
 			"date_start"	: "2013-06-10",
 			"date_end"	: "2013-06-10",
@@ -897,9 +897,9 @@ function init_routes()
 			"days_other"	: 0,
 			"dist_walked"	: 7,
 			"complete"	: 100,
-			"latitude"	: 51.621747,
-			"longitude"	: -2.654057,
-			"zoom"		: 13,
+			"latitude"	: 55.899186,
+			"longitude"	: -4.889603,
+			"zoom"		: 11,
 			"custom"	: ""
 		},
 		"kent.coast" : {
