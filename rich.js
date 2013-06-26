@@ -659,7 +659,7 @@ function create_message(estimate)
 		since = new Date(rich_info.date_seen);
 	}
 
-	message += '<img style="float: left;" src="flatcap.png">';
+	message += '<img style="float: left;" src="../gfx/flatcap.png">';
 	message += '<div style="margin-left: 70px;">';
 	message += '<h2>Rich';
 
@@ -772,7 +772,7 @@ function map_create_rich()
 	marker = new google.maps.Marker({
 		position: new google.maps.LatLng(rich_info.latitude, rich_info.longitude),
 		map: map,
-		icon: 'r_green.png',
+		icon: '../gfx/r_green.png',
 		title: "Where's Rich?"
 	});
 
@@ -796,7 +796,7 @@ function map_create_estimate()
 	marker = new google.maps.Marker({
 		position: new google.maps.LatLng(estimate_info.latitude, estimate_info.longitude),
 		map: map,
-		icon: 'r_yellow.png',
+		icon: '../gfx/r_yellow.png',
 		title: "Where's Rich?"
 	});
 
