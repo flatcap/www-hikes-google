@@ -749,6 +749,23 @@ function init_routes()
 			"zoom"		: 9,
 			"custom"	: ""
 		},
+		"hangers.way" : {
+			"fullname"	: "Hanger's Way",
+			"name"		: "Hanger's Way",
+			"attr"		: "ers",
+			"dist_route"	: 21,
+			"date_start"	: "",
+			"date_end"	: "",
+			"days_walked"	: 0,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 0,
+			"complete"	: 0,
+			"latitude"	: 51.062113,
+			"longitude"	: -0.925598,
+			"zoom"		: 10,
+			"custom"	: ""
+		},
 		"heart.of.england" : {
 			"fullname"	: "Heart of England Way",
 			"name"		: "Heart of England",
