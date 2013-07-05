@@ -105,7 +105,7 @@ verbose "SPEED1 = $SPEED1 waypoints/day"
 [ "$SPEED1" -lt  20 ] && exit_no_estimate
 [ "$SPEED1" -gt 500 ] && exit_no_estimate
 
-SPEED2="$((($ROUTE_LENGTH*$WAYPOINT/$NUM_WAYPOINTS)/$DATE_DIFF"
+SPEED2="$((($ROUTE_LENGTH*$WAYPOINT/$NUM_WAYPOINTS)/$DATE_DIFF))"
 
 # default speed if no data
 [ "$SPEED2" = 0 ] && SPEED2="$DEF_SPEED"
