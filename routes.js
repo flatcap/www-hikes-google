@@ -1970,7 +1970,7 @@ function init_routes()
 			"complete"	: 0,
 			"latitude"	: 52.442618,
 			"longitude"	: -3.477173,
-			"zoom"		: 8,
+			"zoom"		: 7,
 			"custom"	: ""
 		},
 		"wantsum.walk" : {
