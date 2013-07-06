@@ -1971,7 +1971,7 @@ function init_routes()
 			"latitude"	: 52.442618,
 			"longitude"	: -3.477173,
 			"zoom"		: 7,
-			"custom"	: ""
+			"custom"	: "scouts"
 		},
 		"wantsum.walk" : {
 			"fullname"	: "Wantsum Walk",
