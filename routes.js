@@ -1959,7 +1959,7 @@ function init_routes()
 		"wales.coast" : {
 			"fullname"	: "Wales Coast Path",
 			"name"		: "Wales Coast",
-			"attr"		: "ers",
+			"attr"		: "ersx",
 			"dist_route"	: 865,
 			"date_start"	: "",
 			"date_end"	: "",
