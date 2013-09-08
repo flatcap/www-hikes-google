@@ -12,6 +12,8 @@ VERBOSE=0
 
 [ "$1" = "-v" ] && VERBOSE=1
 
+[ "$JSON" -nt "$ESTIMATE" ] || exit 0
+
 function get_var()
 {
 	grep -m 1 "^[[:space:]]*\"$1\":" $JSON | cut -d: -f2- | sed 's/^[ \t]*"*\([^"]*\)"*,*[ \t]*$/\1/'
