@@ -133,6 +133,93 @@ function put_json ($info)
 	file_put_contents ($log_file, $str, FILE_APPEND);
 }
 
+function create_form ($info)
+{
+	printf ("<html>\n");
+	printf ("	<head>\n");
+	printf ("		<title>Where's Rich</title>\n");
+	printf ("		<style type='text/css'>\n");
+	printf ("			label { display: block; float: left; width: 5em; clear: both; font-weight: bold; }\n");
+	printf ("		</style>\n");
+	printf ("	</head>\n");
+	printf ("	<body>\n");
+	printf ("		<form action='where.php'>\n");
+
+	printf ("\t\t\t<label for='bed'>bed</label>     <input name='bed'   value='$info->date_bed'            /> <br />\n");
+	printf ("\t\t\t<label for='date'>date</label>   <input name='date'  value='$info->date_seen'           /> <br />\n");
+	printf ("\t\t\t<label for='lat'>lat</label>     <input name='lat'   value='%0.6f'                      /> <br />\n", $info->latitude);
+	printf ("\t\t\t<label for='lon'>lon</label>     <input name='lon'   value='%0.6f'                      /> <br />\n", $info->longitude);
+	printf ("\t\t\t<label for='msg'>msg</label>     <input name='msg'   value='$info->message'             /> <br />\n");
+	printf ("\t\t\t<label for='route'>route</label> <input name='route' value='$info->route'               /> <br />\n");
+	printf ("\t\t\t<label for='start'>start</label> <input name='start' value='$info->date_route'          /> <br />\n");
+	printf ("\t\t\t<label for='wp'>wp</label>       <input name='wp'    value='$info->wp'                  /> <br />\n");
+	printf ("\t\t\t<label for='pc'>&#37;age</label> <input name='pc'    value='$info->percentage' readonly /> <br />\n");
+
+	printf ("\t\t\t<input type='submit' value='Save'></input>\n");
+
+	printf ("		</form>\n");
+	printf ("	</body>\n");
+	printf ("</html>\n");
+}
+
+function create_calendar($day, $month, $year)
+{
+	/* draw table */
+	$calendar = '<table border="1" cellpadding="1" cellspacing="0">';
+
+	/* table headings */
+	$headings = array('M','T','W','T','F','S','S');
+	$calendar .= '<tr><td>'.implode('</td><td>', $headings).'</td></tr>';
+
+	/* days and weeks vars now ... */
+	$running_day   = date('N', mktime(0, 0, 0, $month, 1, $year))-1;
+	$days_in_month = date('t', mktime(0, 0, 0, $month, 1, $year));
+	$days_in_this_week = 1;
+	$day_counter = 0;
+	$dates_array = array();
+
+	/* row for week one */
+	$calendar .= '<tr>';
+
+	/* print "blank" days until the first of the current week */
+	for($x = 0; $x < $running_day; $x++) {
+		$calendar .= '<td>&nbsp;</td>';
+		$days_in_this_week++;
+	}
+
+	/* keep going with days.... */
+	for($list_day = 1; $list_day <= $days_in_month; $list_day++) {
+		/* add in the day number */
+		if ($list_day == $day) {
+			$calendar .= '<td style="background: red; color: white; font-weight: bold;">';
+		} else {
+			$calendar .= '<td>';
+		}
+		$calendar .= $list_day;
+		$calendar .= '</td>';
+
+		if($running_day == 6) {
+			$calendar .= '</tr>';
+			if(($day_counter+1) != $days_in_month) {
+				$calendar .= '<tr>';
+			}
+			$running_day = -1;
+			$days_in_this_week = 0;
+		}
+		$days_in_this_week++; $running_day++; $day_counter++;
+	}
+
+	/* finish the rest of the days in the week */
+	if($days_in_this_week < 8) {
+		for($x = 1; $x <= (8 - $days_in_this_week); $x++) {
+			$calendar .= '<td>&nbsp;</td>';
+		}
+	}
+
+	$calendar .= '</tr></table>';
+	return $calendar;
+}
+
 function main()
 {
 	$info = get_json();
@@ -146,8 +233,14 @@ function main()
 	$route      = get_url_variable ("route");
 	$wp         = get_url_variable ("wp");
 
-	decode_dashed ($latitude);
-	decode_dashed ($longitude);
+	if ($wp == "oxford") {
+		$latitude  = "51.763233";
+		$longitude = "-1.269283";
+		$wp        = "";
+	} else {
+		decode_dashed ($latitude);
+		decode_dashed ($longitude);
+	}
 
 	if (valid_coords ($latitude, $longitude)) {
 		$info->latitude  = $latitude;
@@ -159,7 +252,7 @@ function main()
 	}
 
 	$info->wp = "";
-	if ($wp !== false) {
+	if (($wp !== false) && !empty ($wp)) {
 		if (get_waypoint ($info->route, $wp, $info->latitude, $info->longitude, $info->percentage)) {
 			$info->wp = $wp;
 		} else {
@@ -195,23 +288,52 @@ function main()
 	if (!isset ($info->date_route)) $info->date_route = "";
 	if (!isset ($info->percentage)) $info->percentage = "";
 
-	printf ("<pre>\n");
-	printf ("bed   = %s\n",      $info->date_bed);
-	printf ("date  = %s (%s)\n", $info->date_seen, strftime ("%A %-d %B %Y", strtotime ($info->date_seen)));
-	printf ("lat   = %0.6f\n",   $info->latitude);
-	printf ("lon   = %0.6f\n",   $info->longitude);
-	printf ("msg   = %s\n",      $info->message);
-	printf ("route = %s\n",      $info->route);
-	printf ("start = %s\n",      $info->date_route);
-	printf ("wp    = %s\n",      $wp);
-	printf ("%%age  = %d\n",     $info->percentage);
-
 	put_json ($info);
+
+	create_form ($info);
+
+	$date  = getdate();
+	$day   = $date['mday'];
+	$month = $date['mon'];
+	$year  = $date['year'];
+	$names = array ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+	$month--;
+	if ($month == 0) {
+		$month = 12;
+		$year--;
+	}
+
+	echo '<div style="float: left; margin-right: 1em;">';
+	echo "<b>${names[$month-1]} $year</b>";
+	echo create_calendar(0, $month, $year);
+	echo '</div>';
+
+	$month++;
+	if ($month == 13) {
+		$month = 1;
+		$year++;
+	}
+
+	echo '<div style="float: left; margin-right: 1em;">';
+	echo "<b>${names[$month-1]} $year</b>";
+	echo create_calendar($day, $month, $year);
+	echo '</div>';
+
+	$month++;
+	if ($month == 13) {
+		$month = 1;
+		$year++;
+	}
+
+	echo '<div style="float: left; margin-right: 1em;">';
+	echo "<b>${names[$month-1]} $year</b>";
+	echo create_calendar(0, $month, $year);
+	echo '</div>';
 }
 
 
 date_default_timezone_set('Europe/London');
 
-echo "<pre>";
 main();
 
