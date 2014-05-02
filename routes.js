@@ -1962,7 +1962,7 @@ function init_routes()
 			"attr"		: "cehrs",
 			"dist_route"	: 865,
 			"date_start"	: "2013-07-08",
-			"date_end"	: "",
+			"date_end"	: "2013-08-17",
 			"days_walked"	: 41,
 			"days_camped"	: 42,
 			"days_other"	: 0,
