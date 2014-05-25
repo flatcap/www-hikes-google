@@ -463,7 +463,7 @@ function init_routes()
 		"e9" : {
 			"fullname"	: "E9 Dover to Plymouth",
 			"name"		: "E9",
-			"attr"		: "cefhrsv",
+			"attr"		: "cefhrsvx",
 			"dist_route"	: 448,
 			"date_start"	: "2012-06-13",
 			"date_end"	: "2013-01-12",
@@ -475,7 +475,7 @@ function init_routes()
 			"latitude"	: 50.590200,
 			"longitude"	: -1.450190,
 			"zoom"		: 7,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 		"elham.valley" : {
 			"fullname"	: "Elham Valley Way",
@@ -616,7 +616,7 @@ function init_routes()
 		"join.3" : {
 			"fullname"	: "Gourock to Toward Point",
 			"name"		: "Gourock to Toward Point",
-			"attr"		: "efhs",
+			"attr"		: "efhsx",
 			"dist_route"	: 7,
 			"date_start"	: "2013-06-10",
 			"date_end"	: "2013-06-10",
@@ -628,7 +628,7 @@ function init_routes()
 			"latitude"	: 55.899200,
 			"longitude"	: -4.889600,
 			"zoom"		: 11,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 		"goyt.way" : {
 			"fullname"	: "Goyt Way",
@@ -820,7 +820,7 @@ function init_routes()
 		"isle.of.wight.coast" : {
 			"fullname"	: "Isle of Wight Coastal Path",
 			"name"		: "Isle of Wight Coast",
-			"attr"		: "cehrs",
+			"attr"		: "cefhrsx",
 			"dist_route"	: 68,
 			"date_start"	: "2012-12-30",
 			"date_end"	: "2013-01-02",
@@ -832,7 +832,7 @@ function init_routes()
 			"latitude"	: 50.670800,
 			"longitude"	: -1.321790,
 			"zoom"		: 11,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 		"itchen.way" : {
 			"fullname"	: "Itchen Way",
@@ -1449,7 +1449,7 @@ function init_routes()
 		"solent.way" : {
 			"fullname"	: "Solent Way",
 			"name"		: "Solent Way",
-			"attr"		: "cefhrst",
+			"attr"		: "cefhrstx",
 			"dist_route"	: 61,
 			"date_start"	: "2012-12-30",
 			"date_end"	: "",
@@ -1461,7 +1461,7 @@ function init_routes()
 			"latitude"	: 50.739900,
 			"longitude"	: -1.196140,
 			"zoom"		: 10,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 		"south.downs" : {
 			"fullname"	: "South Downs Way - National Trail",
@@ -1891,7 +1891,7 @@ function init_routes()
 		"wales.coast" : {
 			"fullname"	: "Wales Coast Path",
 			"name"		: "Wales Coast",
-			"attr"		: "cefhrs",
+			"attr"		: "cefhrsx",
 			"dist_route"	: 887,
 			"date_start"	: "2013-07-08",
 			"date_end"	: "2013-08-17",
@@ -1903,7 +1903,7 @@ function init_routes()
 			"latitude"	: 52.442600,
 			"longitude"	: -3.477170,
 			"zoom"		: 8,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 		"wantsum.walk" : {
 			"fullname"	: "Wantsum Walk",
