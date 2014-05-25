@@ -1194,19 +1194,19 @@ function init_routes()
 		"pembrokeshire.coast" : {
 			"fullname"	: "Pembrokeshire Coast Path - National Trail",
 			"name"		: "Pembrokeshire Coast",
-			"attr"		: "ers",
-			"dist_route"	: 182,
-			"date_start"	: "",
-			"date_end"	: "",
-			"days_walked"	: 0,
-			"days_camped"	: 0,
+			"attr"		: "cefhrsx",
+			"dist_route"	: 177,
+			"date_start"	: "2013-07-30",
+			"date_end"	: "2013-08-08",
+			"days_walked"	: 10,
+			"days_camped"	: 9,
 			"days_other"	: 0,
-			"dist_walked"	: 0,
-			"complete"	: 0,
+			"dist_walked"	: 177,
+			"complete"	: 100,
 			"latitude"	: 51.849400,
 			"longitude"	: -4.879300,
 			"zoom"		: 10,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 		"pennine.bridleway" : {
 			"fullname"	: "Pennine Bridleway - National Trail",
@@ -2163,13 +2163,19 @@ function init_routes()
 		"join.4" : {
 			"fullname"	: "Frampton on Severn",
 			"name"		: "Frampton on Severn",
+			"attr"		: "ehrs",
 			"dist_route"	: 2,
 			"date_start"	: "2013-08-25",
 			"date_end"	: "2013-08-25",
 			"days_walked"	: 1,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 2,
+			"complete"	: 100,
 			"latitude"	: 51.782700,
 			"longitude"	: -2.370300,
 			"zoom"		: 12,
+			"custom"	: ""
 		},
 	};
 	return route_list;
