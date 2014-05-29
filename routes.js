@@ -2177,6 +2177,57 @@ function init_routes()
 			"zoom"		: 12,
 			"custom"	: ""
 		},
+		"hike1" : {
+			"fullname"	: "Chester to Gretna",
+			"name"		: "Chester to Gretna",
+			"attr"		: "r",
+			"dist_route"	: 365,
+			"date_start"	: "",
+			"date_end"	: "",
+			"days_walked"	: 0,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 0,
+			"complete"	: 0,
+			"latitude"	: 54.184941,
+			"longitude"	: -3.037720,
+			"zoom"		: 8,
+			"custom"	: ""
+		},
+		"hike2" : {
+			"fullname"	: "Carlisle to Glasgow",
+			"name"		: "Carlisle to Glasgow",
+			"attr"		: "r",
+			"dist_route"	: 334,
+			"date_start"	: "",
+			"date_end"	: "",
+			"days_walked"	: 0,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 0,
+			"complete"	: 0,
+			"latitude"	: 55.627996,
+			"longitude"	: -3.092651,
+			"zoom"		: 8,
+			"custom"	: ""
+		},
+		"hike3" : {
+			"fullname"	: "Glasgow to Inverness",
+			"name"		: "Glasgow to Inverness",
+			"attr"		: "r",
+			"dist_route"	: 165,
+			"date_start"	: "",
+			"date_end"	: "",
+			"days_walked"	: 0,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 0,
+			"complete"	: 0,
+			"latitude"	: 56.713551,
+			"longitude"	: -4.542847,
+			"zoom"		: 8,
+			"custom"	: ""
+		},
 	};
 	return route_list;
 }
