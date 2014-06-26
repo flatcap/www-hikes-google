@@ -2189,9 +2189,9 @@ function init_routes()
 			"days_other"	: 0,
 			"dist_walked"	: 8,
 			"complete"	: 100,
-			"latitude"	: 0.000000,
-			"longitude"	: 0.000000,
-			"zoom"		: 0,
+			"latitude"	: 53.250000,
+			"longitude"	: -3.007850,
+			"zoom"		: 12,
 			"custom"	: ""
 		},
 		"join.6" : {
@@ -2206,9 +2206,9 @@ function init_routes()
 			"days_other"	: 0,
 			"dist_walked"	: 7,
 			"complete"	: 100,
-			"latitude"	: 0.000000,
-			"longitude"	: 0.000000,
-			"zoom"		: 0,
+			"latitude"	: 53.441000,
+			"longitude"	: -3.006130,
+			"zoom"		: 12,
 			"custom"	: ""
 		},
 		"join.7" : {
@@ -2223,9 +2223,9 @@ function init_routes()
 			"days_other"	: 0,
 			"dist_walked"	: 25,
 			"complete"	: 100,
-			"latitude"	: 0.000000,
-			"longitude"	: 0.000000,
-			"zoom"		: 0,
+			"latitude"	: 53.743400,
+			"longitude"	: -2.838940,
+			"zoom"		: 12,
 			"custom"	: ""
 		},
 		"join.8" : {
@@ -2240,9 +2240,9 @@ function init_routes()
 			"days_other"	: 0,
 			"dist_walked"	: 3,
 			"complete"	: 100,
-			"latitude"	: 0.000000,
-			"longitude"	: 0.000000,
-			"zoom"		: 0,
+			"latitude"	: 54.948000,
+			"longitude"	: -2.919620,
+			"zoom"		: 12,
 			"custom"	: ""
 		},
 	};
