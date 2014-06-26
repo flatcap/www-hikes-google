@@ -517,10 +517,10 @@ function dd_init()
 			if ("complete" in route_list[r]) {
 				if (route_list[r].complete == 100) {
 					var attr = route_list[r].attr;
-					if (attr.contains ('r')) {
-						c.push ({ key: r, fullname: route_list[r].fullname });
-					} else {
+					if (attr.contains ('j')) {
 						j.push ({ key: r, fullname: route_list[r].fullname });
+					} else {
+						c.push ({ key: r, fullname: route_list[r].fullname });
 					}
 				} else if (route_list[r].complete > 0) {
 					i.push ({ key: r, fullname: route_list[r].fullname  + " (" + route_list[r].complete + "%)" });

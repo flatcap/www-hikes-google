@@ -72,7 +72,7 @@ function init_routes()
 		"join.2" : {
 			"fullname"	: "Aust to Chepstow",
 			"name"		: "Aust to Chepstow",
-			"attr"		: "ehrs",
+			"attr"		: "ehjrs",
 			"dist_route"	: 5,
 			"date_start"	: "2013-05-07",
 			"date_end"	: "2013-05-07",
@@ -140,7 +140,7 @@ function init_routes()
 		"join.1" : {
 			"fullname"	: "Bridgwater to Avonmouth",
 			"name"		: "Bridgwater to Avonmouth",
-			"attr"		: "cehrs",
+			"attr"		: "cehjrs",
 			"dist_route"	: 62,
 			"date_start"	: "2013-05-01",
 			"date_end"	: "2013-05-04",
@@ -616,7 +616,7 @@ function init_routes()
 		"join.3" : {
 			"fullname"	: "Gourock to Toward Point",
 			"name"		: "Gourock to Toward Point",
-			"attr"		: "efhrsx",
+			"attr"		: "efhjrsx",
 			"dist_route"	: 7,
 			"date_start"	: "2013-06-10",
 			"date_end"	: "2013-06-10",
@@ -2163,7 +2163,7 @@ function init_routes()
 		"join.4" : {
 			"fullname"	: "Frampton on Severn",
 			"name"		: "Frampton on Severn",
-			"attr"		: "ehrs",
+			"attr"		: "ehjrs",
 			"dist_route"	: 2,
 			"date_start"	: "2013-08-25",
 			"date_end"	: "2013-08-25",
@@ -2180,7 +2180,7 @@ function init_routes()
 		"join.5" : {
 			"fullname"	: "Chester to Wirral",
 			"name"		: "Chester to Wirral",
-			"attr"		: "ehrs",
+			"attr"		: "ehjrs",
 			"dist_route"	: 8,
 			"date_start"	: "2014-05-29",
 			"date_end"	: "2014-05-30",
@@ -2197,7 +2197,7 @@ function init_routes()
 		"join.6" : {
 			"fullname"	: "Liverpool to Sefton",
 			"name"		: "Liverpool to Sefton",
-			"attr"		: "efhrs",
+			"attr"		: "efhjrs",
 			"dist_route"	: 7,
 			"date_start"	: "2014-05-31",
 			"date_end"	: "2014-05-31",
@@ -2214,7 +2214,7 @@ function init_routes()
 		"join.7" : {
 			"fullname"	: "Sefton to Lancashire",
 			"name"		: "Sefton to Lancashire",
-			"attr"		: "ehrs",
+			"attr"		: "ehjrs",
 			"dist_route"	: 25,
 			"date_start"	: "2014-06-01",
 			"date_end"	: "2014-06-02",
@@ -2231,7 +2231,7 @@ function init_routes()
 		"join.8" : {
 			"fullname"	: "Cumbria to Gretna",
 			"name"		: "Cumbria to Gretna",
-			"attr"		: "ehrs",
+			"attr"		: "ehjrs",
 			"dist_route"	: 3,
 			"date_start"	: "2014-06-22",
 			"date_end"	: "2014-06-22",
