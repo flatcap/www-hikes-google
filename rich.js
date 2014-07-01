@@ -666,7 +666,7 @@ function create_message(estimate)
 	if (estimate) {
 		message += ' <span class="estimate">(estimated position)</span>';
 	} else {
-		message += ' <span class="lastseen">(last checked in ';
+		message += ' <span class="lastseen">(checked in ';
 		elapsed = today.diff (rich_info.date_seen);
 		if (elapsed < 1) {
 			message += "today";
