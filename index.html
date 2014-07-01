@@ -18,7 +18,11 @@
 		<script type="text/javascript" src="analytics.js"></script>
 	</head>
 	<body onload="initialise()">
-		<div class="fixed"><div id="canvas"></div></div>
+		<div id="fixed" class="fixed">
+		<input style="position:absolute; right:0; bottom:0; z-index: 99;" onclick="on_global(this.id)" id="sidebar" value="Sidebar" type="button" />
+		<div id="canvas">
+		</div>
+		</div>
 		<div id="user">
 			<h1>Rich's Routes</h1>
 			<form action="">

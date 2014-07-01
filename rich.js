@@ -967,6 +967,19 @@ function on_global (id)
 			}
 			break;
 
+		case "sidebar":
+			var sidebar = document.getElementById("user");
+			var fixed = document.getElementById ("fixed");
+			if (sidebar.style.display == 'none') {
+				sidebar.setAttribute ("style", "display:block;");
+				fixed.setAttribute ("style", "width:70%;");
+			} else {
+				sidebar.setAttribute ("style", "display:none;");
+				fixed.setAttribute ("style", "width:100%;");
+			}
+			google.maps.event.trigger(map,'resize')
+			break;
+
 		case "global_todo":
 			if (opt_zoom) {
 				map_zoom_route();
