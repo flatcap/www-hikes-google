@@ -7,7 +7,9 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 		<meta http-equiv="content-type" content="text/html; charset=us-ascii" />
 		<link rel="stylesheet" href="rich.css" type="text/css" />
+		<link rel="stylesheet" href="menu.css" type="text/css" />
 		<link rel='icon' type='image/png' href='../gfx/favicon.png'>
+		<link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="rich.json"></script>
 		<script type="text/javascript" src="estimate.json"></script>
 		<script type="text/javascript" src="todo.json"></script>
@@ -18,14 +20,21 @@
 		<script type="text/javascript" src="analytics.js"></script>
 	</head>
 	<body onload="initialise()">
+		<ul class="menu" id="menu">
+			<li>Google Map</li>
+			<a href="stats.html"><li>Statistics</li></a>
+			<a href="calendar-hike.html"><li>Hike Calendar</li></a>
+			<a href="calendar-camp.html"><li>Camp Calendar</li></a>
+		</ul>
+		<br>
+
 		<div id="fixed" class="fixed">
-		<input style="position:absolute; right:0; bottom:0; z-index: 99;" onclick="on_global(this.id)" id="sidebar" value="Sidebar" type="button" />
+		<input style="position:absolute; right:0; bottom:0; z-index: 99;" onclick="on_global(this.id)" id="sidebar" value="Fullscreen" type="button" />
 		<div id="canvas">
 		</div>
 		</div>
 		<div id="user">
 			<h1>Rich's Routes</h1>
-			<!-- <a id="stats" href="stats.html">Stats</a> -->
 			<form action="">
 				<select size="10" id="dropdown" onchange="on_hike(this.id);"></select>
 			</form>
@@ -33,7 +42,7 @@
 				<br />
 				<input onclick="on_global(this.id)" id="global_centre" value="Centre Map" type="button" />
 				<input onclick="on_global(this.id)" id="global_done"   value="All Done"   type="button" />
-				<input onclick="on_global(this.id)" id="global_todo"   value="To Do Next" type="button" />
+				<input onclick="on_global(this.id)" id="global_todo"   value="To Do"      type="button" />
 				<input onclick="on_global(this.id)" id="global_clear"  value="Clear All"  type="button" />
 				<hr />
 				<h2>Display:</h2>

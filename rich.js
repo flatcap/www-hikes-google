@@ -969,13 +969,16 @@ function on_global (id)
 
 		case "sidebar":
 			var sidebar = document.getElementById("user");
-			var fixed = document.getElementById ("fixed");
+			var fixed   = document.getElementById ("fixed");
+			var menu    = document.getElementById ("menu");
 			if (sidebar.style.display == 'none') {
 				sidebar.setAttribute ("style", "display:block;");
-				fixed.setAttribute ("style", "width:70%;");
+				fixed.setAttribute ("style", "width:70%; position: fixed; top: 3em;");
+				menu.setAttribute ("style", "display:block;");
 			} else {
 				sidebar.setAttribute ("style", "display:none;");
-				fixed.setAttribute ("style", "width:100%;");
+				fixed.setAttribute ("style", "width:100%; position: fixed; top: 0;");
+				menu.setAttribute ("style", "display:none;");
 			}
 			google.maps.event.trigger(map,'resize')
 			break;
