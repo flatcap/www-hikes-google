@@ -19,6 +19,7 @@ ul.menu li {
 	padding: 0.5em;
 	border: 3px solid white;
 	font-family: 'Fredoka One';
+	text-align: center;
 
 	border-radius: 15px;
 	-moz-border-radius: 15px;
