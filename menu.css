@@ -11,7 +11,7 @@ ul.menu {
 ul.menu li {
 	display: block;
 	float: left;
-	list-style-type: none;
+	list-style: none;
 	width: 8em;
 	font-size: 120%;
 	background: blue;
