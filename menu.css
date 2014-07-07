@@ -3,15 +3,14 @@ body {
 	padding-top: 0;
 }
 
-ul.menu {
+p.menu {
 	margin: 0;
 	padding: 0;
 }
 
-ul.menu li {
+p.menu span {
 	display: block;
 	float: left;
-	list-style: none;
 	width: 8em;
 	font-size: 120%;
 	background: blue;
@@ -26,7 +25,7 @@ ul.menu li {
 	-webkit-border-radius: 15px;
 }
 
-a li {
+a span {
 	background: #006 !important;
 }
 
