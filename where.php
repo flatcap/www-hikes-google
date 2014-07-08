@@ -3,6 +3,35 @@
 $filename = "rich.json";
 $log_file = "data.log";
 
+function geo_lookup ($place, &$latitude, &$longitude)
+{
+	$place = urlencode ($place);
+
+	$url = "https://maps.googleapis.com/maps/api/geocode/json?address=$place,uk";
+
+	$json = file_get_contents ($url);
+	if ($json === false) {
+		return false;
+	}
+
+	$data = json_decode ($json);
+	if ($data === NULL) {
+		return false;
+	}
+
+	try {
+		$lat  = $data->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+		$long = $data->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+	} catch (Exception $e) {
+		return false;
+	}
+
+	$latitude  = $lat;
+	$longitude = $long;
+
+	return true;
+}
+
 function decode_dashed (&$coord)
 {
 	$pos = strpos ($coord, "'");
@@ -143,6 +172,7 @@ function create_form ($info)
 	printf ("		</style>\n");
 	printf ("	</head>\n");
 	printf ("	<body>\n");
+	printf ("		<a href='index.html'>Map</a>\n");
 	printf ("		<form action='where.php'>\n");
 
 	printf ("\t\t\t<label for='bed'>bed</label>     <input name='bed'   value='$info->date_bed'            /> <br />\n");
@@ -233,13 +263,17 @@ function main()
 	$route      = get_url_variable ("route");
 	$wp         = get_url_variable ("wp");
 
-	if ($wp == "oxford") {
+	if (empty ($wp)){
+		decode_dashed ($latitude);
+		decode_dashed ($longitude);
+	} else if ($wp == "home") {
 		$latitude  = "51.763233";
 		$longitude = "-1.269283";
 		$wp        = "";
-	} else {
-		decode_dashed ($latitude);
-		decode_dashed ($longitude);
+	} else if (ctype_alpha ($wp[0])) {
+		if (geo_lookup ($wp, $latitude, $longitude) === true) {
+		}
+		$wp = "";
 	}
 
 	if (valid_coords ($latitude, $longitude)) {
