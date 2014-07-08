@@ -679,7 +679,7 @@ function create_message(estimate)
 		}
 		message += ')</span>';
 	}
-	message += '<br><br></h2>';
+	message += '</h2>';
 
 	if (estimate) {
 		percentage = estimate_info.percentage;
@@ -713,11 +713,11 @@ function create_message(estimate)
 		message += '<span class="subtle">lat/long: ' + lat.toFixed(6) + ',' + lon.toFixed(6) + '</span><br>';
 	}
 
-	message += '<br>';
+	//message += '<br>';
 
 	elapsed = since.diff (rich_info.date_bed);
 	if (elapsed > 7) {
-		message += 'Last saw a bed ' + elapsed + ' days ago.<br><br>';
+		message += 'Last saw a bed ' + elapsed + ' days ago.<br>';
 	}
 
 	if (rich_info.message) {
