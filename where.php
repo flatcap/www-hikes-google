@@ -267,8 +267,8 @@ function main()
 		decode_dashed ($latitude);
 		decode_dashed ($longitude);
 	} else if ($wp == "home") {
-		$latitude  = "51.763233";
-		$longitude = "-1.269283";
+		$latitude  = "51.763237";
+		$longitude = "-1.269116";
 		$wp        = "";
 	} else if (ctype_alpha ($wp[0])) {
 		if (geo_lookup ($wp, $latitude, $longitude) === true) {
