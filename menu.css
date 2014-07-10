@@ -1,6 +1,8 @@
 body {
 	margin-top: 0;
 	padding-top: 0;
+	background: white;
+	color: black;
 }
 
 p.menu {
