@@ -719,7 +719,7 @@ var randomColor = function(){
         if (stdRegEx.test(style.href)) {
           // A standard GMap-style marker icon
           style.shadow = new google.maps.MarkerImage(
-              'http://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png',
+              'https://maps.google.com/mapfiles/ms/micons/msmarker.shadow.png',
               shadowSize,
               zeroPoint,
               shadowPoint,
@@ -727,7 +727,7 @@ var randomColor = function(){
         } else if (style.href.indexOf('-pushpin.png') > -1) {
           // Pushpin marker icon
           style.shadow = new google.maps.MarkerImage(
-            'http://maps.google.com/mapfiles/ms/micons/pushpin_shadow.png',
+            'https://maps.google.com/mapfiles/ms/micons/pushpin_shadow.png',
             shadowSize,
             zeroPoint,
             shadowPoint,
