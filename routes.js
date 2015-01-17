@@ -2245,6 +2245,23 @@ function init_routes()
 			"zoom"		: 12,
 			"custom"	: ""
 		},
+		"coastline" : {
+			"fullname"	: "Coastline of Britain",
+			"name"		: "Coastline",
+			"attr"		: "efhrst",
+			"dist_route"	: 5883,
+			"date_start"	: "2012-04-30",
+			"date_end"	: "",
+			"days_walked"	: 123,
+			"days_camped"	: 0,
+			"days_other"	: 0,
+			"dist_walked"	: 2333,
+			"complete"	: 40,
+			"latitude"	: 54.699200,
+			"longitude"	: -3.143850,
+			"zoom"		: 6,
+			"custom"	: ""
+		},
 	};
 	return route_list;
 }
