@@ -12,8 +12,6 @@ VERBOSE=0
 
 [ "$1" = "-v" ] && VERBOSE=1
 
-[ "$JSON" -nt "$ESTIMATE" ] || exit 0
-
 function get_var()
 {
 	grep -m 1 "^[[:space:]]*\"$1\":" $JSON | cut -d: -f2- | sed 's/^[ \t]*"*\([^"]*\)"*,*[ \t]*$/\1/'
@@ -69,6 +67,8 @@ function verbose()
 	echo "$@"
 }
 
+
+[ "$JSON" -nt "$ESTIMATE" ] || exit_no_estimate
 
 DATE_ROUTE="$(get_var date_route)"
 DATE_SEEN="$(get_var date_seen)"
