@@ -2248,19 +2248,19 @@ function init_routes()
 		"coastline" : {
 			"fullname"	: "Coastline of Britain",
 			"name"		: "Coastline",
-			"attr"		: "efhrst",
+			"attr"		: "cefhrstx",
 			"dist_route"	: 5883,
 			"date_start"	: "2012-04-30",
 			"date_end"	: "",
 			"days_walked"	: 123,
-			"days_camped"	: 0,
-			"days_other"	: 0,
+			"days_camped"	: 112,
+			"days_other"	: 5,
 			"dist_walked"	: 2333,
 			"complete"	: 40,
 			"latitude"	: 54.699200,
 			"longitude"	: -3.143850,
 			"zoom"		: 6,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 	};
 	return route_list;
