@@ -2197,7 +2197,7 @@ function init_routes()
 		"join.6" : {
 			"fullname"	: "Liverpool to Sefton",
 			"name"		: "Liverpool to Sefton",
-			"attr"		: "efhjrs",
+			"attr"		: "efhjrsx",
 			"dist_route"	: 7,
 			"date_start"	: "2014-05-31",
 			"date_end"	: "2014-05-31",
@@ -2209,7 +2209,7 @@ function init_routes()
 			"latitude"	: 53.441000,
 			"longitude"	: -3.006130,
 			"zoom"		: 12,
-			"custom"	: ""
+			"custom"	: "ferry_icon"
 		},
 		"join.7" : {
 			"fullname"	: "Sefton to Lancashire",
@@ -2253,7 +2253,7 @@ function init_routes()
 			"date_start"	: "2012-04-30",
 			"date_end"	: "",
 			"days_walked"	: 123,
-			"days_camped"	: 112,
+			"days_camped"	: 110,
 			"days_other"	: 5,
 			"dist_walked"	: 2333,
 			"complete"	: 40,
