@@ -7,7 +7,7 @@ function geo_lookup ($place, &$latitude, &$longitude)
 {
 	$place = urlencode ($place);
 
-	$url = "https://maps.googleapis.com/maps/api/geocode/json?address=$place,uk";
+	$url = "//maps.googleapis.com/maps/api/geocode/json?address=$place,uk";
 
 	$json = file_get_contents ($url);
 	if ($json === false) {
@@ -268,7 +268,7 @@ function main()
 		decode_dashed ($longitude);
 	} else if ($wp == "home") {
 		$latitude  = "51.763237";
-		$longitude = "-1.269116";
+		$longitude = "-1.269080";
 		$wp        = "";
 	} else if (ctype_alpha ($wp[0])) {
 		if (geo_lookup ($wp, $latitude, $longitude) === true) {
