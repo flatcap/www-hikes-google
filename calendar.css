@@ -1,0 +1,166 @@
+h1 {
+	font-size: 130%;
+}
+
+h2 {
+	clear: both;
+	font-size: 110%;
+}
+
+h3 {
+	padding: 0 0 0 0.5em;
+	margin: 0;
+	font-size: 100%;
+	text-align: left;
+}
+
+table {
+	float: left;
+	border: 1px solid black;
+	margin: 0.2em;
+	width: 14em;
+	height: 12em;
+}
+
+th {
+	background: black;
+	color: white;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+	background-color: #eee;
+	color: black;
+	border: 1px solid #eee;
+	width: 25px;
+}
+
+.c1 {
+	background-image: url(http://flatcap.xyz/gfx/map_hotel.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left top;
+}
+
+.c2 {
+	background-image: url(http://flatcap.xyz/gfx/map_hut.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left top;
+}
+
+.c3 {
+	background-image: url(http://flatcap.xyz/gfx/map_tent.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left top;
+}
+
+.s3 {
+	background-image: url(http://flatcap.xyz/gfx/map_site.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left top;
+}
+
+.k1 {
+	background-color: #eee;
+	color: black;
+	border: 1px dashed #777;
+}
+
+.k2 {
+	background-color: #afa;
+	color: black;
+	border: 1px dashed #333;
+}
+
+.k3 {
+	background-color: #6f6;
+	color: black;
+	border: 1px solid  #000;
+}
+
+.k4 {
+	background-color: #6f6;
+	color: black;
+	border: 1px solid  #000;
+}
+
+div.fixed {
+	width: 4em;
+	text-align: left;
+	padding-left: 30px;
+	float: left;
+}
+
+li {
+	padding-bottom: 3px;
+}
+
+.key {
+	position: relative;
+}
+
+.key:hover {
+	border: 1px solid black;
+}
+
+.key:hover div {
+	opacity: 1;
+}
+
+td p {
+	margin: 0 0.5em 0 0.5em;
+	text-align: left;
+	font-size: 70%;
+	padding-left: 1em;
+}
+
+td div {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: white;
+	color: black;
+	opacity: 0;
+	border: 1px solid #999;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-box-shadow: 5px 5px 8px #CCC;
+	-webkit-box-shadow: 5px 5px 8px #CCC;
+	box-shadow: 5px 5px 8px #CCC;
+	z-index: 1;
+	padding: 0.5em;
+}
+
+td.k1 div, td.k2 div, td.k3 div, td.k4 div {
+	background-image: url(//flatcap.org/gfx/map_hike.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left bottom;
+}
+
+td.c1 div {
+	background-image: url(//flatcap.org/gfx/map_hotel.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left bottom;
+}
+
+td.c2 div {
+	background-image: url(//flatcap.org/gfx/map_hut.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left bottom;
+}
+
+td.c3 div {
+	background-image: url(//flatcap.org/gfx/map_tent.png);
+	background-repeat: no-repeat;
+	background-size: 25px 25px;
+	background-position: left bottom;
+}
+

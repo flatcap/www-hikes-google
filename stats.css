@@ -1,0 +1,54 @@
+h1 {
+	clear: left;
+	font-size: 130%;
+	padding-top: 1em;
+}
+
+h2 {
+	font-size: 110%;
+	padding: 0;
+	margin: 0.5em 0 0 0;
+}
+
+a > img {
+	border: 1px solid blue;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: separate;
+	float: left;
+	margin: 0 2em 0 0;
+}
+
+table, tr, th, td {
+	border: 1px solid black;
+}
+
+th {
+	background: white;
+	color: black;
+	font-size: 100%;
+	font-weight: bold;
+}
+
+th, td {
+	text-align: right;
+	padding: 0 0.5em 0 0.5em;
+}
+
+td:nth-child(1), th:nth-child(1) {
+	text-align: left;
+}
+
+caption {
+	font-weight: bold;
+	text-align: left;
+	font-size: 120%;
+}
+
+div.stats {
+	float: left;
+	margin-right: 2em;
+}
+
